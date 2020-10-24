@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ModelProyecto1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AccountStatement">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SavingsAccountId" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" Nullable="false" />
+    <Property Name="InitialBalance" Type="money" Nullable="false" />
+    <Property Name="FinalBalance" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Benefactor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RelationshipId" Type="int" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="AccountNumber" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Percentage" Type="int" Nullable="false" />
+    <Property Name="Condition" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Coin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mov CO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeMovCO" Type="int" Nullable="false" />
+    <Property Name="ObjectiveAccountId" Type="int" Nullable="false" />
+    <Property Name="DateOfMovCO" Type="date" Nullable="false" />
+    <Property Name="Fee" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mov CO Interest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeMovCOinterestId" Type="int" Nullable="false" />
+    <Property Name="ObjectiveAccountId" Type="int" Nullable="false" />
+    <Property Name="DateOfMovCOinterest" Type="date" Nullable="false" />
+    <Property Name="Fee" Type="money" Nullable="false" />
+    <Property Name="NewAcumInterest" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Movement CA">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SavingsAccountId" Type="int" Nullable="false" />
+    <Property Name="TypeMovId" Type="int" Nullable="false" />
+    <Property Name="AccountStatementId" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="money" Nullable="false" />
+    <Property Name="NewBalance" Type="money" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Visible" Type="bit" Nullable="false" />
+    <Property Name="DateOfMov" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ObjetiveAccount">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SavingsAccountId" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" Nullable="false" />
+    <Property Name="Fee" Type="money" Nullable="false" />
+    <Property Name="Objective" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Balance" Type="money" Nullable="false" />
+    <Property Name="AcumInterest" Type="float" Nullable="false" />
+    <Property Name="DaysOfDeposit" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeDocId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ValueDocIden" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Phone1" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Phone2" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="InsertAt" Type="datetime" />
+    <Property Name="InsertBy" Type="varchar" MaxLength="50" />
+    <Property Name="InsertIn" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Relationship">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SavingsAccount">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeSavingsAccountId" Type="int" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="UserCanAccessId" Type="int" Nullable="false" />
+    <Property Name="Balance" Type="money" Nullable="false" />
+    <Property Name="CreationDate" Type="date" Nullable="false" />
+    <Property Name="AccountNumber" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TypeDocIdentity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TypeMovCO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="TypeMovCOInt">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TypeMovement CA">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TypeOP" Type="varchar" MaxLength="5" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TypeSavingsAccount">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CoinId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="InterestRate" Type="float" Nullable="false" />
+    <Property Name="PenaltyForBreach" Type="money" Nullable="false" />
+    <Property Name="MinimunBalance" Type="money" Nullable="false" />
+    <Property Name="MensualAccountForService" Type="money" Nullable="false" />
+    <Property Name="MaxOpsHuman" Type="int" Nullable="false" />
+    <Property Name="MaxOpsAtm" Type="int" Nullable="false" />
+    <Property Name="ExceedComisionHumanMont" Type="float" Nullable="false" />
+    <Property Name="ExceedComisionAtmMont" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="IsAdministrator" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserCanAccess">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="AccountNumber" Type="int" Nullable="false" />
+    <Property Name="Condition" Type="bit" Nullable="false" />
+    <Property Name="InsertAt" Type="datetime" />
+    <Property Name="UpdateAt" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_AccountStatement_SavingsAccount">
+    <End Role="SavingsAccount" Type="Self.SavingsAccount" Multiplicity="1" />
+    <End Role="AccountStatement" Type="Self.AccountStatement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SavingsAccount">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AccountStatement">
+        <PropertyRef Name="SavingsAccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Benefactor_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Benefactor" Type="Self.Benefactor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Benefactor">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Benefactor_Relationship">
+    <End Role="Relationship" Type="Self.Relationship" Multiplicity="1" />
+    <End Role="Benefactor" Type="Self.Benefactor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Relationship">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Benefactor">
+        <PropertyRef Name="RelationshipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mov CO Interest_ObjetiveAccount">
+    <End Role="ObjetiveAccount" Type="Self.ObjetiveAccount" Multiplicity="1" />
+    <End Role="Mov CO Interest" Type="Self.Mov CO Interest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjetiveAccount">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mov CO Interest">
+        <PropertyRef Name="ObjectiveAccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mov CO Interest_TypeMovCOInt">
+    <End Role="TypeMovCOInt" Type="Self.TypeMovCOInt" Multiplicity="1" />
+    <End Role="Mov CO Interest" Type="Self.Mov CO Interest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeMovCOInt">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mov CO Interest">
+        <PropertyRef Name="TypeMovCOinterestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mov CO_ObjetiveAccount">
+    <End Role="ObjetiveAccount" Type="Self.ObjetiveAccount" Multiplicity="1" />
+    <End Role="Mov CO" Type="Self.Mov CO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjetiveAccount">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mov CO">
+        <PropertyRef Name="ObjectiveAccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mov CO_TypeMovCO">
+    <End Role="TypeMovCO" Type="Self.TypeMovCO" Multiplicity="1" />
+    <End Role="Mov CO" Type="Self.Mov CO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeMovCO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mov CO">
+        <PropertyRef Name="TypeMovCO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movement CA_AccountStatement">
+    <End Role="AccountStatement" Type="Self.AccountStatement" Multiplicity="1" />
+    <End Role="Movement CA" Type="Self.Movement CA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountStatement">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Movement CA">
+        <PropertyRef Name="AccountStatementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movement CA_SavingsAccount">
+    <End Role="SavingsAccount" Type="Self.SavingsAccount" Multiplicity="1" />
+    <End Role="Movement CA" Type="Self.Movement CA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SavingsAccount">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Movement CA">
+        <PropertyRef Name="SavingsAccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movement CA_TypeMovement CA">
+    <End Role="TypeMovement CA" Type="Self.TypeMovement CA" Multiplicity="1" />
+    <End Role="Movement CA" Type="Self.Movement CA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeMovement CA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Movement CA">
+        <PropertyRef Name="TypeMovId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ObjetiveAccount_SavingsAccount">
+    <End Role="SavingsAccount" Type="Self.SavingsAccount" Multiplicity="1" />
+    <End Role="ObjetiveAccount" Type="Self.ObjetiveAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SavingsAccount">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ObjetiveAccount">
+        <PropertyRef Name="SavingsAccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_TypeDocIdentity">
+    <End Role="TypeDocIdentity" Type="Self.TypeDocIdentity" Multiplicity="1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeDocIdentity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="TypeDocId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SavingsAccount_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="SavingsAccount" Type="Self.SavingsAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SavingsAccount">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SavingsAccount_TypeSavingsAccount">
+    <End Role="TypeSavingsAccount" Type="Self.TypeSavingsAccount" Multiplicity="1" />
+    <End Role="SavingsAccount" Type="Self.SavingsAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeSavingsAccount">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SavingsAccount">
+        <PropertyRef Name="TypeSavingsAccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SavingsAccount_usercanaccess">
+    <End Role="UserCanAccess" Type="Self.UserCanAccess" Multiplicity="1" />
+    <End Role="SavingsAccount" Type="Self.SavingsAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserCanAccess">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SavingsAccount">
+        <PropertyRef Name="UserCanAccessId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TypeSavingsAccount_Coin">
+    <End Role="Coin" Type="Self.Coin" Multiplicity="1" />
+    <End Role="TypeSavingsAccount" Type="Self.TypeSavingsAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Coin">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TypeSavingsAccount">
+        <PropertyRef Name="CoinId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usercanaccess_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserCanAccess" Type="Self.UserCanAccess" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserCanAccess">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelProyecto1StoreContainer">
+    <EntitySet Name="AccountStatement" EntityType="Self.AccountStatement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Benefactor" EntityType="Self.Benefactor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Coin" EntityType="Self.Coin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mov CO" EntityType="Self.Mov CO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mov CO Interest" EntityType="Self.Mov CO Interest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movement CA" EntityType="Self.Movement CA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ObjetiveAccount" EntityType="Self.ObjetiveAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Relationship" EntityType="Self.Relationship" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SavingsAccount" EntityType="Self.SavingsAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeDocIdentity" EntityType="Self.TypeDocIdentity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeMovCO" EntityType="Self.TypeMovCO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeMovCOInt" EntityType="Self.TypeMovCOInt" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeMovement CA" EntityType="Self.TypeMovement CA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeSavingsAccount" EntityType="Self.TypeSavingsAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserCanAccess" EntityType="Self.UserCanAccess" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AccountStatement_SavingsAccount" Association="Self.FK_AccountStatement_SavingsAccount">
+      <End Role="SavingsAccount" EntitySet="SavingsAccount" />
+      <End Role="AccountStatement" EntitySet="AccountStatement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Benefactor_Person" Association="Self.FK_Benefactor_Person">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Benefactor" EntitySet="Benefactor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Benefactor_Relationship" Association="Self.FK_Benefactor_Relationship">
+      <End Role="Relationship" EntitySet="Relationship" />
+      <End Role="Benefactor" EntitySet="Benefactor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mov CO Interest_ObjetiveAccount" Association="Self.FK_Mov CO Interest_ObjetiveAccount">
+      <End Role="ObjetiveAccount" EntitySet="ObjetiveAccount" />
+      <End Role="Mov CO Interest" EntitySet="Mov CO Interest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mov CO Interest_TypeMovCOInt" Association="Self.FK_Mov CO Interest_TypeMovCOInt">
+      <End Role="TypeMovCOInt" EntitySet="TypeMovCOInt" />
+      <End Role="Mov CO Interest" EntitySet="Mov CO Interest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mov CO_ObjetiveAccount" Association="Self.FK_Mov CO_ObjetiveAccount">
+      <End Role="ObjetiveAccount" EntitySet="ObjetiveAccount" />
+      <End Role="Mov CO" EntitySet="Mov CO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mov CO_TypeMovCO" Association="Self.FK_Mov CO_TypeMovCO">
+      <End Role="TypeMovCO" EntitySet="TypeMovCO" />
+      <End Role="Mov CO" EntitySet="Mov CO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movement CA_AccountStatement" Association="Self.FK_Movement CA_AccountStatement">
+      <End Role="AccountStatement" EntitySet="AccountStatement" />
+      <End Role="Movement CA" EntitySet="Movement CA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movement CA_SavingsAccount" Association="Self.FK_Movement CA_SavingsAccount">
+      <End Role="SavingsAccount" EntitySet="SavingsAccount" />
+      <End Role="Movement CA" EntitySet="Movement CA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movement CA_TypeMovement CA" Association="Self.FK_Movement CA_TypeMovement CA">
+      <End Role="TypeMovement CA" EntitySet="TypeMovement CA" />
+      <End Role="Movement CA" EntitySet="Movement CA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ObjetiveAccount_SavingsAccount" Association="Self.FK_ObjetiveAccount_SavingsAccount">
+      <End Role="SavingsAccount" EntitySet="SavingsAccount" />
+      <End Role="ObjetiveAccount" EntitySet="ObjetiveAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_TypeDocIdentity" Association="Self.FK_Person_TypeDocIdentity">
+      <End Role="TypeDocIdentity" EntitySet="TypeDocIdentity" />
+      <End Role="Person" EntitySet="Person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SavingsAccount_Person" Association="Self.FK_SavingsAccount_Person">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="SavingsAccount" EntitySet="SavingsAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SavingsAccount_TypeSavingsAccount" Association="Self.FK_SavingsAccount_TypeSavingsAccount">
+      <End Role="TypeSavingsAccount" EntitySet="TypeSavingsAccount" />
+      <End Role="SavingsAccount" EntitySet="SavingsAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SavingsAccount_usercanaccess" Association="Self.FK_SavingsAccount_usercanaccess">
+      <End Role="UserCanAccess" EntitySet="UserCanAccess" />
+      <End Role="SavingsAccount" EntitySet="SavingsAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TypeSavingsAccount_Coin" Association="Self.FK_TypeSavingsAccount_Coin">
+      <End Role="Coin" EntitySet="Coin" />
+      <End Role="TypeSavingsAccount" EntitySet="TypeSavingsAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usercanaccess_User" Association="Self.FK_usercanaccess_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserCanAccess" EntitySet="UserCanAccess" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
