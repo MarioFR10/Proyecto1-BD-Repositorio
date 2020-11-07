@@ -17,27 +17,31 @@ namespace Proyecto1_BD.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SavingsAccount()
         {
-            this.AccountStatement = new HashSet<AccountStatement>();
+            this.AccountStatements = new HashSet<AccountStatement>();
+            this.Benefactors = new HashSet<Benefactor>();
             this.Movement_CA = new HashSet<Movement_CA>();
-            this.ObjetiveAccount = new HashSet<ObjetiveAccount>();
+            this.ObjetiveAccounts = new HashSet<ObjetiveAccount>();
+            this.UserCanAccesses = new HashSet<UserCanAccess>();
         }
     
         public int Id { get; set; }
         public int TypeSavingsAccountId { get; set; }
         public int PersonId { get; set; }
-        public int UserCanAccessId { get; set; }
         public decimal Balance { get; set; }
         public System.DateTime CreationDate { get; set; }
         public string AccountNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccountStatement> AccountStatement { get; set; }
+        public virtual ICollection<AccountStatement> AccountStatements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Benefactor> Benefactors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movement_CA> Movement_CA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ObjetiveAccount> ObjetiveAccount { get; set; }
+        public virtual ICollection<ObjetiveAccount> ObjetiveAccounts { get; set; }
         public virtual Person Person { get; set; }
         public virtual TypeSavingsAccount TypeSavingsAccount { get; set; }
-        public virtual UserCanAccess UserCanAccess { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserCanAccess> UserCanAccesses { get; set; }
     }
 }

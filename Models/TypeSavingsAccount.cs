@@ -17,7 +17,7 @@ namespace Proyecto1_BD.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TypeSavingsAccount()
         {
-            this.SavingsAccount = new HashSet<SavingsAccount>();
+            this.SavingsAccounts = new HashSet<SavingsAccount>();
         }
     
         public int Id { get; set; }
@@ -34,6 +34,6 @@ namespace Proyecto1_BD.Models
     
         public virtual Coin Coin { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SavingsAccount> SavingsAccount { get; set; }
+        public virtual ICollection<SavingsAccount> SavingsAccounts { get; set; }
     }
 }

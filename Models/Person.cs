@@ -17,14 +17,16 @@ namespace Proyecto1_BD.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Person()
         {
-            this.Benefactor = new HashSet<Benefactor>();
-            this.SavingsAccount = new HashSet<SavingsAccount>();
+            this.Benefactors = new HashSet<Benefactor>();
+            this.SavingsAccounts = new HashSet<SavingsAccount>();
+            this.Users = new HashSet<User>();
         }
     
         public int Id { get; set; }
         public int TypeDocId { get; set; }
         public string Name { get; set; }
         public string ValueDocIden { get; set; }
+        public System.DateTime DateOfBirth { get; set; }
         public string Email { get; set; }
         public string Phone1 { get; set; }
         public string Phone2 { get; set; }
@@ -33,9 +35,11 @@ namespace Proyecto1_BD.Models
         public string InsertIn { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Benefactor> Benefactor { get; set; }
+        public virtual ICollection<Benefactor> Benefactors { get; set; }
         public virtual TypeDocIdentity TypeDocIdentity { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SavingsAccount> SavingsAccount { get; set; }
+        public virtual ICollection<SavingsAccount> SavingsAccounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

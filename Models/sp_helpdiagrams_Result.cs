@@ -10,20 +10,13 @@
 namespace Proyecto1_BD.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Benefactor
+    public partial class sp_helpdiagrams_Result
     {
-        public int Id { get; set; }
-        public int RelationshipId { get; set; }
-        public int PersonId { get; set; }
-        public int SavingsAccountId { get; set; }
+        public string Database { get; set; }
         public string Name { get; set; }
-        public int Percentage { get; set; }
-        public bool Condition { get; set; }
-    
-        public virtual Person Person { get; set; }
-        public virtual Relationship Relationship { get; set; }
-        public virtual SavingsAccount SavingsAccount { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

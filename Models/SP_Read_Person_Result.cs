@@ -10,20 +10,16 @@
 namespace Proyecto1_BD.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class TypeDocIdentity
+    public partial class SP_Read_Person_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TypeDocIdentity()
-        {
-            this.People = new HashSet<Person>();
-        }
-    
         public int Id { get; set; }
+        public int TypeDocId { get; set; }
         public string Name { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Person> People { get; set; }
+        public string ValueDocIden { get; set; }
+        public System.DateTime DateOfBirth { get; set; }
+        public string Email { get; set; }
+        public string Phone1 { get; set; }
+        public string Phone2 { get; set; }
     }
 }

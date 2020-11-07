@@ -129,77 +129,93 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountStatement.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Benefactor.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Coin.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Modelo-Ado-Net.Context.cs">
+    <Compile Include="Models\Model-DB-Final.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Modelo-Ado-Net.Context.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Modelo-Ado-Net.cs">
+    <Compile Include="Models\Model-DB-Final.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Modelo-Ado-Net.Designer.cs">
+    <Compile Include="Models\Model-DB-Final.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Modelo-Ado-Net.edmx</DependentUpon>
+      <DependentUpon>Model-DB-Final.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Movement_CA.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mov_CO.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mov_CO_Interest.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ObjetiveAccount.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Person.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Relationship.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SavingsAccount.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_Read_MovCO_Result.cs">
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_Read_Person_Result.cs">
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_Read_TypeMovementCA_Result.cs">
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TypeDocIdentity.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TypeMovCO.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TypeMovCOInt.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TypeMovement_CA.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TypeSavingsAccount.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserCanAccess.cs">
-      <DependentUpon>Modelo-Ado-Net.tt</DependentUpon>
+      <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -212,24 +228,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Modelo-Ado-Net.Context.tt">
+    <Content Include="images\bgimage.jpg" />
+    <Content Include="Models\Model-DB-Final.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Modelo-Ado-Net.Context.cs</LastGenOutput>
-      <DependentUpon>Modelo-Ado-Net.edmx</DependentUpon>
+      <DependentUpon>Model-DB-Final.edmx</DependentUpon>
+      <LastGenOutput>Model-DB-Final.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Modelo-Ado-Net.tt">
+    <Content Include="Models\Model-DB-Final.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Modelo-Ado-Net.edmx</DependentUpon>
-      <LastGenOutput>Modelo-Ado-Net.cs</LastGenOutput>
+      <DependentUpon>Model-DB-Final.edmx</DependentUpon>
+      <LastGenOutput>Model-DB-Final.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\Modelo-Ado-Net.edmx">
+    <EntityDeploy Include="Models\Model-DB-Final.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Modelo-Ado-Net.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model-DB-Final.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Modelo-Ado-Net.edmx.diagram">
-      <DependentUpon>Modelo-Ado-Net.edmx</DependentUpon>
+    <Content Include="Models\Model-DB-Final.edmx.diagram">
+      <DependentUpon>Model-DB-Final.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -242,6 +259,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="styles\style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -253,6 +271,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_LayoutPage1.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Error.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />

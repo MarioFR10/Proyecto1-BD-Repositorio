@@ -17,15 +17,17 @@ namespace Proyecto1_BD.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.UserCanAccess = new HashSet<UserCanAccess>();
+            this.UserCanAccesses = new HashSet<UserCanAccess>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
+        public int PersonId { get; set; }
+        public string UserName { get; set; }
         public string Password { get; set; }
         public bool IsAdministrator { get; set; }
     
+        public virtual Person Person { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserCanAccess> UserCanAccess { get; set; }
+        public virtual ICollection<UserCanAccess> UserCanAccesses { get; set; }
     }
 }
