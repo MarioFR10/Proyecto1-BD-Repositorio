@@ -142,6 +142,7 @@
     <Compile Include="Models\Coin.cs">
       <DependentUpon>Model-DB-Final.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmployeeDAL.cs" />
     <Compile Include="Models\Model-DB-Final.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -260,6 +261,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="styles\style.css" />
+    <None Include="Views\User\MenuUser.cshtml" />
+    <None Include="Views\User\table_element.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -281,6 +284,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\EmployeeDAL\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

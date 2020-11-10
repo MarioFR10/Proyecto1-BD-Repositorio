@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Proyecto1_BD.Models.User>
+@{
+    ViewBag.Title = "MenuUser";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table table-striped">
+    <tread>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PersonId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAdministrator)
+            </th>
+        </tr>
+    </tread>
+    <tbody>
+        @foreach (var emp in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Id)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.PersonId)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Password)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.IsAdministrator)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@emp.Id">Edit</a>
+                    <a asp-action="Details" asp-route-id="@emp.Id">Details</a>
+                    <a asp-action="Delate" asp-route-id="@emp.Id">Delate</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
