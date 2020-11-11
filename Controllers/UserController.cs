@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Proyecto1_BD.Models;
 using System.Data.SqlClient;
-
+using Microsoft.AspNetCore.Mvc;
 
 namespace Proyecto1_BD.Controllers
 {
@@ -16,6 +16,7 @@ namespace Proyecto1_BD.Controllers
         SqlCommand comm = new SqlCommand();
         SqlDataReader dr;
         SqlDataReader admi;
+        EmployeeDAL employeeDAL = new EmployeeDAL();
         // GET: User
         [HttpGet]
         public ActionResult Login()
@@ -34,7 +35,7 @@ namespace Proyecto1_BD.Controllers
             con.Open();
             com.Connection = con;
             comm.Connection = con;
-            com.CommandText = "Select * from [dbo].[User] US where US.UserName = '"+usr.UserName+"'and US.Password = '"+usr.Password+"'";
+            com.CommandText = "Select * from [dbo].[User] US where US.UserName = '" + usr.UserName + "'and US.Password = '" + usr.Password + "'";
             dr = com.ExecuteReader();
             if (dr.Read())
             {
@@ -59,7 +60,99 @@ namespace Proyecto1_BD.Controllers
 
                 return View("Error");
             }
-            
+        }
+        
+        public IActionResult MenuUser()
+        {
+            List<User> emplist = new List<User>();
+            emplist = employeeDAL.Get_All_User().ToList();
+            return (IActionResult)View(emplist);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return (IActionResult)View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult Create([Bind] User objEmp)
+        {
+            if (ModelState.IsValid)
+            {
+                employeeDAL.AddEmployee(objEmp);
+                return (IActionResult)RedirectToAction("MenuUser");
+            }
+            return (IActionResult)View(objEmp);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int? Id)
+        {
+            if (Id == null)
+            {
+                return (IActionResult)HttpNotFound();
+            }
+            User user = employeeDAL.GetEmployeeById((int)Id);
+            if (user == null)
+            {
+                return (IActionResult)HttpNotFound();
+            }
+            return (IActionResult)View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int? Id, [Bind] User objUs)
+        {
+            if (Id == null)
+            {
+                return (IActionResult)HttpNotFound();
+            }
+            User user = employeeDAL.GetEmployeeById((int)Id);
+            if (ModelState.IsValid)
+            {
+                employeeDAL.UpdateEmployee(objUs);
+                return (IActionResult)RedirectToAction("MenuUser");
+            }
+            return (IActionResult)View(employeeDAL);
+        }
+        [HttpGet]
+        public IActionResult Details(int? Id)
+        {
+            if (Id == null)
+            {
+                return (IActionResult)HttpNotFound();
+            }
+            User user = employeeDAL.GetEmployeeById((int)Id);
+            if (user == null)
+            {
+                return (IActionResult)HttpNotFound();
+            }
+            return (IActionResult)View(user);
+        }
+        public IActionResult Delete(int? Id)
+        {
+            if (Id == null)
+            {
+                return (IActionResult)HttpNotFound();
+            }
+            User user = employeeDAL.GetEmployeeById((int)Id);
+            if (user == null)
+            {
+                return (IActionResult)HttpNotFound();
+            }
+            return (IActionResult)View(user);
+        }
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteUser(int? id)
+        {
+            employeeDAL.DeleteEmployee((int)id);
+            return (IActionResult)RedirectToAction("MenuUser");
         }
     }
 }

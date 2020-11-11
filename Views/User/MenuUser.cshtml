@@ -3,6 +3,7 @@
     ViewBag.Title = "MenuUser";
     Layout = "~/Views/_LayoutPage1.cshtml";
 }
+<h1>MenuUser</h1>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -10,9 +11,6 @@
 <table class="table table-striped">
     <tread>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.PersonId)
             </th>
@@ -30,28 +28,28 @@
     <tbody>
         @foreach (var emp in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayNameFor(model => model.Id)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => model.PersonId)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => model.UserName)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => model.Password)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => model.IsAdministrator)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@emp.Id">Edit</a>
-                    <a asp-action="Details" asp-route-id="@emp.Id">Details</a>
-                    <a asp-action="Delate" asp-route-id="@emp.Id">Delate</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => emp.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => emp.PersonId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => emp.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => emp.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => emp.IsAdministrator)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@emp.PersonId">Edit</a>
+                <a asp-action="Details" asp-route-id="@emp.PersonId">Details</a>
+                <a asp-action="Delate" asp-route-id="@emp.PersonId">Delate</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
