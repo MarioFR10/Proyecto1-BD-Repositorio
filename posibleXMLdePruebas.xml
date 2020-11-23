@@ -1,0 +1,198 @@
+<Datos>
+  <Tipo_Doc>
+    <TipoDocuIdentidad Id="1" Nombre="Cedula Nacional"/>
+    <TipoDocuIdentidad Id="2" Nombre="Cedula Residente"/>
+    <TipoDocuIdentidad Id="3" Nombre="Pasaporte"/>
+    <TipoDocuIdentidad Id="4" Nombre="Cedula Juridica"/>
+    <TipoDocuIdentidad Id="5" Nombre="Permiso de Trabajo"/>
+    <TipoDocuIdentidad Id="6" Nombre="Cedula Extranjera"/>
+  </Tipo_Doc>
+
+  <Tipo_Moneda>
+    <TipoMoneda Id="1" Nombre="Colones" Simbolo="₡"/>
+    <TipoMoneda Id="2" Nombre="Dolares" Simbolo="$"/>
+    <TipoMoneda Id="3" Nombre="Euros" Simbolo="€"/>
+  </Tipo_Moneda>
+  
+  <Parentezcos>
+    <Parentezco Id="1" Nombre="Padre"/>
+    <Parentezco Id="2" Nombre="Madre"/>
+    <Parentezco Id="3" Nombre="Hijo"/>
+    <Parentezco Id="4" Nombre="Hija"/>
+    <Parentezco Id="5" Nombre="Hermano"/>
+    <Parentezco Id="6" Nombre="Hermana"/>
+    <Parentezco Id="7" Nombre="amigo"/>
+    <Parentezco Id="8" Nombre="amiga"/>
+  </Parentezcos>
+
+
+  <Tipo_Cuenta_Ahorros>
+    <TipoCuentaAhorro Id="1" Nombre="Proletario" IdTipoMoneda="1" SaldoMinimo="25000.00" MultaSaldoMin="3000.00" CargoAnual = "5000" NumRetirosHumano="5" NumRetirosAutomatico ="8" ComisionHumano="300" ComisionAutomatico="300" Interes ="10" />
+    <TipoCuentaAhorro Id="2" Nombre="Profesional" IdTipoMoneda="1" SaldoMinimo="50000.00" MultaSaldoMin="3000.00" CargoAnual = "15000" NumRetirosHumano="5" NumRetirosAutomatico ="8" ComisionHumano="500" ComisionAutomatico="500" Interes ="15" />
+    <TipoCuentaAhorro Id="3" Nombre="Exclusivo" IdTipoMoneda="1" SaldoMinimo="100000.00" MultaSaldoMin="3000.00" CargoAnual = "30000" NumRetirosHumano="5" NumRetirosAutomatico ="8" ComisionHumano="1000" ComisionAutomatico="1000" Interes ="20" />
+  </Tipo_Cuenta_Ahorros>
+
+  <!-- catalogos-->
+
+  <FechaOperacion Fecha='2020-03-03'>
+    <Personas>
+      <Persona TipoDocuIdentidad="1" Nombre="Javith Aguero Hernandez" ValorDocumentoIdentidad="117370445" FechaNacimiento="1999-03-20" Email="aguerojavith@gmail.com" Telefono1="85343403" Telefono2="24197636"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Osvaldo Aguero Hernandez" ValorDocumentoIdentidad="12738545" FechaNacimiento="1994-10-13" Email="osadage@gmail.com" Telefono1="87541766" Telefono2="24197545"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Franco Quiros Ramirez" ValorDocumentoIdentidad="106030039" FechaNacimiento="1963-04-09" Email="fquiros@itcr.ac.cr" Telefono1="87128720" Telefono2="22124523"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Juana Perez Mendez" ValorDocumentoIdentidad="144488000" FechaNacimiento="1973-10-09" Email="perezjuana@yahoo.com" Telefono1="70112205" Telefono2="22064286"/>
+    </Personas>
+    <Cuentas>
+      <Cuenta ValorDocumentoIdentidadDelCliente="117370445" TipoCuentaId="1" NumeroCuenta="11000001" FechaCreacion="2020-10-13" Saldo="1000000.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="106030039" TipoCuentaId="3" NumeroCuenta="11013939" FechaCreacion="2020-07-04" Saldo="45670345.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="144488000" TipoCuentaId="1" NumeroCuenta="11493715" FechaCreacion="2016-10-13" Saldo="55904600.00"/>
+    </Cuentas>
+    <Beneficiarios>
+      <Beneficiario NumeroCuenta="11000001" ValorDocumentoIdentidadBeneficiario="12738545" ParentezcoId="5" Porcentaje="25" />
+      <Beneficiario NumeroCuenta="11493715" ValorDocumentoIdentidadBeneficiario="106030039" ParentezcoId="7" Porcentaje="87"/>
+    </Beneficiarios>
+
+    <movimientos>
+      <Movimientos Tipo="1" CodigoCuenta='11000001' Monto="2000" Descripcion= "Restaurante La Vista"/>
+      <Movimientos Tipo="2" CodigoCuenta='11493715' Monto="15000" Descripcion= "Retiro ATM sucursal Cartago"/>
+    </movimientos>
+
+  <FechaOperacion Fecha='2020-03-05'>
+    <Personas>
+      <Persona TipoDocuIdentidad="1" Nombre="Marco Orozco Guevara" ValorDocumentoIdentidad="153816920" FechaNacimiento="1982-09-27" Email="orozcomarco@yahoo.com" Telefono1="84846568" Telefono2="20436193"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Guadalupe Zuñiga Chacon" ValorDocumentoIdentidad="105711321" FechaNacimiento="1988-06-05" Email="zuñigaguadalupe@gmail.com" Telefono1="75624554" Telefono2="24415744"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Juana Oviedo Trejos" ValorDocumentoIdentidad="195864670" FechaNacimiento="1992-09-22" Email="oviedojuana@gmail.com" Telefono1="74584726" Telefono2="28517141"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Óscar Villalobos Romero" ValorDocumentoIdentidad="145019786" FechaNacimiento="1977-03-01" Email="villalobosóscar@hotmail.com" Telefono1="72639471" Telefono2="23969186"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Ana Hernandez Gomez" ValorDocumentoIdentidad="149892757" FechaNacimiento="1971-01-06" Email="hernandezana@gmail.com" Telefono1="84257486" Telefono2="24381362"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Jose Flores Arguedas" ValorDocumentoIdentidad="179934028" FechaNacimiento="1971-01-26" Email="floresjose@yahoo.com" Telefono1="67707206" Telefono2="25114511"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Óscar Alvarado Lobo" ValorDocumentoIdentidad="176790244" FechaNacimiento="2003-09-12" Email="alvaradoóscar@gmail.com" Telefono1="85669123" Telefono2="23768261"/>
+    </Personas>
+    <Cuentas>
+      <Cuenta ValorDocumentoIdentidadDelCliente="12738545" TipoCuentaId="2" NumeroCuenta="11860716" FechaCreacion="2020-03-23" Saldo="39121797.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="153816920" TipoCuentaId="3" NumeroCuenta="11687607" FechaCreacion="2014-09-23" Saldo="15877051.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="195864670" TipoCuentaId="1" NumeroCuenta="11010717" FechaCreacion="2016-10-18" Saldo="30630724.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="149892757" TipoCuentaId="1" NumeroCuenta="11469827" FechaCreacion="2013-05-16" Saldo="55323336.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="176790244" TipoCuentaId="2" NumeroCuenta="11327131" FechaCreacion="2010-02-02" Saldo="44960377.00"/>
+    </Cuentas>
+    <Beneficiarios>
+      <Beneficiario NumeroCuenta="11013939" ValorDocumentoIdentidadBeneficiario="12738545" ParentezcoId="3" Porcentaje="25" />
+      <Beneficiario NumeroCuenta="11327131" ValorDocumentoIdentidadBeneficiario="195864670" ParentezcoId="4" Porcentaje="47"/>
+      <Beneficiario NumeroCuenta="11860716" ValorDocumentoIdentidadBeneficiario="176790244" ParentezcoId="1" Porcentaje="54"/>
+    </Beneficiarios>
+
+    <movimientos>
+      <Movimientos Tipo="1" CodigoCuenta='11327131' Monto="2700" Descripcion= "Restaurante La Vista"/>
+      <Movimientos Tipo="2" CodigoCuenta='11917515' Monto="5000" Descripcion= "Maxipali Paraíso"/>
+      <Movimientos Tipo="1" CodigoCuenta='11000001' Monto="1800" Descripcion= "Restaurante La Vista"/>
+      <Movimientos Tipo="2" CodigoCuenta='11493715' Monto="15000" Descripcion= "Walmart Cartago"/>
+    </movimientos>
+
+  <FechaOperacion Fecha='2020-03-06'>
+    <Personas>
+      <Persona TipoDocuIdentidad="1" Nombre="Ruben Cubero Duarte" ValorDocumentoIdentidad="167231980" FechaNacimiento="1996-06-01" Email="cuberoruben@yahoo.com" Telefono1="78241767" Telefono2="27668408"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Elena Flores Varela" ValorDocumentoIdentidad="159471918" FechaNacimiento="1998-05-06" Email="floreselena@gmail.com" Telefono1="66198589" Telefono2="24834379"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Jose Ulloa Ulate" ValorDocumentoIdentidad="163482829" FechaNacimiento="2006-10-20" Email="ulloajose@outlook.com" Telefono1="75054233" Telefono2="25115426"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Armando Mendez Fonseca" ValorDocumentoIdentidad="163444875" FechaNacimiento="1970-07-08" Email="mendezarmando@gmail.com" Telefono1="83318758" Telefono2="27319086"/>
+    </Personas>
+    <Cuentas>
+      <Cuenta ValorDocumentoIdentidadDelCliente="163482829" TipoCuentaId="3" NumeroCuenta="11024586" FechaCreacion="2019-10-13" Saldo="5502422.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="177230015" TipoCuentaId="1" NumeroCuenta="11589496" FechaCreacion="2020-04-20" Saldo="85578897.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="144488000" TipoCuentaId="3" NumeroCuenta="11794632" FechaCreacion="2012-01-28" Saldo="32301567.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="174808854" TipoCuentaId="1" NumeroCuenta="11514529" FechaCreacion="2019-03-24" Saldo="30164562.00"/>
+    </Cuentas>
+    <Beneficiarios>
+      <Beneficiario NumeroCuenta="11000001" ValorDocumentoIdentidadBeneficiario="144488000" ParentezcoId="2" Porcentaje="25" />
+      <Beneficiario NumeroCuenta="11493715" ValorDocumentoIdentidadBeneficiario="106030039" ParentezcoId="3" Porcentaje="87"/>
+      <Beneficiario NumeroCuenta="11917515" ValorDocumentoIdentidadBeneficiario="163482829" ParentezcoId="4" Porcentaje="74"/>
+    </Beneficiarios>
+
+    <movimientos>
+      <Movimientos Tipo="1" CodigoCuenta='11000001' Monto="2000" Descripcion= "Restaurante La Parada"/>
+      <Movimientos Tipo="3" CodigoCuenta='11493715' Monto="15000" Descripcion= "Deposito manual sucursal Tres Rios"/>
+      <Movimientos Tipo="1" CodigoCuenta='11917515' Monto="2000" Descripcion= "Restaurante La Vista"/>
+      <Movimientos Tipo="2" CodigoCuenta='177230015' Monto="15000" Descripcion= "Retiro ATM sucursal Tres Rios"/>
+      <Movimientos Tipo="1" CodigoCuenta='11013939' Monto="2000" Descripcion= "Restaurante El Arrecife"/>
+      <Movimientos Tipo="2" CodigoCuenta='11860716' Monto="15000" Descripcion= "Retiro ATM sucursal Paraíso"/>
+    </movimientos>
+
+  <FechaOperacion Fecha='2020-03-07'>
+    <Personas>
+      <Persona TipoDocuIdentidad="1" Nombre="Araceli Serrano Arroyo" ValorDocumentoIdentidad="124532423" FechaNacimiento="1972-06-06" Email="serranoaraceli@hotmail.com" Telefono1="81135107" Telefono2="23020064"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Victor Moreno Melendez" ValorDocumentoIdentidad="143217478" FechaNacimiento="1998-10-08" Email="morenovictor@yahoo.com" Telefono1="78758222" Telefono2="20054709"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Agustin Guevara Oviedo" ValorDocumentoIdentidad="182157649" FechaNacimiento="1972-01-27" Email="guevaraagustin@yahoo.com" Telefono1="64151372" Telefono2="23261725"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Araceli Artavia Gamboa" ValorDocumentoIdentidad="117359964" FechaNacimiento="2009-04-16" Email="artaviaaraceli@gmail.com" Telefono1="68960591" Telefono2="26030512"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Ana Ulloa Cubero" ValorDocumentoIdentidad="144127398" FechaNacimiento="2002-02-01" Email="ulloaana@gmail.com" Telefono1="74484886" Telefono2="22554608"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Luisa Barrantes Artavia" ValorDocumentoIdentidad="123168420" FechaNacimiento="1979-01-03" Email="barrantesluisa@gmail.com" Telefono1="74976638" Telefono2="20704613"/>
+    </Personas>
+    <Cuentas>
+      <Cuenta ValorDocumentoIdentidadDelCliente="124532423" TipoCuentaId="1" NumeroCuenta="11463737" FechaCreacion="2012-04-19" Saldo="29379485.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="143217478" TipoCuentaId="2" NumeroCuenta="11943543" FechaCreacion="2017-04-03" Saldo="460083.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="182157649" TipoCuentaId="1" NumeroCuenta="11559857" FechaCreacion="2014-12-03" Saldo="73834739.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="117359964" TipoCuentaId="1" NumeroCuenta="11107814" FechaCreacion="2020-10-10" Saldo="39125732.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="123168420" TipoCuentaId="3" NumeroCuenta="11245285" FechaCreacion="2018-01-07" Saldo="54771930.00"/>
+    </Cuentas>
+    <Beneficiarios>
+      <Beneficiario NumeroCuenta="11245285" ValorDocumentoIdentidadBeneficiario="12738545" ParentezcoId="7" Porcentaje="25" />
+      <Beneficiario NumeroCuenta="11559857" ValorDocumentoIdentidadBeneficiario="106030039" ParentezcoId="5" Porcentaje="87"/>
+      <Beneficiario NumeroCuenta="11463737" ValorDocumentoIdentidadBeneficiario="185351883" ParentezcoId="2" Porcentaje="74"/>
+    </Beneficiarios>
+
+    <movimientos>
+      <Movimientos Tipo="1" CodigoCuenta='11245285' Monto="2000" Descripcion= "Restaurante La Vista"/>
+      <Movimientos Tipo="2" CodigoCuenta='11917515' Monto="15000" Descripcion= "Retiro ATM sucursal Cartago"/>
+    </movimientos>
+
+  <FechaOperacion Fecha='2020-03-10'>
+    <Personas>
+      <Persona TipoDocuIdentidad="1" Nombre="Veronica Chacon Gomez" ValorDocumentoIdentidad="117983527" FechaNacimiento="1976-10-02" Email="chaconveronica@yahoo.com" Telefono1="67983909" Telefono2="23644964"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Manuel Ruiz Fuentes" ValorDocumentoIdentidad="165553974" FechaNacimiento="1981-05-12" Email="ruizmanuel@outlook.com" Telefono1="78639851" Telefono2="20415737"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Francisco Fernandez Calvo" ValorDocumentoIdentidad="188401987" FechaNacimiento="1984-02-27" Email="fernandezfrancisco@yahoo.com" Telefono1="70494206" Telefono2="26506549"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Jesus Gomez Marin" ValorDocumentoIdentidad="111266789" FechaNacimiento="1975-11-07" Email="gomezjesus@outlook.com" Telefono1="87785224" Telefono2="25503373"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Antonio Castro Saenz" ValorDocumentoIdentidad="123485695" FechaNacimiento="1973-03-18" Email="castroantonio@gmail.com" Telefono1="63788447" Telefono2="28606182"/>
+    </Personas>
+    <Cuentas>
+      <Cuenta ValorDocumentoIdentidadDelCliente="117983527" TipoCuentaId="3" NumeroCuenta="11164352" FechaCreacion="2015-05-25" Saldo="22462337.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="165553974" TipoCuentaId="2" NumeroCuenta="11744607" FechaCreacion="2010-05-20" Saldo="57455222.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="188401987" TipoCuentaId="1" NumeroCuenta="11271116" FechaCreacion="2018-02-15" Saldo="81230932.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="111266789" TipoCuentaId="2" NumeroCuenta="11559001" FechaCreacion="2012-07-01" Saldo="74130436.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="123485695" TipoCuentaId="2" NumeroCuenta="11911212" FechaCreacion="2014-04-02" Saldo="13445239.00"/>
+    </Cuentas>
+    <Beneficiarios>
+      <Beneficiario NumeroCuenta="11744607" ValorDocumentoIdentidadBeneficiario="12738545" ParentezcoId="5" Porcentaje="25" />
+      <Beneficiario NumeroCuenta="11164352" ValorDocumentoIdentidadBeneficiario="106030039" ParentezcoId="7" Porcentaje="87"/>
+      <Beneficiario NumeroCuenta="11911212" ValorDocumentoIdentidadBeneficiario="185351883" ParentezcoId="1" Porcentaje="74"/>
+    </Beneficiarios>
+
+    <movimientos>
+      <Movimientos Tipo="1" CodigoCuenta='11000001' Monto="2000" Descripcion= "Restaurante La Vista"/>
+      <Movimientos Tipo="2" CodigoCuenta='11911212' Monto="15000" Descripcion= "Retiro ATM sucursal Tres Rios"/>
+    </movimientos>
+
+  <FechaOperacion Fecha='2020-03-12'>
+    <Personas>
+      <Persona TipoDocuIdentidad="1" Nombre="Guadalupe Arce Romero" ValorDocumentoIdentidad="110839943" FechaNacimiento="1995-02-02" Email="arceguadalupe@yahoo.com" Telefono1="71546150" Telefono2="27387992"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Elena Moreno Gamboa" ValorDocumentoIdentidad="128965552" FechaNacimiento="1970-08-12" Email="morenoelena@yahoo.com" Telefono1="72600503" Telefono2="21350753"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Jorge Gomez Murillo" ValorDocumentoIdentidad="197009534" FechaNacimiento="1995-09-19" Email="gomezjorge@outlook.com" Telefono1="88860159" Telefono2="23612150"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Armando Ulate Ulate" ValorDocumentoIdentidad="108498449" FechaNacimiento="2009-01-09" Email="ulatearmando@yahoo.com" Telefono1="79823481" Telefono2="29033265"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Guadalupe Hernandez Mesen" ValorDocumentoIdentidad="159967351" FechaNacimiento="1995-11-23" Email="hernandezguadalupe@outlook.com" Telefono1="86264294" Telefono2="20938185"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Guadalupe Sancho Cerdas" ValorDocumentoIdentidad="182017351" FechaNacimiento="1982-03-14" Email="sanchoguadalupe@outlook.com" Telefono1="66920373" Telefono2="20680181"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Elena Cordoba Madriz" ValorDocumentoIdentidad="158742839" FechaNacimiento="1985-06-15" Email="cordobaelena@gmail.com" Telefono1="76909253" Telefono2="29612574"/>
+      <Persona TipoDocuIdentidad="1" Nombre="Gustavo Arguedas Valverde" ValorDocumentoIdentidad="158453180" FechaNacimiento="1973-10-23" Email="arguedasgustavo@yahoo.com" Telefono1="72786970" Telefono2="28981340"/>
+    </Personas>
+    <Cuentas>
+      <Cuenta ValorDocumentoIdentidadDelCliente="110839943" TipoCuentaId="2" NumeroCuenta="11796772" FechaCreacion="2015-04-05" Saldo="61940918.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="197009534" TipoCuentaId="2" NumeroCuenta="11665553" FechaCreacion="2014-08-23" Saldo="88940010.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="108498449" TipoCuentaId="1" NumeroCuenta="11683263" FechaCreacion="2016-04-27" Saldo="8884311.00"/>
+      <Cuenta ValorDocumentoIdentidadDelCliente="158453180" TipoCuentaId="1" NumeroCuenta="11329729" FechaCreacion="2011-05-24" Saldo="23324323.00"/>
+    </Cuentas>
+    <Beneficiarios>
+      <Beneficiario NumeroCuenta="11000001" ValorDocumentoIdentidadBeneficiario="12738545" ParentezcoId="5" Porcentaje="25" />
+      <Beneficiario NumeroCuenta="158453180" ValorDocumentoIdentidadBeneficiario="106030039" ParentezcoId="7" Porcentaje="87"/>
+      <Beneficiario NumeroCuenta="11917515" ValorDocumentoIdentidadBeneficiario="185351883" ParentezcoId="1" Porcentaje="74"/>
+    </Beneficiarios>
+
+    <movimientos>
+      <Movimientos Tipo="1" CodigoCuenta='11000001' Monto="2000" Descripcion= "Restaurante La Vista"/>
+      <Movimientos Tipo="2" CodigoCuenta='11917515' Monto="15000" Descripcion= "Retiro ATM sucursal Cartago"/>
+    </movimientos>
+
+</Datos>
