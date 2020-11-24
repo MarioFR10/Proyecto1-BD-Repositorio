@@ -55,6 +55,7 @@
       <Movimientos Tipo="1" CodigoCuenta='11000001' Monto="2000" Descripcion= "Restaurante La Vista"/>
       <Movimientos Tipo="2" CodigoCuenta='11493715' Monto="15000" Descripcion= "Retiro ATM sucursal Cartago"/>
     </movimientos>
+  </FechaOperacion Fecha='2020-03-03'>
 
   <FechaOperacion Fecha='2020-03-05'>
     <Personas>
@@ -85,6 +86,7 @@
       <Movimientos Tipo="1" CodigoCuenta='11000001' Monto="1800" Descripcion= "Restaurante La Vista"/>
       <Movimientos Tipo="2" CodigoCuenta='11493715' Monto="15000" Descripcion= "Walmart Cartago"/>
     </movimientos>
+  </FechaOperacion Fecha='2020-03-05'>
 
   <FechaOperacion Fecha='2020-03-06'>
     <Personas>
@@ -113,6 +115,7 @@
       <Movimientos Tipo="1" CodigoCuenta='11013939' Monto="2000" Descripcion= "Restaurante El Arrecife"/>
       <Movimientos Tipo="2" CodigoCuenta='11860716' Monto="15000" Descripcion= "Retiro ATM sucursal Paraíso"/>
     </movimientos>
+  </FechaOperacion Fecha='2020-03-06'>
 
   <FechaOperacion Fecha='2020-03-07'>
     <Personas>
@@ -140,6 +143,7 @@
       <Movimientos Tipo="1" CodigoCuenta='11245285' Monto="2000" Descripcion= "Restaurante La Vista"/>
       <Movimientos Tipo="2" CodigoCuenta='11917515' Monto="15000" Descripcion= "Retiro ATM sucursal Cartago"/>
     </movimientos>
+  </FechaOperacion Fecha='2020-03-07'>
 
   <FechaOperacion Fecha='2020-03-10'>
     <Personas>
@@ -166,6 +170,7 @@
       <Movimientos Tipo="1" CodigoCuenta='11000001' Monto="2000" Descripcion= "Restaurante La Vista"/>
       <Movimientos Tipo="2" CodigoCuenta='11911212' Monto="15000" Descripcion= "Retiro ATM sucursal Tres Rios"/>
     </movimientos>
+  </FechaOperacion Fecha='2020-03-10'>
 
   <FechaOperacion Fecha='2020-03-12'>
     <Personas>
@@ -194,5 +199,6 @@
       <Movimientos Tipo="1" CodigoCuenta='11000001' Monto="2000" Descripcion= "Restaurante La Vista"/>
       <Movimientos Tipo="2" CodigoCuenta='11917515' Monto="15000" Descripcion= "Retiro ATM sucursal Cartago"/>
     </movimientos>
+  </FechaOperacion Fecha='2020-03-12'>
 
 </Datos>
