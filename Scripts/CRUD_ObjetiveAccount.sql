@@ -109,7 +109,7 @@ BEGIN
 			END;
 			ELSE
 				BEGIN 
-					SET @outResultCode = 1 -- Codigo de error NO EXISTE EL VALOR DE NUMERO DE IDENTIDAD
+					SET @outResultCode = 1 -- Codigo de error NO EXISTE LA CUENTA	
 					SELECT @outResultCode
 				END
 		END TRY
@@ -137,7 +137,7 @@ BEGIN
 			END;
 			ELSE
 				BEGIN 
-					SET @outResultCode = 1 -- Codigo de error NO EXISTE EL VALOR DE NUMERO DE IDENTIDAD
+					SET @outResultCode = 1 -- Codigo de error NO EXISTE LA CUENTA
 					SELECT @outResultCode
 				END
 		END TRY

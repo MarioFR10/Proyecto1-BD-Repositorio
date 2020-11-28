@@ -296,10 +296,119 @@ namespace Project_Api.Context
             }
         }
 
+        public Dictionary<string, object> CreateObjetive(int idCuenta, DateTime fechaInicio, DateTime fechaFinal, decimal monto, string objetivo, string dias)
+        {
+            Dictionary<string, object> response = new Dictionary<string, object>();
+
+            using (SqlConnection con = new SqlConnection("Server = tcp:proyecto1-server-bd.database.windows.net,1433; Database = proyecto1-database; User ID = Administrador; Password = Proyecto1; Trusted_Connection = False; Encrypt = True;"))
+            {
+                SqlCommand cmd = new SqlCommand("dbo_SP_Create_ObjetiveAccount", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("@AccountId", idCuenta);
+                cmd.Parameters.AddWithValue("@inStartDate", fechaInicio);
+                cmd.Parameters.AddWithValue("@inEndDate", fechaFinal);
+                cmd.Parameters.AddWithValue("@inFee", monto);
+                cmd.Parameters.AddWithValue("@inObjetive", objetivo);
+                cmd.Parameters.AddWithValue("@inDaysOfDeposit", dias);
+
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    response.Add("Code", dr.GetInt32(0));
+                }
+
+                dr.Close();
+                if (Convert.ToInt32(response["Code"]) == 0)
+                {
+                    response.Add("success", "Account Inserted!");
+                    return response;
+                }
+                con.Close();
+                return response;
+
+            }
+        }
+
+        public Dictionary<string, object> UpdateObjetive(List<Dictionary<string, object>> objetive)
+        {
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            foreach (Dictionary<string, object> obj in objetive)
+            {
+                using (SqlConnection con = new SqlConnection("Server = tcp:proyecto1-server-bd.database.windows.net,1433; Database = proyecto1-database; User ID = Administrador; Password = Proyecto1; Trusted_Connection = False; Encrypt = True;"))
+                {
+                    SqlCommand cmd = new SqlCommand("dbo_SP_Update_ObjectiveAccount", con)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+                    int objCuentaId = Convert.ToInt32(obj[""].ToString());
+                    string descripcion = obj[""].ToString();
+                    cmd.Parameters.AddWithValue("@ObjectiveAccountId", objCuentaId);
+                    cmd.Parameters.AddWithValue("@inDescription", descripcion);
+                    con.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        response.Add("Code", dr.GetInt32(0));
+                    }
+                    if (Convert.ToInt32(response["Code"]) == 1 || response == null)
+                    {
+                        response.Add("error", "Error Updating");
+                    }
+                    else
+                    {
+                        response.Add("success", "Succesfully Done");
+                    }
+                    dr.Close();
+                    con.Close();
+                    return response;
+
+                }
+            }
+            response.Add("error", "No Objetive Accounts in this account");
+            return response;
+        }
+
+
+        public Dictionary<string, object> DeleteObjetive(int objetiveId)
+        {
+            Dictionary<string, object> response = new Dictionary<string, object>();
+
+            using (SqlConnection con = new SqlConnection("Server = tcp:proyecto1-server-bd.database.windows.net,1433; Database = proyecto1-database; User ID = Administrador; Password = Proyecto1; Trusted_Connection = False; Encrypt = True;"))
+            {
+                SqlCommand cmd = new SqlCommand("dbo_SP_Delete_ObjectiveAccount", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("@ObjectiveAccountId", objetiveId);
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    response.Add("Code", dr.GetInt32(0));
+                }
+                if (Convert.ToInt32(response["Code"]) == 1 || response == null)
+                {
+
+                    response.Add("error", "Error Deleting");
+                }
+                else
+                {
+                    response.Add("success", "Succesfully Done");
+                }
+                dr.Close();
+                con.Close();
+                return response;
+            }
+        }
+
+
         public DbSet<User> User { get; set; }
         public DbSet<SavingsAccount> SavingsAccount { get; set; }
         public DbSet<Benefactor> Benefactor { get; set; }
         public DbSet<AccountStatement> AccountStatement { get; set; }
-
+        public DbSet<ObjetiveAccount> ObjetiveAccount { get; set; }
     }
 }
