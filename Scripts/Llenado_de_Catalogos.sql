@@ -48,7 +48,7 @@ SET @x = '<Catalogos>
 
 
 -----------------------------------------Script de llenado de TypeDocIdentity
-/*
+
 INSERT INTO [dbo].[TypeDocIdentity](Id, Name)
 SELECT  T.Item.value('@Id', 'int'),
 		T.Item.value('@Nombre', 'varchar(100)')
@@ -56,13 +56,9 @@ FROM @x.nodes('Catalogos/Tipo_Doc/TipoDocuIdentidad') as T(Item)
 
 select * from TypeDocIdentity
 
-*/
-
-
 
 -----------------------------------------Script de llenado de Coin
 
-/*
 INSERT INTO [dbo].[Coin](Id, Name, Symbol)
 SELECT  T.Item.value('@Id', 'int'),
 		T.Item.value('@Nombre', 'varchar(100)'),
@@ -71,15 +67,11 @@ FROM @x.nodes('Catalogos/Tipo_Moneda/TipoMoneda') as T(Item)
 
 select * from Coin
 
-*/
-
-
-
 
 
 ------------------------------------------Script de llenado de Relationship
 
-/*
+
 INSERT INTO [dbo].[Relationship](Id, Name)
 SELECT  T.Item.value('@Id', 'int'),
 		T.Item.value('@Nombre', 'varchar(100)')
@@ -87,11 +79,10 @@ FROM @x.nodes('Catalogos/Parentezcos/Parentezco') as T(Item)
 
 select * from Relationship
 
-*/
 
 ------------------------------------------Script de llenado de TypeSavingsAccount
 
-/*
+
 INSERT INTO [dbo].[TypeSavingsAccount](Id, 
 									Name, 
 									CoinId, 
@@ -119,11 +110,10 @@ FROM @x.nodes('Catalogos/Tipo_Cuenta_Ahorros/TipoCuentaAhorro') as T(Item)
 
 select * from TypeSavingsAccount
 
-*/
 
 ------------------------------------------Script de llenado de TypeMovement
 
-/*
+
 SET IDENTITY_INSERT [dbo].[TypeMovement CA] ON
 INSERT INTO [dbo].[TypeMovement CA]([Id],
 									Name,
@@ -135,4 +125,3 @@ FROM @x.nodes('Catalogos/Tipo_Movimientos/Tipo_Movimiento') as T(Item)
 SET IDENTITY_INSERT [dbo].[TypeMovement CA] OFF
 
 SELECT * FROM [dbo].[TypeMovement CA]
-*/

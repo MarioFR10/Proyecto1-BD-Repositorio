@@ -339,16 +339,19 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 											DateOfMov)
 			SELECT TC.Sec,
 				   TM.TipoMovimiento,
-				   ,
+				   AC.Id,
 				   TM.Monto,
-				   ,
+				   SA.Balance + TM.Monto,
 				   TM.Descripcion,
 				   1,
 				   @lo1
 			FROM @TempMovimientos TM
 			INNER JOIN @TempCuentas TC ON TC.NumeroCuenta = TM.NumCuenta
-			--------Movimiento
+			INNER JOIN [dbo].[AccountStatement] AC ON AC.SavingsAccountId = TC.Sec
+			INNER JOIN [dbo].[SavingsAccount] SA ON SA.Id = TC.Sec
 
+			--------Movimiento
 			SET @lo1=DATEADD(d,1,@lo1)
 
 		END
+

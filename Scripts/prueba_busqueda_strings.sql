@@ -10,7 +10,8 @@ INSERT INTO [dbo].[Movement CA](SavingsAccountId,
 								[Description],
 								Visible, 
 								DateOfMov)
-VALUES(1, 1, 1, 100, 101, 'Restaurante El Arrecife', 0, '2000-11-11')
+VALUES(70, 1, 2077, 100, 101, 'Restaurante El Arrecife', 0, '2000-11-11')
+
 
 /*opcion 1 NO FUNCIONA
 DECLARE @SearchWord NVARCHAR(100)  

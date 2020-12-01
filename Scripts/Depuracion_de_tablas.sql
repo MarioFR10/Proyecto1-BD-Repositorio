@@ -5,6 +5,9 @@ DELETE FROM [dbo].[Benefactor];
 DBCC CHECKIDENT(Benefactor, RESEED, 0)
 SELECT * FROM [dbo].[Benefactor]
 
+DELETE FROM [dbo].[Movement CA];
+DBCC CHECKIDENT([Movement CA], RESEED, 0)
+Select * FROM [dbo].[Movement CA]
 
 DELETE FROM [dbo].[AccountStatement];
 DBCC CHECKIDENT(AccountStatement, RESEED, 0)
