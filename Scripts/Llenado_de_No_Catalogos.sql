@@ -227,7 +227,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 					'186.176.102.189'
 			FROM @x.nodes('Operaciones/FechaOperacion[@Fecha=sql:variable("@lo1")]/Persona') as T(Item)
 
-			select * from @TempPersonas
+			select * from [dbo].[Person]
 
 			--Insertar en tablas variables
 
@@ -239,7 +239,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 				   T.Item.value('@NumeroCuenta','VARCHAR(50)')
 			FROM @x.nodes('Operaciones/FechaOperacion[@Fecha=sql:variable("@lo1")]/Cuenta') as T(Item)
 
-			select * from @TempCuentas
+			--select * from @TempCuentas
 
 			--WHERE 
 			--SELECT TC.TipoCuentaID,
@@ -263,7 +263,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 				   T.Item.value('@Porcentaje','INT')
 			FROM @x.nodes('Operaciones/FechaOperacion[@Fecha=sql:variable("@lo1")]/Beneficiario') as T(Item)
 
-			select * from @TempBeneficiario
+			--select * from @TempBeneficiario
 
 			INSERT INTO @TempMovimientos(NumCuenta,
 									 TipoMovimiento,
@@ -275,7 +275,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 				   T.Item.value('@Descripcion','VARCHAR(100)')
 			FROM @x.nodes('Operaciones/FechaOperacion[@Fecha=sql:variable("@lo1")]/Movimientos') as T(Item)
 
-			select * from @TempMovimientos
+			--select * from @TempMovimientos
 
 			--------Insertar en tablas--------
 
@@ -289,7 +289,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 												InsertBy,
 												InsertIn)
 			SELECT TC.TipoCuentaID,
-				   TP.Sec,
+				   TP.Id,
 				   0,
 				   @lo1,
 				   TC.NumeroCuenta,
@@ -297,7 +297,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 				   'Script',
 				   '186.176.102.189'
 			FROM @TempCuentas TC
-			INNER JOIN @TempPersonas TP ON TP.ValorDocumentoIdentidad = TC.ValDocIDent
+			INNER JOIN [dbo].[Person] TP ON TP.[ValueDocIden] = TC.ValDocIDent
 
 			select * from [dbo].[SavingsAccount]
 			--------SavingAccount
@@ -313,16 +313,16 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 											InsertBy,
 											InsertIn)
 			SELECT TB.ParentescoID,
-				   TP.Sec,
+				   TP.Id,
 				   TC.Sec,
-				   TP.Nombre,
+				   TP.Name,
 				   TB.Porcentaje,
 				   1,
 				   GETDATE(),
 				   'Script',
 				   '186.176.102.189'
 			FROM @TempBeneficiario TB
-			INNER JOIN @TempPersonas TP ON TP.ValorDocumentoIdentidad = TB.ValDocIdent
+			INNER JOIN [dbo].[Person] TP ON TP.[ValueDocIden] = TB.ValDocIdent
 			INNER JOIN @TempCuentas TC ON TC.NumeroCuenta = TB.NumeroCuenta
 
 			select * from [dbo].[Benefactor]
@@ -350,6 +350,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 			INNER JOIN [dbo].[AccountStatement] AC ON AC.SavingsAccountId = TC.Sec
 			INNER JOIN [dbo].[SavingsAccount] SA ON SA.Id = TC.Sec
 
+			select * from [dbo].[Movement CA]
 			--------Movimiento
 			SET @lo1=DATEADD(d,1,@lo1)
 
