@@ -40,3 +40,7 @@ SELECT * FROM [dbo].[Relationship]
 
 DELETE FROM [dbo].[TypeDocIdentity];
 SELECT * FROM [dbo].[TypeDocIdentity]
+
+DELETE FROM [dbo].[TypeMovement CA];
+DBCC CHECKIDENT([TypeMovement CA], RESEED, 0)
+Select * FROM [dbo].[TypeMovement CA]
