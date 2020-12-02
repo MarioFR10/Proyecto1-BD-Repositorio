@@ -11,14 +11,14 @@ BEGIN
 										InsertAt,
 										InsertBy,
 										InsertIn)
-	SELECT I.SavingAccountId,
-		   I.CreationDate,
-		   DATEADD( DAY, -1, DATEADD(MONTH, 1, I.CreationDate)),
+	SELECT i.Id,
+		   i.CreationDate,
+		   DATEADD( DAY, -1, DATEADD(MONTH, 1, i.CreationDate)),
 		   0,
 		   0,
 		   GETDATE(),
 		   'Script',
 		   '186.176.102.189'
 
-	FROM inserted I
+	FROM inserted AS i
 END
