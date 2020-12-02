@@ -1,4 +1,4 @@
-DECLARE @x XML
+﻿DECLARE @x XML
 SET @x = '<Operaciones>
 	<FechaOperacion Fecha="2020-07-01">
 	   <Persona TipoDocuIdentidad="1" Nombre="David Arroyo Mesen" ValorDocumentoIdentidad="117171162" FechaNacimiento="1976-08-14" Email="arroyodavid736@outlook.com" Telefono1="73562984" Telefono2="22816530"/>
@@ -162,7 +162,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 	SELECT  T.Item.value('@Fecha', 'DATE')
 	FROM @x.nodes('Operaciones/FechaOperacion') as T(Item)
 
-	select * from @TempFechas
+	--select * from @TempFechas
 
 	DECLARE @OperationDate DATE,
 			@lo1 DATE, --iteradores
@@ -210,7 +210,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 					'186.176.102.189'
 			FROM @x.nodes('Operaciones/FechaOperacion[@Fecha=sql:variable("@lo1")]/Persona') as T(Item)
 
-			select * from [dbo].[Person]
+			--select * from [dbo].[Person]
 
 			--Insertar en tablas variables
 
@@ -222,7 +222,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 				   T.Item.value('@NumeroCuenta','VARCHAR(50)')
 			FROM @x.nodes('Operaciones/FechaOperacion[@Fecha=sql:variable("@lo1")]/Cuenta') as T(Item)
 
-			select * from @TempCuentas
+			--select * from @TempCuentas
 
 			--WHERE 
 			--SELECT TC.TipoCuentaID,
@@ -262,6 +262,32 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 
 			--------Insertar en tablas--------
 
+			DECLARE 
+					@minimo int, 
+					@maximo int 
+
+					SELECT @minimo =MIN(Sec), @maximo = MAX(Sec)
+					FROM @TempMovimientos
+					
+					WHILE @minimo <= @maximo
+						BEGIN 
+							
+							SELECT @monto = -1*TM.Monto
+							FROM @TempMovimientos TM
+							WHERE TM.Sec = @minimo and (TM.TipoMovimiento = 1 OR TM.TipoMovimiento = 2 OR TM.TipoMovimiento = 3)
+
+							SELECT @monto = TM.Monto
+							FROM @TempMovimientos TM
+							WHERE TM.Sec = @minimo and (TM.TipoMovimiento = 4 OR TM.TipoMovimiento = 5 OR TM.TipoMovimiento = 6)
+
+							UPDATE @TempMovimientos
+							SET Monto = @monto
+							WHERE Sec = @minimo
+
+							SET @minimo = @minimo + 1
+						END
+
+
 			--------SavingAccount
 			INSERT INTO [dbo].[SavingsAccount] (TypeSavingsAccountId,
 												PersonId,
@@ -282,8 +308,9 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 			FROM @TempCuentas TC
 			INNER JOIN [dbo].[Person] TP ON TP.[ValueDocIden] = TC.ValDocIDent
 			
-
-			select * from [dbo].[SavingsAccount]
+			SELECT 'Cuenta'
+			SELECT * FROM [dbo].[SavingsAccount] SA WHERE SA.Id = 1
+			--select * from [dbo].[SavingsAccount]
 			--------SavingAccount
 
 			--------Benefactor
@@ -309,17 +336,22 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 			INNER JOIN [dbo].[Person] TP ON TP.[ValueDocIden] = TB.ValDocIdent
 			INNER JOIN @TempCuentas TC ON TC.NumeroCuenta = TB.NumeroCuenta
 
-			select * from [dbo].[Benefactor]
+			--select * from [dbo].[Benefactor]
 			--------Benefactor
 
 			--------Movimiento
-			SELECT @monto = -1*TM.Monto
-			FROM @TempMovimientos TM
-			WHERE TM.TipoMovimiento = 1 OR TM.TipoMovimiento = 2 OR TM.TipoMovimiento = 3
 
-			SELECT @monto = TM.Monto
-			FROM @TempMovimientos TM
-			WHERE TM.TipoMovimiento = 4 OR TM.TipoMovimiento = 5 OR TM.TipoMovimiento = 6
+			--SELECT @monto = -1*TM.Monto
+			--FROM @TempMovimientos TM
+			--WHERE TM.TipoMovimiento = 1 OR TM.TipoMovimiento = 2 OR TM.TipoMovimiento = 3
+			
+
+			--SELECT @monto = TM.Monto
+			--FROM @TempMovimientos TM
+			--WHERE TM.TipoMovimiento = 4 OR TM.TipoMovimiento = 5 OR TM.TipoMovimiento = 6
+
+			SELECT 'MONTO'
+			SELECT @monto
 
 			INSERT INTO [dbo].[Movement CA] (SavingsAccountId,
 											TypeMovId,
@@ -344,6 +376,9 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 			WHERE AC.EndDate >= @lo1
 
 			--select * from [dbo].[Movement CA]
+
+			SELECT 'Movimientos'
+			SELECT * FROM [dbo].[Movement CA] MC WHERE MC.SavingsAccountId = 1
 			----------Movimiento
 			SET @lo1=DATEADD(d,1,@lo1)
 
