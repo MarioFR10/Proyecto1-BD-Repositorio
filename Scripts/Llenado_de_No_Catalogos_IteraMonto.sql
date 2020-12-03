@@ -341,6 +341,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 
 			--------Movimiento
 
+
 			DECLARE 
 					@minimo INT, 
 					@maximo INT,
