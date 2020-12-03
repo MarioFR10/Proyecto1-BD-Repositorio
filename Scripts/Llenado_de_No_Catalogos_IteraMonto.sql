@@ -368,6 +368,13 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 								InsertIn = '186.176.102.189'
 							WHERE [dbo].[SavingsAccount].Id = @CuentaId
 
+							UPDATE [dbo].[AccountStatement]
+							SET FinalBalance = @SaldoActual + @monto,
+								InsertAt = GETDATE(),
+								InsertBy = 'script',
+								InsertIn = '186.176.102.189'
+							WHERE [dbo].[AccountStatement].[SavingsAccountId] = @CuentaId
+
 							INSERT [dbo].[Movement CA] (SavingsAccountId,
 											TypeMovId,
 											AccountStatementId,
@@ -423,6 +430,32 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 			--SELECT 'Movimientos'
 			--SELECT * FROM [dbo].[Movement CA] MC WHERE MC.SavingsAccountId = 1
 			----------Movimiento
+
+
+			-------------Cerrar estados de cuenta---------------
+
+			INSERT INTO [dbo].[AccountStatement] ([SavingsAccountId],
+												[StartDate],
+												[EndDate],
+												[InitialBalance],
+												[FinalBalance],
+												[InsertAt],
+												[InsertBy],
+												[InsertIn])
+			SELECT AC.[SavingsAccountId],
+				   DATEADD(d,1,AC.[EndDate]),
+				   DATEADD(MONTH,1,AC.[EndDate]),
+				   AC.[FinalBalance],
+				   AC.[FinalBalance],
+				   GETDATE(),
+				   'Script',
+				   '186.176.102.189'
+			FROM [dbo].[AccountStatement] AC
+			WHERE AC.[EndDate] = @lo1
+			--INNER JOIN [dbo].[AccountStatement] AC ON AC.[EndDate] = @lo1
+			--INNER JOIN [dbo].[SavingsAccount] SA on SA.[Id] = AC.[SavingsAccountId]
+			----------------------------------------------------
+
 			SET @lo1=DATEADD(d,1,@lo1)
 
 		END
