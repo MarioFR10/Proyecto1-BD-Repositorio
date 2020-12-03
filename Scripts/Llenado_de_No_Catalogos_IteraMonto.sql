@@ -149,6 +149,14 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 								Monto MONEY,
 								Descripcion VARCHAR(100))
 
+	DECLARE @TempUsuarios TABLE ( Sec int IDENTITY(1,1), 
+								Usuario VARCHAR(50),
+								Contrasenia VARCHAR(20),
+								ValDocIdent VARCHAR(50),
+								Administrador BIT)
+
+	DECLARE @TempPuedeVer TABLE (Usuario VARCHAR(50),
+								NumCuenta VARCHAR(50))
 
 	-------------------tabla prueba insert select----------------------
 	DECLARE @TempPruebas TABLE (Sec INT IDENTITY(1,1),
@@ -182,6 +190,8 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 			DELETE @TempCuentas
 			DELETE @TempBeneficiario
 			DELETE @TempMovimientos
+			DELETE @TempUsuarios
+			DELETE @TempPuedeVer
 			--reiniciar Id
 			--DBCC CHECKIDENT (AccesoUsuario, RESEED, 0)
 
@@ -258,6 +268,22 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 			FROM @x.nodes('Operaciones/FechaOperacion[@Fecha=sql:variable("@lo1")]/Movimientos') as T(Item)
 
 			--select * from @TempMovimientos
+
+			INSERT INTO @TempUsuarios(Usuario,
+								Contrasenia,
+								ValDocIdent,
+								Administrador)
+			SELECT T.Item.value('@User','VARCHAR(50)'),
+				   T.Item.value('@Pass','VARCHAR(20)'),
+				   T.Item.value('@ValorDocumentoIdentidad','VARCHAR(50)'),
+				   T.Item.value('@EsAdministrador','BIT')
+			FROM @x.nodes('Operaciones/FechaOperacion[@Fecha=sql:variable("@lo1")]/Usuario') as T(Item)
+
+			INSERT INTO @TempPuedeVer(Usuario,
+									  NumCuenta)
+			SELECT T.Item.value('@User','VARCHAR(50)'),
+				   T.Item.value('@NumeroCuenta','VARCHAR(50)')
+			FROM @x.nodes('Operaciones/FechaOperacion[@Fecha=sql:variable("@lo1")]/UsuarioPuedeVer') as T(Item)
 
 			--------Insertar en tablas--------
 
@@ -431,6 +457,40 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 			--SELECT * FROM [dbo].[Movement CA] MC WHERE MC.SavingsAccountId = 1
 			----------Movimiento
 
+			----------Usuarios----------
+			INSERT INTO [dbo].[User] (PersonId,
+									  UserName,
+									  Password,
+									  isAdministrator,
+									  InsertAt,
+									  InsertBy,
+									  InsertIn)
+			SELECT TP.Id,
+				   TU.Usuario,
+				   TU.Contrasenia,
+				   TU.Administrador,
+				   GETDATE(),
+				   'Script',
+				   '186.176.102.189'
+			FROM @TempUsuarios TU
+			INNER JOIN [dbo].[Person] TP ON TP.[ValueDocIden] = TU.ValDocIdent
+			----------Usuarios----------
+
+			----------UsuarioPuedeVer----------
+			INSERT INTO [dbo].[UserCanAccess] (UserId,
+									  SavingsAccountId,
+									  Condition,
+									  InsertAt,
+									  UpdateAt)
+			SELECT U.Id,
+				   SA.Id,
+				   1,
+				   GETDATE(),
+				   GETDATE()
+			FROM @TempPuedeVer TPV
+			INNER JOIN [dbo].[User] U ON U.UserName = TPV.Usuario
+			INNER JOIN [dbo].[SavingsAccount] SA ON SA.AccountNumber = TPV.NumCuenta
+			----------UsuarioPuedeVer----------
 
 			-------------Cerrar estados de cuenta---------------
 
@@ -463,3 +523,5 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 
 --select * from [dbo].[SavingsAccount]
 --select * from [dbo].[Movement CA]
+--SELECT * from [dbo].[User]
+--SELECT * from [dbo].[UserCanAccess]
