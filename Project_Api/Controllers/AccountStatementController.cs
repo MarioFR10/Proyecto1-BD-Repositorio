@@ -38,5 +38,40 @@ namespace Project_Api.Controllers
             }
         }
 
+        [HttpPost("GetMovements")]
+        public ActionResult GetMovements([FromBody] Dictionary<string, object> pJson)
+        {
+            try
+            {
+                Dictionary<string, object> responseList = new Dictionary<string, object>();
+                int accountStatementId = Convert.ToInt32(pJson["accountStatementId"].ToString());
+                responseList = context.GetMovements(accountStatementId);
+                context.SaveChanges();
+                return Ok(responseList);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.ToString());
+            }
+        }
+
+        [HttpPost("GetMovementsByWord")]
+        public ActionResult GetMovementsByWord([FromBody] Dictionary<string, object> pJson)
+        {
+            try
+            {
+                Dictionary<string, object> responseList = new Dictionary<string, object>();
+                int accountStatementId = Convert.ToInt32(pJson["accountStatementId"].ToString());
+                string word = "%" + pJson["word"].ToString() + "%";
+                responseList = context.GetMovementsByWord(accountStatementId, word);
+                context.SaveChanges();
+                return Ok(responseList);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.ToString());
+            }
+        }
+
     }
 }

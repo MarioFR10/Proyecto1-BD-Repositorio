@@ -61,5 +61,41 @@ namespace Project_Api.Controllers
             }
         }
 
+        [HttpPost("getObjetiveAccounts")]
+        public ActionResult GetObjetiveAccounts([FromBody] Dictionary<string, object> pJson)
+        {
+            try
+            {
+                Dictionary<string, object> responseList = new Dictionary<string, object>();
+                int accountId = Convert.ToInt32(pJson["SavingsAccountId"].ToString());
+                responseList = context.GetObjetiveAccounts(accountId);
+                context.SaveChanges();
+                return Ok(responseList);
+            }
+                catch (Exception e)
+            {
+                return BadRequest(e.ToString());
+            }
+        }
+
+
+        [HttpPut("deleteObjetive")]
+        public ActionResult DeleteObjetive([FromBody] Dictionary<string, object> pJson)
+        {
+            try
+            {
+                Dictionary<string, object> responseList = new Dictionary<string, object>();
+                int objetiveId = Convert.ToInt32(pJson["objetiveaccountId"].ToString());
+
+                responseList = context.DeleteObjetive(objetiveId);
+                context.SaveChanges();
+                return Ok(responseList);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.ToString());
+            }
+        }
+
     }
 }
