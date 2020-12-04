@@ -389,7 +389,7 @@ namespace Project_Api.Context
                 {
                     response.Add("Code", dr.GetInt32(0));
                 }
-                if (Convert.ToInt32(response["Code"]) == 1 || response == null)
+                if (Convert.ToInt32(response["Code"]) == 1 || response.Count() == 0)
                 {
 
                     response.Add("error", "Error Deleting");
@@ -403,6 +403,131 @@ namespace Project_Api.Context
                 return response;
             }
         }
+
+        public Dictionary<string, object> GetMovements(int accountStatementId)
+        {
+            List<Dictionary<string, object>> response = new List<Dictionary<string, object>>();
+            Dictionary<string, object> finalresponse = new Dictionary<string, object>();
+
+            using (SqlConnection con = new SqlConnection("Server = tcp:proyecto1-server-bd.database.windows.net,1433; Database = proyecto1-database; User ID = Administrador; Password = Proyecto1; Trusted_Connection = False; Encrypt = True;"))
+            {
+                SqlCommand cmd = new SqlCommand("dbo_SP_Read_Movements", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("@AccountStatementId", accountStatementId);
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Dictionary<string, object> movements = new Dictionary<string, object>();
+                    movements.Add("id", dr.GetInt32(0));
+                    movements.Add("typeMovId", dr.GetInt32(1));
+                    movements.Add("amount", dr.GetDecimal(2));
+                    movements.Add("newBalance", dr.GetDecimal(3));
+                    movements.Add("description", dr.GetString(4));
+
+                    response.Add(movements);
+                }
+                dr.Close();
+                if (response.Count() == 0)
+                {
+                    Dictionary<string, object> error = new Dictionary<string, object>();
+                    error.Add("error", "There are no movements");
+                    response.Add(error);
+                    return finalresponse;
+                }
+                con.Close();
+                finalresponse.Add("movements", response);
+                return finalresponse;
+
+            }
+        }
+
+        public Dictionary<string, object> GetMovementsByWord(int accountStatementId, string word)
+        {
+            List<Dictionary<string, object>> response = new List<Dictionary<string, object>>();
+            Dictionary<string, object> finalresponse = new Dictionary<string, object>();
+
+            using (SqlConnection con = new SqlConnection("Server = tcp:proyecto1-server-bd.database.windows.net,1433; Database = proyecto1-database; User ID = Administrador; Password = Proyecto1; Trusted_Connection = False; Encrypt = True;"))
+            {
+                SqlCommand cmd = new SqlCommand("dbo_SP_Read_Movements", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("@AccountStatementId", accountStatementId);
+                cmd.Parameters.AddWithValue("@Word", word);  // Arreglar este parametro
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Dictionary<string, object> movements = new Dictionary<string, object>();
+                    movements.Add("id", dr.GetInt32(0));
+                    movements.Add("typeMovId", dr.GetInt32(1));
+                    movements.Add("amount", dr.GetDecimal(2));
+                    movements.Add("newBalance", dr.GetDecimal(3));
+                    movements.Add("description", dr.GetString(4));
+
+                    response.Add(movements);
+                }
+                dr.Close();
+                if (response.Count() == 0)
+                {
+                    Dictionary<string, object> error = new Dictionary<string, object>();
+                    error.Add("error", "There are no movements");
+                    response.Add(error);
+                    return finalresponse;
+                }
+                con.Close();
+                finalresponse.Add("movements", response);
+                return finalresponse;
+
+            }
+        }
+
+        public Dictionary<string, object> GetObjetiveAccounts(int accountId)
+        {
+            List<Dictionary<string, object>> response = new List<Dictionary<string, object>>();
+            Dictionary<string, object> finalresponse = new Dictionary<string, object>();
+
+            using (SqlConnection con = new SqlConnection("Server = tcp:proyecto1-server-bd.database.windows.net,1433; Database = proyecto1-database; User ID = Administrador; Password = Proyecto1; Trusted_Connection = False; Encrypt = True;"))
+            {
+                SqlCommand cmd = new SqlCommand("dbo_SP_Read_ObjectiveAccount", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("@SavingsAccountId", accountId);
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Dictionary<string, object> objetiveaccount = new Dictionary<string, object>();
+                    objetiveaccount.Add("id", dr.GetInt32(0));
+                    objetiveaccount.Add("SavingsAccountId", dr.GetInt32(1));
+                    objetiveaccount.Add("startDate", dr.GetDateTime(2));
+                    objetiveaccount.Add("endDate", dr.GetDateTime(3));
+                    objetiveaccount.Add("fee", dr.GetDecimal(4));
+                    objetiveaccount.Add("objetive", dr.GetString(5));
+                    objetiveaccount.Add("balance", dr.GetDecimal(6));
+                    objetiveaccount.Add("acumInterest", dr.GetDouble(7));
+                    objetiveaccount.Add("daysOfDeposit", dr.GetString(8));
+                    response.Add(objetiveaccount);
+                }
+                dr.Close();
+                if (response.Count() == 0)
+                {
+                    Dictionary<string, object> error = new Dictionary<string, object>();
+                    error.Add("error", "No objetive accounts availables");
+                    response.Add(error);
+                    return finalresponse;
+                }
+                con.Close();
+                finalresponse.Add("objetiveAccounts", response);
+                return finalresponse;
+
+            }
+        }
+
 
 
         public DbSet<User> User { get; set; }

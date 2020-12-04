@@ -74,24 +74,5 @@ namespace Project_Api.Controllers
             }
         }
 
-
-        [HttpPut("deleteObjetive")]
-        public ActionResult DeleteObjetive([FromBody] Dictionary<string, object> pJson)
-        {
-            try
-            {
-                Dictionary<string, object> responseList = new Dictionary<string, object>();
-                int objetiveId = Convert.ToInt32(pJson[""].ToString());
-
-                responseList = context.DeleteObjetive(objetiveId);
-                context.SaveChanges();
-                return Ok(responseList);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.ToString());
-            }
-        }
-
     }
 }
