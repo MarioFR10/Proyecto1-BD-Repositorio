@@ -213,10 +213,8 @@ export default new Vuex.Store({
     //funcion delete objetive Account
     deleteObjetiveAccount({commit},objetiveAccount: ObjetiveAccount){
       commit('setLoaded',false);
-      console.log('Llegue', objetiveAccount);
       const accountProvider = new AccountProvider();
       accountProvider.deleteObjetiveAccount(objetiveAccount.id).then(message=>{
-        console.log('despues de borrado', objetiveAccount);
         accountProvider.getObjetiveAccount(objetiveAccount.SavingsAccountId).then(objetiveAccounts=>{
           commit('setObjetiveAccounts',objetiveAccounts);
           commit('setSuccess',message);
@@ -233,7 +231,7 @@ export default new Vuex.Store({
         commit('setLoaded',true);
       });
     },
-    
+
     //funcion de filtrado de movimientos
     getMovementsWord({commit},movimiento: Movement){
       commit('setLoaded',false);
@@ -247,6 +245,53 @@ export default new Vuex.Store({
         commit('setLoaded',true);
       });
     },
+
+    //funcion de agregar cuentas objetivo
+
+    createObjetiveAccount({commit},cuentaObjetivo: ObjetiveAccount){
+      commit('setLoaded',false);
+      const accountProvider = new AccountProvider();
+      accountProvider.createObjetiveAccount(cuentaObjetivo).then(message=>{
+        accountProvider.getObjetiveAccount(cuentaObjetivo.SavingsAccountId).then(objetiveAccounts=>{
+          commit('setObjetiveAccounts',objetiveAccounts);
+          commit('setSuccess',message);
+          commit('setError',null);
+          commit('setLoaded',true);
+        }).catch(error=>{
+          commit('setSuccess',null);
+          commit('setError',error);
+          commit('setLoaded',true);
+        });
+      }).catch(error=>{
+        commit('setSuccess',null);
+        commit('setError',error);
+        commit('setLoaded',true);
+      });
+    },
+
+    //funcion de update de cuenta objetivo
+
+    updateObjetiveAccount({commit},objetiveAccount: ObjetiveAccount){
+      commit('setLoaded',false);
+      const accountProvider = new AccountProvider();
+      accountProvider.updateObjetiveAccount(objetiveAccount).then(message=>{
+        accountProvider.getObjetiveAccount(objetiveAccount.SavingsAccountId).then(objetiveAccounts=>{
+          commit('setObjetiveAccounts',objetiveAccounts);
+          commit('setSuccess',message);
+          commit('setError',null);
+          commit('setLoaded',true);
+        }).catch(error=>{
+          commit('setSuccess',null);
+          commit('setError',error);
+          commit('setLoaded',true);
+        });
+      }).catch(error=>{
+        commit('setSuccess',null);
+        commit('setError',error);
+        commit('setLoaded',true);
+      });
+    },
+
     
   },
   modules: {

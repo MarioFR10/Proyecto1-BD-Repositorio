@@ -8,19 +8,54 @@
             <b-card-body>
                 <b-form @submit.prevent="submit">
                     <b-form-group>
-                        <b-form-input type="text" placeholder="No. Identificacion" v-model="$v.benefactor.valueDocIden.$model" :class="{'is-invalid':$v.benefactor.valueDocIden.$error}"></b-form-input>
-                        <b-form-select class="mt-2" v-model="relationshipSelected" :options="relationships"></b-form-select>
                         <b-row class=mt-2 no-gutters>
-                            <b-col md="5" class="mb-1">
-                                <b-card-text class=mt-1>Porcentaje beneficio </b-card-text>
+                            <b-col md="4" class="mb-1">
+                                    <b-card-text class=mt-1>Id cuenta de ahorros: {{accountId}} </b-card-text>
                             </b-col>
-                            <b-col md="3">
-                                <b-form-input type=number v-model="benefactor.percentage"></b-form-input>
+                        </b-row>
+                        <b-row class=mt-2 no-gutters>
+                            <b-col md="2" class="mb-1">
+                                    <b-card-text class=mt-1 v-model="fechaInicio">Fecha Inicio: </b-card-text>
+                            </b-col>
+                            <b-col md="4">
+                                <b-form-input type="date"></b-form-input>
+                            </b-col>
+                        </b-row>
+                        <b-row class=mt-2 no-gutters>
+                            <b-col md="2" class="mb-1">
+                                    <b-card-text class=mt-1 v-model="fechaFin">Fecha Fin: </b-card-text>
+                            </b-col>
+                            <b-col md="4">
+                                <b-form-input type="date"></b-form-input>
+                            </b-col>
+                        </b-row>
+                        <b-row class=mt-2 no-gutters>
+                            <b-col md="2" class="mb-1">
+                                    <b-card-text class=mt-1>Objetivo: </b-card-text>
+                            </b-col>
+                            <b-col md="5">
+                                <b-form-input class="mt-0" v-model="objetivo" placeholder="Ingrese el objetivo de la cuenta"></b-form-input>
+                            </b-col>
+                        </b-row>
+                        <b-row class=mt-2 no-gutters>
+                            <b-col md="2" class="mb-1">
+                                <b-card-text class=mt-1>Cuota: </b-card-text>
+                            </b-col>
+                            <b-col md="2">
+                                <b-form-input type=number v-model="cuota"></b-form-input>
+                            </b-col>
+                        </b-row>
+                        <b-row class=mt-2 no-gutters>
+                            <b-col md="2" class="mb-1">
+                                    <b-card-text class=mt-1>Dias de deposito: </b-card-text>
+                            </b-col>
+                            <b-col md="5">
+                                <b-form-input class="mt-2" v-model="diasDeposito" placeholder="Ingrese los dias de deposito"></b-form-input>
                             </b-col>
                         </b-row>
                     </b-form-group>
                     <b-form-group class="mb-0 mt-2">
-                        <b-button type="submit" block :disabled="$v.$invalid||!loaded||relationshipSelected===null">Crear beneficiario</b-button>
+                        <b-button type="submit" block :disabled="!loaded">Crear Cuenta Objetivo</b-button>
                     </b-form-group>
                 </b-form>
             </b-card-body>
@@ -37,35 +72,43 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { mapActions, mapGetters, mapState} from 'vuex'
 import { required} from 'vuelidate/lib/validators'
-import Benefactor from '../models/Benefactor';
+import ObjetiveAccount from '../models/ObjetiveAccount';
 
 @Component({
   data(){
       return {
-          relationshipSelected: null,
-          benefactor: new Benefactor(undefined,'nameDocId',0,'','',0)
+          objetivo: '',
+          diasDeposito: '',
+          fechaInicio: new Date(),
+          fechaFin: new Date(),
+          cuota: 0,
+          cuentaObjetivo: new ObjetiveAccount(undefined, 0 , new Date(), new Date(), 0, '', 0, 0, '', false)
       }
   },
-  created(){
-      this.getRelationships();
-  },
+  //created(){
+    //  this.getObjetiveAccount();
+  //},
   props: {
-      accountId: String,
+      accountId: Number,
   },
   computed: {
       ...mapGetters(['hasError']),
       ...mapState(['error','loaded','user','relationships']),
   },
   methods: {
-      ...mapActions(['createBenefactor','getRelationships']),
+      ...mapActions(['createObjetiveAccount','getObjetiveAccount']),
+
       submit(){
-        this.$v.$touch()
-        if (!this.$v.$invalid) {
-            this.benefactor.savingsAccountId = this.accountId;
-            this.benefactor.nameDocId = this.relationshipSelected;
-            this.createBenefactor(this.benefactor);
-            this.$emit('closeForm');
-        }
+        this.cuentaObjetivo.SavingsAccountId = this.accountId;
+        this.cuentaObjetivo.startDate = this.fechaInicio;
+        this.cuentaObjetivo.endDate = this.fechaFin;
+        this.cuentaObjetivo.fee = this.cuota;
+        this.cuentaObjetivo.objetive = this.objetivo;
+        this.cuentaObjetivo.daysOfDeposit = this.diasDeposito;
+        
+        this.createObjetiveAccount(this.cuentaObjetivo);
+
+        this.$emit('closeForm');
       },
       closeForm(){
         this.$emit('closeForm');

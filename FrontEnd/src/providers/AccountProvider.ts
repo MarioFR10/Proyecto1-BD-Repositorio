@@ -147,5 +147,58 @@ export default class AccountProvider{
   throw new Error(response.status + " (" + response.statusText + ")");
   }
 
+
+  async createObjetiveAccount(cuentaObjetivo: ObjetiveAccount): Promise<string>{
+    const operation = "savingsaccount/createObjetive";
+      const options = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "SavingsAccountId": cuentaObjetivo.SavingsAccountId,
+        "startDate": cuentaObjetivo.startDate,
+        "endDate": cuentaObjetivo.endDate,
+        "fee": cuentaObjetivo.fee,
+        "objetive": cuentaObjetivo.objetive,
+        "daysOfDeposit": cuentaObjetivo.daysOfDeposit
+      })
+    };
+    const response = await fetch(this.apiUrl+operation, options);
+    if(response.ok){
+      const object = await response.json();
+      if(!object.error){
+        return object.success;
+      }
+      throw new Error(object.error);
+    }
+    throw new Error(response.status + " (" + response.statusText + ")");
+  }
+
+  async updateObjetiveAccount(objetiveAccount: ObjetiveAccount): Promise<string>{
+    const operation = "savingsaccount/updateObjetive";
+      const options = {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "objetiveaccountId": objetiveAccount.id,
+        "objetive": objetiveAccount.objetive
+      })
+    };
+    const response = await fetch(this.apiUrl+operation, options);
+    if(response.ok){
+      const object = await response.json();
+      if(!object.error){
+        return object.success;
+      }
+      throw new Error(object.error);
+    }
+    throw new Error(response.status + " (" + response.statusText + ")");
+  }
   
+
 }

@@ -1,5 +1,3 @@
-
-
 /*
 Edicion cuenta obj
 
@@ -8,11 +6,56 @@ Creacion
 modificacion descripcion
 
 desactivacion
+
 */
+
+
+select * from [dbo].[ObjetiveAccount]
+
+delete from [dbo].[ObjetiveAccount]
+DBCC CHECKIDENT(ObjetiveAccount, RESEED, 0)
+
+exec dbo_SP_Create_ObjetiveAccount 4, '2020-11-23', '2020-11-23', 3, 'prueba', '14, 15, 16'
+
+--Read
+ALTER PROCEDURE dbo_SP_Read_ObjectiveAccount
+(
+	@SavingsAccountId INT
+)
+AS
+BEGIN
+	SET NOCOUNT ON
+		BEGIN TRY
+			DECLARE @outResultCode INT = 0
+			IF exists( SELECT OA.Id FROM [dbo].[ObjetiveAccount] OA WHERE OA.SavingsAccountId = @SavingsAccountId )
+			BEGIN
+				SELECT OA.Id, 
+					   OA.SavingsAccountId,
+					   OA.StartDate,
+					   OA.EndDate,
+					   OA.Fee,
+					   OA.Objective,
+					   OA.Balance,
+					   OA.AcumInterest,
+					   OA.DaysOfDeposit
+				FROM [dbo].[ObjetiveAccount] OA
+				WHERE OA.SavingsAccountId = @SavingsAccountId AND OA.Active = 1
+			END;
+			ELSE
+				BEGIN 
+					SET @outResultCode = 1 -- Codigo de error NO EXISTE LA CUENTA OBJETIVO
+				END
+		END TRY
+		BEGIN CATCH
+			SET @outResultCode = 1 -- Codigo de error NO EXISTE LA CUENTA OBJETIVO
+		END CATCH
+	SET NOCOUNT OFF 
+END	
+GO
 
 --Create
 
-CREATE PROCEDURE dbo_SP_Create_ObjetiveAccount
+ALTER PROCEDURE dbo_SP_Create_ObjetiveAccount
 (
     @AccountId INT,   --Mapeado en capa logica
 	@inStartDate DATE,	--ingresa usuario
@@ -44,9 +87,10 @@ BEGIN
 													 @inFee,
 													 @inObjetive,
 													 0,
-													 0,
+													 0.0,
 													 @inDaysOfDeposit,
 													 1)
+				SELECT @outResultCode
 		END
 		ELSE
 			BEGIN 
@@ -64,7 +108,7 @@ GO
 
 --Update
 
-CREATE PROCEDURE dbo_SP_Update_ObjectiveAccount
+ALTER PROCEDURE dbo_SP_Update_ObjectiveAccount
 (
 	@ObjectiveAccountId INT,
 	@inDescription VARCHAR(50)
@@ -78,6 +122,7 @@ BEGIN
 			BEGIN
 				UPDATE [dbo].[ObjetiveAccount] SET [Objective] = @inDescription
 				WHERE [dbo].[ObjetiveAccount].Id = @ObjectiveAccountId
+				SELECT @outResultCode
 			END;
 			ELSE
 				BEGIN 
@@ -93,7 +138,7 @@ GO
 
 --Desactivar
 
-CREATE PROCEDURE dbo_SP_Delete_ObjectiveAccount
+ALTER PROCEDURE dbo_SP_Delete_ObjectiveAccount
 (
 	@ObjectiveAccountId INT
 )
@@ -106,14 +151,17 @@ BEGIN
 			BEGIN
 				UPDATE [dbo].[ObjetiveAccount] SET [Active] = 0
 				WHERE [dbo].[ObjetiveAccount].Id = @ObjectiveAccountId
+				SELECT @outResultCode
 			END;
 			ELSE
 				BEGIN 
-					SET @outResultCode = 1 -- Codigo de error NO EXISTE LA CUENTA	
+					SET @outResultCode = 1 -- Codigo de error NO EXISTE LA CUENTA OBJETIVO
 					SELECT @outResultCode
 				END
 		END TRY
 		BEGIN CATCH
+					SET @outResultCode = 1 -- Codigo de error NO EXISTE LA CUENTA OBJETIVO
+					SELECT @outResultCode
 		END CATCH
 	SET NOCOUNT OFF 
 END	
@@ -121,7 +169,7 @@ GO
 
 --Activar
 
-CREATE PROCEDURE dbo_SP_Activate_ObjectiveAccount
+ALTER PROCEDURE dbo_SP_Activate_ObjectiveAccount
 (
 	@ObjectiveAccountId INT
 )
@@ -146,3 +194,6 @@ BEGIN
 	SET NOCOUNT OFF 
 END	
 GO
+
+
+select * from [ObjetiveAccount]

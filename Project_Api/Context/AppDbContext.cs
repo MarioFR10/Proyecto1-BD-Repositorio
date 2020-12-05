@@ -332,43 +332,36 @@ namespace Project_Api.Context
             }
         }
 
-        public Dictionary<string, object> UpdateObjetive(List<Dictionary<string, object>> objetive)
+        public Dictionary<string, object> UpdateObjetive(int objCuentaId, string descripcion)
         {
             Dictionary<string, object> response = new Dictionary<string, object>();
-            foreach (Dictionary<string, object> obj in objetive)
+            using (SqlConnection con = new SqlConnection("Server = tcp:proyecto1-server-bd.database.windows.net,1433; Database = proyecto1-database; User ID = Administrador; Password = Proyecto1; Trusted_Connection = False; Encrypt = True;"))
             {
-                using (SqlConnection con = new SqlConnection("Server = tcp:proyecto1-server-bd.database.windows.net,1433; Database = proyecto1-database; User ID = Administrador; Password = Proyecto1; Trusted_Connection = False; Encrypt = True;"))
+                SqlCommand cmd = new SqlCommand("dbo_SP_Update_ObjectiveAccount", con)
                 {
-                    SqlCommand cmd = new SqlCommand("dbo_SP_Update_ObjectiveAccount", con)
-                    {
-                        CommandType = CommandType.StoredProcedure
-                    };
-                    int objCuentaId = Convert.ToInt32(obj[""].ToString());
-                    string descripcion = obj[""].ToString();
-                    cmd.Parameters.AddWithValue("@ObjectiveAccountId", objCuentaId);
-                    cmd.Parameters.AddWithValue("@inDescription", descripcion);
-                    con.Open();
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        response.Add("Code", dr.GetInt32(0));
-                    }
-                    if (Convert.ToInt32(response["Code"]) == 1 || response == null)
-                    {
-                        response.Add("error", "Error Updating");
-                    }
-                    else
-                    {
-                        response.Add("success", "Succesfully Done");
-                    }
-                    dr.Close();
-                    con.Close();
-                    return response;
-
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("@ObjectiveAccountId", objCuentaId);
+                cmd.Parameters.AddWithValue("@inDescription", descripcion);
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    response.Add("Code", dr.GetInt32(0));
                 }
+                if (Convert.ToInt32(response["Code"]) == 1 )
+                {
+                    response.Add("error", "Error Updating");
+                }
+                else
+                {
+                    response.Add("success", "Succesfully Done");
+                }
+                dr.Close();
+                con.Close();
+                return response;
+
             }
-            response.Add("error", "No Objetive Accounts in this account");
-            return response;
         }
 
 

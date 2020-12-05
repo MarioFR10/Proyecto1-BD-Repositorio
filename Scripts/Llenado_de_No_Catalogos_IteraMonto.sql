@@ -149,7 +149,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 								Monto MONEY,
 								Descripcion VARCHAR(100))
 
-	DECLARE @TempUsuarios TABLE ( Sec INT IDENTITY(1,1), 
+	DECLARE @TempUsuarios TABLE ( Sec int IDENTITY(1,1), 
 								Usuario VARCHAR(50),
 								Contrasenia VARCHAR(20),
 								ValDocIdent VARCHAR(50),
@@ -157,12 +157,6 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 
 	DECLARE @TempPuedeVer TABLE (Usuario VARCHAR(50),
 								NumCuenta VARCHAR(50))
-
-	DECLARE @TempEstadoCuenta TABLE (Sec INT IDENTITY(1,1), 
-									 CuentaId INT,
-									 EstadoCuentaId INT,
-									 TipoCuenta INT,
-									 Minimo MONEY)
 
 	-------------------tabla prueba insert select----------------------
 	DECLARE @TempPruebas TABLE (Sec INT IDENTITY(1,1),
@@ -409,17 +403,17 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 							WHERE [dbo].[AccountStatement].[SavingsAccountId] = @CuentaId
 
 							INSERT [dbo].[Movement CA] (SavingsAccountId,
-														TypeMovId,
-														AccountStatementId,
-														Amount,
-														NewBalance,
-														Description,
-														Visible,
-														DateOfMov)
+											TypeMovId,
+											AccountStatementId,
+											Amount,
+											NewBalance,
+											Description,
+											Visible,
+											DateOfMov)
 							VALUES(@CuentaId,
 								   @Tipo,
 								   @EstadoCuentaId,
-								   ABS (@monto),
+								   @monto,
 								   @SaldoActual + @monto,
 								   @Descripcion,
 								   1,
@@ -501,82 +495,34 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 
 			-------------Cerrar estados de cuenta---------------
 
-			INSERT INTO @TempEstadoCuenta (CuentaId,
-											EstadoCuentaId,
-											TipoCuenta,
-											Minimo)
+			INSERT INTO [dbo].[AccountStatement] ([SavingsAccountId],
+												[StartDate],
+												[EndDate],
+												[InitialBalance],
+												[FinalBalance],
+												[InsertAt],
+												[InsertBy],
+												[InsertIn])
 			SELECT AC.[SavingsAccountId],
-				   AC.Id,
-				   SA.[TypeSavingsAccountId],
-				   AC.[FinalBalance]
-			FROM [dbo].[AccountStatement] AC,
-				 [dbo].[SavingsAccount] SA
-			WHERE AC.[EndDate] = @lo1 AND SA.Id = AC.[SavingsAccountId]
-
-			
-
+				   DATEADD(d,1,AC.[EndDate]),
+				   DATEADD(MONTH,1,AC.[EndDate]),
+				   AC.[FinalBalance],
+				   AC.[FinalBalance],
+				   GETDATE(),
+				   'Script',
+				   '186.176.102.189'
+			FROM [dbo].[AccountStatement] AC
+			WHERE AC.[EndDate] = @lo1
 			--INNER JOIN [dbo].[AccountStatement] AC ON AC.[EndDate] = @lo1
 			--INNER JOIN [dbo].[SavingsAccount] SA on SA.[Id] = AC.[SavingsAccountId]
-			DECLARE 
-					@minimo2 INT, 
-					@maximo2 INT,
-					@Cuenta INT,
-					@EstadoCuenta INT,
-					@TipoCuenta INT,
-					@MinSaldo INT
-
-			SELECT @minimo2 = MIN(Sec), 
-				   @maximo2 = MAX(Sec)
-			FROM @TempEstadoCuenta
-					
-			WHILE @minimo2 <= @maximo2
-				BEGIN
-					SELECT @Cuenta = TEC.CuentaId,
-						   @EstadoCuenta = TEC.EstadoCuentaId,
-						   @TipoCuenta = TEC.TipoCuenta,
-						   @MinSaldo = TEC.Minimo
-					FROM @TempEstadoCuenta TEC
-					WHERE TEC.Sec = @minimo2
-
-					EXEC dbo.CerrarEstadoCuenta @Cuenta, @EstadoCuenta, @TipoCuenta, @MinSaldo, @lo1
-
-					--SELECT @ATM = COUNT(MCA.[TypeMovId])
-					--FROM [dbo].[Movement CA] MCA
-					--WHERE MCA.[SavingsAccountId] = @TempEstadoCuenta.CuentaId AND @TempEstadoCuenta.Sec = @minimo2 AND MCA.[TypeMovId] = 2
-
-					--SELECT @Humano = COUNT(MCA.[TypeMovId])
-					--FROM [dbo].[Movement CA] MCA
-					--WHERE MCA.[SavingsAccountId] = @TempEstadoCuenta.CuentaId AND @TempEstadoCuenta.Sec = @minimo2 AND MCA.[TypeMovId] = 3
-
-					--SET @MultaHumano = 0
-					--SET @MultaATM = 0
-
-					--SELECT @MultaHumano = TSA.[ExceedComisionHumanMont]
-					--FROM [dbo].[TypeSavingsAccount] TSA
-					--WHERE TSA.[MaxOpsHuman] < @Humano AND @TempEstadoCuenta.Sec = @minimo2
-
-					--IF (@MultaHumano != 0)
-					--	BEGIN
-					--		SELECT 'entra'
-					--	END
-
-					--SELECT @MultaATM = TSA.[ExceedComisionAtmMont]
-					--FROM [dbo].[TypeSavingsAccount] TSA
-					--WHERE TSA.[MaxOpsATM] < @ATM AND @TempEstadoCuenta.Sec = @minimo2
-
-					--IF (@MultaATM != 0)
-					--	BEGIN
-					--		SELECT 'entra'
-					--	END
-					SET @minimo2 = @minimo2 + 1
-				END
 			----------------------------------------------------
 
 			SET @lo1=DATEADD(d,1,@lo1)
 
 		END
---SELECT * FROM [dbo].[AccountStatement]
 
+
+--SELECT * FROM [dbo].[AccountStatement]
 --select * from [dbo].[SavingsAccount]
 --select * from [dbo].[Movement CA]
 --SELECT * from [dbo].[User]
