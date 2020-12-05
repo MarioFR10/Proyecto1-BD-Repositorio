@@ -33,15 +33,15 @@
 <script lang="ts">
 import { mapActions, mapGetters, mapState } from 'vuex';
 import { Component, Vue } from 'vue-property-decorator';
-import Benefactor from '../models/Benefactor';
-import Movement from '../models/Movements';
+import Movement from '../models/Movement';
 
 @Component({
     data(){
         return {
             id: this.$route.params.id,
             verMovimiento: true,
-            descripcion: ''
+            descripcion: '',
+            movimiento: new Movement('', 0, 0, 0, 0, 0,'',false)
         }
     },
     created(){
@@ -59,19 +59,11 @@ import Movement from '../models/Movements';
     },
     methods: {
         ...mapActions(['getMovements', 'getMovementsWord']),
-        //preguntar a edgar
         filtrado(){
             if(this.descripcion != ''){
-                this.movements.forEach((element: { description: string }) => {
-                    console.log(element.description);
-                    
-                    if (this.descripcion == element.description){
-                        this.verMovimiento = true;
-                    }
-                    else{
-                        this.verMovimiento = false;
-                    }
-                });
+                this.movimiento.accountStatementId = this.id;
+                this.movimiento.description = this.descripcion;
+                this.getMovementsWord(this.movimiento);
             }
             else{
                 this.getMovements(this.id);

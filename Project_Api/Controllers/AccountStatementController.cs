@@ -55,14 +55,14 @@ namespace Project_Api.Controllers
             }
         }
 
-        [HttpPost("GetMovementsByWord")]
+        [HttpPost("getMovementsWord")]
         public ActionResult GetMovementsByWord([FromBody] Dictionary<string, object> pJson)
         {
             try
             {
                 Dictionary<string, object> responseList = new Dictionary<string, object>();
                 int accountStatementId = Convert.ToInt32(pJson["accountStatementId"].ToString());
-                string word = "%" + pJson["word"].ToString() + "%";
+                string word = "%" + pJson["description"].ToString() + "%";
                 responseList = context.GetMovementsByWord(accountStatementId, word);
                 context.SaveChanges();
                 return Ok(responseList);

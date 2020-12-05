@@ -6,6 +6,7 @@ import AccountProvider from '@/providers/AccountProvider'
 import router from '@/router';
 import BenefactorProvider from '@/providers/BenefactorProvider';
 import Benefactor from '@/models/Benefactor';
+import Movement from '@/models/Movement';
 import ObjetiveAccount from '@/models/ObjetiveAccount';
 
 Vue.use(Vuex)
@@ -231,7 +232,22 @@ export default new Vuex.Store({
         commit('setError',error);
         commit('setLoaded',true);
       });
-    }
+    },
+    
+    //funcion de filtrado de movimientos
+    getMovementsWord({commit},movimiento: Movement){
+      commit('setLoaded',false);
+      const accountProvider = new AccountProvider();
+      accountProvider.getMovementsWord(movimiento).then(movements=>{
+        commit('setMovements',movements);
+        commit('setError',null);
+        commit('setLoaded',true);
+      }).catch(error=>{
+        commit('setError',error);
+        commit('setLoaded',true);
+      });
+    },
+    
   },
   modules: {
   },

@@ -451,12 +451,12 @@ namespace Project_Api.Context
 
             using (SqlConnection con = new SqlConnection("Server = tcp:proyecto1-server-bd.database.windows.net,1433; Database = proyecto1-database; User ID = Administrador; Password = Proyecto1; Trusted_Connection = False; Encrypt = True;"))
             {
-                SqlCommand cmd = new SqlCommand("dbo_SP_Read_Movements", con)
+                SqlCommand cmd = new SqlCommand("dbo_SP_Read_Movements_Word", con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
                 cmd.Parameters.AddWithValue("@AccountStatementId", accountStatementId);
-                cmd.Parameters.AddWithValue("@Word", word);  // Arreglar este parametro
+                cmd.Parameters.AddWithValue("@Description", word); 
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())

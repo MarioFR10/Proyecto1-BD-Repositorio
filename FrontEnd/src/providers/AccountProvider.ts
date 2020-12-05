@@ -1,6 +1,6 @@
 import AccountStatement from '@/models/AccountStatement';
 import Account from '@/models/AccountStatement';
-import Movements from '@/models/Movements';
+import Movement from '@/models/Movement';
 import ObjetiveAccount from '@/models/ObjetiveAccount';
 
 export default class AccountProvider{
@@ -53,7 +53,7 @@ export default class AccountProvider{
     throw new Error(response.status + " (" + response.statusText + ")");
   }
 
-  async getMovements(accountStatementId: number): Promise<Movements[]>{
+  async getMovements(accountStatementId: number): Promise<Movement[]>{
     const operation = "accountstatement/GetMovements";
     const options = {
     method: 'POST',
@@ -69,7 +69,7 @@ export default class AccountProvider{
   if(response.ok){
     const object = await response.json();
     if(!object.error){
-      return object.movements as Movements[];
+      return object.movements as Movement[];
     }
     throw new Error(object.error);
   }
@@ -99,7 +99,7 @@ export default class AccountProvider{
   throw new Error(response.status + " (" + response.statusText + ")");
   }
 
-  async deleteObjetiveAccount(objetiveaccountId: number): Promise<string>{
+  async deleteObjetiveAccount(objetiveaccountId: number): Promise<Movement[]>{
     const operation = "savingsaccount/deleteObjetive";
       const options = {
       method: 'PUT',
@@ -122,4 +122,30 @@ export default class AccountProvider{
     throw new Error(response.status + " (" + response.statusText + ")");
   }
 
+
+  async getMovementsWord(movement: Movement): Promise<Movement[]>{
+    const operation = "accountstatement/getMovementsWord";
+    const options = {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "accountStatementId": movement.accountStatementId,
+      "description": movement.description
+    })
+  };
+  const response = await fetch(this.apiUrl+operation, options);
+  if(response.ok){
+    const object = await response.json();
+    if(!object.error){
+      return object.movements as Movement[];
+    }
+    throw new Error(object.error);
+  }
+  throw new Error(response.status + " (" + response.statusText + ")");
+  }
+
+  
 }

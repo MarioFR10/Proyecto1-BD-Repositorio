@@ -17,7 +17,7 @@
                             <b-card-text class=mt-1>Balance: {{objetiveAccount.balance}} </b-card-text>
                             <b-card-text class=mt-1>Interes Acumulado: {{objetiveAccount.acumInterest}} </b-card-text>
                             <b-card-text class=mt-1>Dias de Deposito: {{objetiveAccount.daysOfDeposit}} </b-card-text>
-                            <b-button @click="deleteObjetive(objetiveAccount)" variant="warning">Eliminar Cuenta Objetivo</b-button>
+                            <b-button @click="deleteObjetive(objetiveAccount)" variant="warning">Desactivar Cuenta Objetivo</b-button>
                         </b-card> 
                     </div>
                 </ul>
@@ -65,14 +65,15 @@ import AddObjetiveAccount from '../components/AddObjetiveAccount.vue';
     methods: {
         ...mapActions(['getObjetiveAccount', 'deleteObjetiveAccount']),
 
+        //Abrir form de creacion
         createObjetiveAccount(){
             this.showCreateForm =true;
         },
-
+        //Cerrar form de creacion
         closeCreateForm(){
             this.showCreateForm =false;
         },
-
+        //Borrado logico de cuenta seleccionada
         deleteObjetive(objetiveAccount: ObjetiveAccount){
             console.log(objetiveAccount.SavingsAccountId);
             this.deleteObjetiveAccount(objetiveAccount);
