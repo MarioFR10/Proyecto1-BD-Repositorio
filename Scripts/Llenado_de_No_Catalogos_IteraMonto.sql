@@ -357,7 +357,8 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 					@monto MONEY,
 					@SaldoActual MONEY,
 					@Descripcion VARCHAR(100),
-					@NumCuenta VARCHAR(50)
+					@NumCuenta VARCHAR(50),
+					@MinSaldo MONEY
 
 					SELECT @minimo =MIN(Sec), 
 						   @maximo = MAX(Sec)
@@ -388,11 +389,15 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 
 							SELECT @EstadoCuentaId = AC.Id
 							FROM [dbo].[AccountStatement] AC
-							WHERE @lo1 < AC.EndDate and AC.[SavingsAccountId] = @CuentaId
+							WHERE @lo1 < AC.EndDate AND AC.[SavingsAccountId] = @CuentaId
 
 							SELECT @SaldoActual = SA.Balance
 							FROM [dbo].[SavingsAccount] SA
 							WHERE SA.Id = @CuentaId
+
+							SELECT @MinSaldo = AC.MinBalance
+							FROM [dbo].[AccountStatement] AC
+							WHERE @lo1 < AC.EndDate AND AC.Id = @EstadoCuentaId
 
 							UPDATE [dbo].[SavingsAccount]
 							SET Balance = @SaldoActual + @monto,
@@ -401,12 +406,22 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 								InsertIn = '186.176.102.189'
 							WHERE [dbo].[SavingsAccount].Id = @CuentaId
 
+							IF (@MinSaldo = 0 AND @monto>0)
+								BEGIN
+									UPDATE [dbo].[AccountStatement]
+									SET MinBalance = @monto,
+										InsertAt = GETDATE(),
+										InsertBy = 'script',
+										InsertIn = '186.176.102.189'
+									WHERE [dbo].[AccountStatement].[SavingsAccountId] = @CuentaId
+								END
+
 							UPDATE [dbo].[AccountStatement]
-							SET FinalBalance = @SaldoActual + @monto,
+							SET MinBalance = @SaldoActual + @monto,
 								InsertAt = GETDATE(),
 								InsertBy = 'script',
 								InsertIn = '186.176.102.189'
-							WHERE [dbo].[AccountStatement].[SavingsAccountId] = @CuentaId
+							WHERE [dbo].[AccountStatement].[SavingsAccountId] = @CuentaId AND (@SaldoActual + @monto) < @MinSaldo
 
 							INSERT [dbo].[Movement CA] (SavingsAccountId,
 											TypeMovId,
@@ -419,7 +434,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 							VALUES(@CuentaId,
 								   @Tipo,
 								   @EstadoCuentaId,
-								   @monto,
+								   ABS(@monto),
 								   @SaldoActual + @monto,
 								   @Descripcion,
 								   1,
@@ -500,6 +515,17 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 			----------UsuarioPuedeVer----------
 
 			-------------Cerrar estados de cuenta---------------
+			INSERT INTO @TempEstadoCuenta (CuentaId,
+											EstadoCuentaId,
+											TipoCuenta,
+											Minimo)
+			SELECT AC.[SavingsAccountId],
+				   AC.[Id],
+				   SA.[TypeSavingsAccountId],
+				   AC.[MinBalance]
+			FROM [dbo].[AccountStatement] AC,
+				 [dbo].[SavingsAccount] SA
+			WHERE (CAST(AC.[EndDate]  AS DATE) = CAST(@lo1 AS DATE))
 
 			DECLARE 
 					@minimo2 INT, 
@@ -507,7 +533,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 					@Cuenta INT,
 					@EstadoCuenta INT,
 					@TipoCuenta INT,
-					@MinSaldo INT
+					@SaldoMin MONEY
 
 			SELECT @minimo2 = MIN(Sec), 
 				   @maximo2 = MAX(Sec)
@@ -518,11 +544,11 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 					SELECT @Cuenta = TEC.CuentaId,
 						   @EstadoCuenta = TEC.EstadoCuentaId,
 						   @TipoCuenta = TEC.TipoCuenta,
-						   @MinSaldo = TEC.Minimo
+						   @SaldoMin = TEC.Minimo
 					FROM @TempEstadoCuenta TEC
 					WHERE TEC.Sec = @minimo2
 
-					EXEC dbo.CerrarEstadoCuenta @Cuenta, @EstadoCuenta, @TipoCuenta, @MinSaldo, @lo1
+					EXEC dbo.CerrarEstadoCuenta @Cuenta, @EstadoCuenta, @TipoCuenta, @SaldoMin, @lo1
 
 					SET @minimo2 = @minimo2 + 1
 				END

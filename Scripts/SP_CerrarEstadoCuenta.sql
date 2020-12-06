@@ -1,10 +1,9 @@
-CREATE PROCEDURE dbo.CerrarEstadoCuenta
+ALTER PROCEDURE dbo.CerrarEstadoCuenta
 	@inCuenta INT,
 	@inEstadoCuenta INT,
 	@inTipoCuenta INT,
 	@inMinimo MONEY,
-	@inFecha DATE,
-	@outResultCode INT OUTPUT
+	@inFecha DATE
 AS
 BEGIN
 SET NOCOUNT ON
@@ -20,7 +19,8 @@ SET NOCOUNT ON
 				@SaldoActual MONEY,
 				@Descripcion VARCHAR(50),
 				@FechaCreacion DATE,
-				@DifMeses INT
+				@DifMeses INT,
+				@outResultCode INT = 0
 
 		-----------------------Contar tramites--------------------------
 		SELECT @ATM = COUNT(MCA.[TypeMovId])
@@ -236,7 +236,9 @@ SET NOCOUNT ON
 		WHERE SA.Id = @inCuenta
 
 		UPDATE [dbo].[AccountStatement]
-		SET [FinalBalance] = @SaldoActual
+		SET [FinalBalance] = @SaldoActual,
+			[AtmOps] = @ATM,
+			[HumOps] = @Humano
 		WHERE [dbo].[AccountStatement].[Id] = @inEstadoCuenta AND [dbo].[AccountStatement].[EndDate] = @inFecha
 		-----------------------Cerrar estado de cuenta--------------------------
 
@@ -252,6 +254,9 @@ SET NOCOUNT ON
 									EndDate,
 									InitialBalance,
 									FinalBalance,
+									MinBalance,
+									AtmOps,
+									HumOps,
 									InsertAt,
 									InsertBy,
 									InsertIn)
@@ -260,6 +265,9 @@ SET NOCOUNT ON
 				DATEADD( DAY, -1, DATEADD(MONTH, @DifMeses, @FechaCreacion)),
 				@SaldoActual,
 				@SaldoActual,
+				@SaldoActual,
+				0,
+				0,
 				GETDATE(),
 				'Script',
 				'186.176.102.189')
