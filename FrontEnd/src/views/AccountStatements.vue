@@ -7,9 +7,12 @@
                     <div class=pb-2>
                         <b-card class="account-card d-flex justify-content-center">
                             <b-card-text >Fecha inicial: {{new Date (accountStatement.startDate).toLocaleDateString()}}</b-card-text>
-                            <b-card-text class=mt-1>Fecha final {{new Date (accountStatement.endDate).toLocaleDateString()}}</b-card-text>
-                            <b-card-text class=mt-1>Balance inicial {{accountStatement.initialBalance}}</b-card-text>
-                            <b-card-text class=mt-1>Balance final {{accountStatement.finalBalance}}</b-card-text>
+                            <b-card-text class=mt-1>Fecha final: {{new Date (accountStatement.endDate).toLocaleDateString()}}</b-card-text>
+                            <b-card-text class=mt-1>Balance inicial: {{accountStatement.initialBalance}}</b-card-text>
+                            <b-card-text class=mt-1>Balance final: {{accountStatement.finalBalance}}</b-card-text>
+                            <b-card-text class=mt-1>Balance minimo: {{accountStatement.minBalance}}</b-card-text>
+                            <b-card-text class=mt-1>Operaciones Cajero Humano: {{accountStatement.HumOps}}</b-card-text>
+                            <b-card-text class=mt-1>Operaciones ATM: {{accountStatement.AtmOps}}</b-card-text>
                             <router-link :to="{name:'Movements',params:{id: accountStatement.id}}">
                                 <b-card-text>Movimientos</b-card-text>
                             </router-link>
@@ -70,7 +73,7 @@ export default class AccountStatements extends Vue {}
 .account-card{
   margin:auto;
   width: 70%;
-  max-height: 310px;
+  max-height: 330px;
 }
 .account-card:hover {
   box-shadow: 0 8px 16px 0 rgba(3, 104, 255, 0.904);

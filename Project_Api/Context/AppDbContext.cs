@@ -245,6 +245,9 @@ namespace Project_Api.Context
                     statements.Add("endDate", dr.GetDateTime(2));
                     statements.Add("initialBalance", dr.GetDecimal(3));
                     statements.Add("finalBalance", dr.GetDecimal(4));
+                    statements.Add("minBalance", dr.GetDecimal(5));
+                    statements.Add("AtmOps", dr.GetInt32(6));
+                    statements.Add("HumOps", dr.GetInt32(7));
                     response.Add(statements);
                 }
                 dr.Close();
