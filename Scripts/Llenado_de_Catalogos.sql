@@ -29,9 +29,9 @@ SET @x = '<Catalogos>
 
 
   <Tipo_Cuenta_Ahorros>
-    <TipoCuentaAhorro Id="1" Nombre="Proletario" IdTipoMoneda="1" SaldoMinimo="25000.00" MultaSaldoMin="3000.00" CargoMensual = "5000" NumRetirosHumano="5" NumRetirosAutomatico ="8" ComisionHumano="300" ComisionAutomatico="300" Interes ="10" />
-    <TipoCuentaAhorro Id="2" Nombre="Profesional" IdTipoMoneda="1" SaldoMinimo="50000.00" MultaSaldoMin="3000.00" CargoMensual = "15000" NumRetirosHumano="5" NumRetirosAutomatico ="8" ComisionHumano="500" ComisionAutomatico="500" Interes ="15" />
-    <TipoCuentaAhorro Id="3" Nombre="Exclusivo" IdTipoMoneda="1" SaldoMinimo="100000.00" MultaSaldoMin="3000.00" CargoMensual = "30000" NumRetirosHumano="5" NumRetirosAutomatico ="8" ComisionHumano="1000" ComisionAutomatico="1000" Interes ="20" />
+    <TipoCuentaAhorro Id="1" Nombre="Proletario" IdTipoMoneda="1" SaldoMinimo="25000.00" MultaSaldoMin="3000.00" CargoMensual = "5000" NumRetiroHumano="5" NumRetirosAutomatico ="8" ComisionHumano="300" ComisionAutomatico="300" Interes ="10" />
+    <TipoCuentaAhorro Id="2" Nombre="Profesional" IdTipoMoneda="1" SaldoMinimo="50000.00" MultaSaldoMin="3000.00" CargoMensual = "15000" NumRetiroHumano="5" NumRetirosAutomatico ="8" ComisionHumano="500" ComisionAutomatico="500" Interes ="15" />
+    <TipoCuentaAhorro Id="3" Nombre="Exclusivo" IdTipoMoneda="1" SaldoMinimo="100000.00" MultaSaldoMin="3000.00" CargoMensual = "30000" NumRetiroHumano="5" NumRetirosAutomatico ="8" ComisionHumano="1000" ComisionAutomatico="1000" Interes ="20" />
   </Tipo_Cuenta_Ahorros>
 
   <Tipo_Movimientos>
@@ -41,6 +41,9 @@ SET @x = '<Catalogos>
    <Tipo_Movimiento Id="4" Nombre="Deposito en ATM" Tipo="Credito"/>
    <Tipo_Movimiento Id="5" Nombre="Deposito Ventana" Tipo="Credito"/>
    <Tipo_Movimiento Id="6" Nombre="Devolución de Compra" Tipo="Credito"/>
+   <Tipo_Movimiento Id="7" Nombre="Intereses del mes sobre saldo MInimo" Tipo="Debito"/>
+   <Tipo_Movimiento Id="8" Nombre="Comision exceso de operacion en CH" Tipo="Debito"/>
+   <Tipo_Movimiento Id="9" Nombre="Comision exceso de operacion en CA" Tipo="Debito"/>
   </Tipo_Movimientos>
 </Catalogos>'
 
@@ -100,7 +103,7 @@ SELECT  T.Item.value('@Id', 'int'),
 		T.Item.value('@SaldoMinimo', 'money'),
 		T.Item.value('@MultaSaldoMin', 'money'),
 		T.Item.value('@CargoMensual', 'money'),
-		T.Item.value('@NumRetirosHumano', 'int'),
+		T.Item.value('@NumRetiroHumano', 'int'),
 		T.Item.value('@NumRetirosAutomatico', 'int'),
 		T.Item.value('@ComisionHumano', 'money'),
 		T.Item.value('@ComisionAutomatico', 'money'),
@@ -122,6 +125,21 @@ SELECT T.Item.value('@Id', 'INT'),
 	   T.Item.value('@Nombre', 'VARCHAR(50)'),
 	   T.Item.value('@Tipo', 'VARCHAR(10)')
 FROM @x.nodes('Catalogos/Tipo_Movimientos/Tipo_Movimiento') as T(Item)
+
+INSERT [dbo].[TypeMovement CA](Id,
+									Name,
+									TypeOP)
+VALUES (10,
+		'Multa Incumplir Saldo Minimo',
+		'Debito')
+
+INSERT [dbo].[TypeMovement CA](Id,
+							   Name,
+							   TypeOP)
+VALUES (11,
+		'Cargo Mensual',
+		'Debito')
+
 SET IDENTITY_INSERT [dbo].[TypeMovement CA] OFF
 
 SELECT * FROM [dbo].[TypeMovement CA]

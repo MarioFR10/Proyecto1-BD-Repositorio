@@ -10,11 +10,13 @@ SET NOCOUNT ON
 	BEGIN TRY
 		DECLARE @ATM INT,
 				@Humano INT,
+				@MaxHumano INT,
+				@MaxATM INT,
 				@SaldoMinimo INT,
 				@MultaHumano INT,
-				@MultaATM INT,
-				@MultaSaldoMinimo INT,
-				@monto INT,
+				@MultaATM MONEY,
+				@MultaSaldoMinimo MONEY,
+				@monto MONEY,
 				@Intereses FLOAT,
 				@SaldoActual MONEY,
 				@Descripcion VARCHAR(50),
@@ -31,7 +33,7 @@ SET NOCOUNT ON
 		FROM [dbo].[Movement CA] MCA
 		WHERE MCA.[SavingsAccountId] = @inCuenta AND MCA.[TypeMovId] = 3 AND MCA.[DateOfMov] <= @inFecha
 		-----------------------Contar tramites--------------------------
-
+		--SELECT 'cuentas' AS Contar
 
 		SELECT @SaldoMinimo = TSA.[MinimunBalance]
 		FROM [dbo].[TypeSavingsAccount] TSA
@@ -41,15 +43,22 @@ SET NOCOUNT ON
 		SET @MultaATM = 0
 
 		-----------------------Multa superar retiros ventana--------------------------
-		SELECT @MultaHumano = TSA.[ExceedComisionHumanMont]
+		SELECT @MultaHumano = TSA.[ExceedComisionHumanMont],
+			   @MaxHumano = TSA.[MaxOpsHuman]
 		FROM [dbo].[TypeSavingsAccount] TSA
-		WHERE TSA.[MaxOpsHuman] < @Humano AND TSA.Id = @inTipoCuenta
+		WHERE TSA.Id = @inTipoCuenta
 
-		IF (@MultaHumano != 0)
+		--SELECT @Humano as 'humano'
+		--select @MaxHumano as 'maxhumano'
+		--select @MultaHumano as 'multa humano'
+
+		IF (@MaxHumano < @Humano)
 			BEGIN
 				SELECT @SaldoActual = SA.Balance
 				FROM [dbo].[SavingsAccount] SA
 				WHERE SA.Id = @inCuenta
+
+				--select @SaldoActual as 'saldo actual'
 
 				UPDATE [dbo].[SavingsAccount]
 				SET Balance = @SaldoActual - @MultaHumano,
@@ -61,6 +70,8 @@ SET NOCOUNT ON
 				SELECT @Descripcion = TM.Name
 				FROM [dbo].[TypeMovement CA] TM
 				WHERE TM.Id = 8
+
+				--SELECT @inCuenta,8, @inEstadoCuenta, @MultaHumano, @SaldoActual - @MultaHumano, @Descripcion, 1, @inFecha
 
 				INSERT [dbo].[Movement CA] (SavingsAccountId,
 									TypeMovId,
@@ -86,7 +97,14 @@ SET NOCOUNT ON
 		FROM [dbo].[TypeSavingsAccount] TSA
 		WHERE TSA.[MaxOpsATM] < @ATM AND TSA.Id = @inTipoCuenta
 
-		IF (@MultaATM != 0)
+		--SELECT @MultaATM as 'multaATM'
+
+		SELECT @MultaATM = TSA.[ExceedComisionAtmMont],
+			   @MaxATM = TSA.[MaxOpsAtm]
+		FROM [dbo].[TypeSavingsAccount] TSA
+		WHERE TSA.Id = @inTipoCuenta
+
+		IF (@MaxATM < @ATM)
 			BEGIN
 				SELECT @SaldoActual = SA.Balance
 				FROM [dbo].[SavingsAccount] SA
@@ -102,6 +120,8 @@ SET NOCOUNT ON
 				SELECT @Descripcion = TM.Name
 				FROM [dbo].[TypeMovement CA] TM
 				WHERE TM.Id = 9
+
+				--SELECT @inCuenta,9, @inEstadoCuenta, @MultaATM, @SaldoActual - @MultaATM, @Descripcion, 1, @inFecha
 
 				INSERT [dbo].[Movement CA] (SavingsAccountId,
 									TypeMovId,
@@ -140,6 +160,10 @@ SET NOCOUNT ON
 					InsertIn = '186.176.102.189'
 				WHERE [dbo].[SavingsAccount].Id = @inCuenta
 
+				SELECT @Descripcion = TM.Name
+				FROM [dbo].[TypeMovement CA] TM
+				WHERE TM.Id = 10
+
 				INSERT [dbo].[Movement CA] (SavingsAccountId,
 									TypeMovId,
 									AccountStatementId,
@@ -153,13 +177,13 @@ SET NOCOUNT ON
 						@inEstadoCuenta,
 						@MultaHumano,
 						@SaldoActual - @MultaSaldoMinimo,
-						'Multa Saldo Minimo',
+						@Descripcion,
 						1,
 						@inFecha)
 
 			END
 		-----------------------Multa incumplir saldo minimo--------------------------
-
+		--SELECT 'Multas' AS Multas
 		-----------------------Cargo mensual--------------------------
 		SELECT @SaldoActual = SA.Balance
 		FROM [dbo].[SavingsAccount] SA
@@ -176,6 +200,12 @@ SET NOCOUNT ON
 			InsertIn = '186.176.102.189'
 		WHERE [dbo].[SavingsAccount].Id = @inCuenta
 
+		SELECT @Descripcion = TM.Name
+		FROM [dbo].[TypeMovement CA] TM
+		WHERE TM.Id = 11
+
+		--SELECT @inCuenta,11,@inEstadoCuenta,@monto,	@SaldoActual - @monto,@Descripcion,1,@inFecha
+
 		INSERT [dbo].[Movement CA] (SavingsAccountId,
 									TypeMovId,
 									AccountStatementId,
@@ -189,17 +219,19 @@ SET NOCOUNT ON
 				@inEstadoCuenta,
 				@monto,
 				@SaldoActual - @monto,
-				'Cargo Mensual',
+				@Descripcion,
 				1,
 				@inFecha)
 		-----------------------Cargo mensual--------------------------
-
+		--SELECT 'cargo' as mensual
 		-----------------------Intereses--------------------------
 		SET @SaldoActual = @SaldoActual - @monto
 
 		SELECT @Descripcion = TM.Name
 		FROM [dbo].[TypeMovement CA] TM
 		WHERE TM.Id = 7
+
+		--SELECT @Descripcion
 
 		SELECT @Intereses = TSA.[InterestRate]
 		FROM [dbo].[TypeSavingsAccount] TSA
@@ -229,25 +261,53 @@ SET NOCOUNT ON
 				1,
 				@inFecha)
 		-----------------------Intereses--------------------------
-
+		--SELECT 'Intereses' as intereses
 		-----------------------Cerrar estado de cuenta--------------------------
 		SELECT @SaldoActual = SA.Balance
 		FROM [dbo].[SavingsAccount] SA
 		WHERE SA.Id = @inCuenta
 
-		UPDATE [dbo].[AccountStatement]
-		SET [FinalBalance] = @SaldoActual,
-			[AtmOps] = @ATM,
-			[HumOps] = @Humano
-		WHERE [dbo].[AccountStatement].[Id] = @inEstadoCuenta AND [dbo].[AccountStatement].[EndDate] = @inFecha
-		-----------------------Cerrar estado de cuenta--------------------------
+		IF (@SaldoActual < 0)
+			BEGIN
+				UPDATE [dbo].[AccountStatement]
+				SET [FinalBalance] = 0,
+					[AtmOps] = @ATM,
+					[HumOps] = @Humano
+				WHERE [dbo].[AccountStatement].[Id] = @inEstadoCuenta AND [dbo].[AccountStatement].[EndDate] = @inFecha
 
+				UPDATE [dbo].[SavingsAccount]
+				SET [Balance] = 0
+				WHERE [dbo].[SavingsAccount].Id = @inCuenta
+			END
+		ELSE
+			BEGIN
+				UPDATE [dbo].[AccountStatement]
+				SET [FinalBalance] = @SaldoActual,
+					[AtmOps] = @ATM,
+					[HumOps] = @Humano
+				WHERE [dbo].[AccountStatement].[Id] = @inEstadoCuenta AND [dbo].[AccountStatement].[EndDate] = @inFecha
+			END
+		-----------------------Cerrar estado de cuenta--------------------------
+		--SELECT 'Cerrar' AS EstadoCuenta
 		-----------------------Habrir nuevo estado cuenta--------------------------
 		SELECT @FechaCreacion = SA.[CreationDate]
 		FROM [dbo].[SavingsAccount] SA
 		WHERE SA.Id = @inCuenta
 
 		SET @DifMeses = DATEDIFF(MONTH, @FechaCreacion, @inFecha)
+
+		--SELECT DAY(@inFecha)
+
+		IF(DAY(@FechaCreacion) = 1)
+			BEGIN
+				SET @DifMeses = @DifMeses + 2
+			END
+		ELSE
+			BEGIN
+				SET @DifMeses = @DifMeses + 1
+			END
+
+		--SELECT @DifMeses as Diferencia
 
 		INSERT [dbo].[AccountStatement] (SavingsAccountId,
 									StartDate,
@@ -272,6 +332,7 @@ SET NOCOUNT ON
 				'Script',
 				'186.176.102.189')
 		-----------------------Habrir nuevo estado cuenta--------------------------
+		--SELECT 'Abrir' AS Estado
 	END TRY
 	BEGIN CATCH
 	END CATCH

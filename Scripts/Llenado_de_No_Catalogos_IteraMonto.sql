@@ -36,25 +36,6 @@ SET @x = '<Operaciones>
 	   <Movimientos Tipo="1" CodigoCuenta="11834714" Monto="883656.00" Descripcion="SODA LA ESQUINA" />
 	   <Movimientos Tipo="1" CodigoCuenta="11834714" Monto="270599.00" Descripcion="DHL" />
 	</FechaOperacion>
-	<FechaOperacion Fecha="2020-07-03">
-	   <Persona TipoDocuIdentidad="1" Nombre="Maria Hernandez Robles" ValorDocumentoIdentidad="141581201" FechaNacimiento="1982-01-17" Email="hernandezmaria9676@gmail.com" Telefono1="84851700" Telefono2="23034803"/>
-	   <Persona TipoDocuIdentidad="1" Nombre="Fernanda Zamora Orozco" ValorDocumentoIdentidad="147960534" FechaNacimiento="1991-06-15" Email="zamorafernanda5475@yahoo.com" Telefono1="71341062" Telefono2="20155437"/>
-	   <Cuenta ValorDocumentoIdentidadDelCliente="141581201" TipoCuentaId="3" NumeroCuenta="11362094"/>
-	   <Beneficiario NumeroCuenta="11362094" ValorDocumentoIdentidadBeneficiario="147960534" ParentezcoId="9" Porcentaje="81" />
-	   <Movimientos Tipo="5" CodigoCuenta="11362094" Monto="88288602.00" Descripcion="Banco Central" />
-	   <Movimientos Tipo="1" CodigoCuenta="11362094" Monto="17264483.00" Descripcion="COOPERATIVA DE PRODUCTORES DE LECHE DOS PINOS" />
-	   <Movimientos Tipo="4" CodigoCuenta="11362094" Monto="41848829.00" Descripcion="ATM SAN JOSE" />
-	   <Movimientos Tipo="1" CodigoCuenta="11362094" Monto="15637586.00" Descripcion="GRUPO PROMERICA" />
-	   <Movimientos Tipo="5" CodigoCuenta="11362094" Monto="389249.00" Descripcion="ATM SAN JOSE" />
-	   <Movimientos Tipo="1" CodigoCuenta="11362094" Monto="5110874.00" Descripcion="GARNIER Y GARNIER DESARROLLOS INMOBILIARIOS" />
-	   <Movimientos Tipo="1" CodigoCuenta="11362094" Monto="6509776.00" Descripcion="SAMSUNG ELECTRONICS" />
-	   <Movimientos Tipo="4" CodigoCuenta="11362094" Monto="2076698.00" Descripcion="ATM SAN PEDRO" />
-	   <Movimientos Tipo="1" CodigoCuenta="11362094" Monto="136448.00" Descripcion="GRUPO NUMAR" />
-	   <Movimientos Tipo="1" CodigoCuenta="11362094" Monto="43637.00" Descripcion="M COSTA RICA" />
-	   <Movimientos Tipo="4" CodigoCuenta="11362094" Monto="40202.00" Descripcion="ATM SAN PEDRO" />
-	   <Movimientos Tipo="1" CodigoCuenta="11362094" Monto="5517.00" Descripcion="PORTAFOLIO INMOBILIARIO SA (PINMSA)" />
-	   <Movimientos Tipo="1" CodigoCuenta="11362094" Monto="3460.00" Descripcion="HUAWEI" />
-	</FechaOperacion>
 	<FechaOperacion Fecha="2020-07-04">
 	   <Persona TipoDocuIdentidad="1" Nombre="Guadalupe Mesen Retana" ValorDocumentoIdentidad="121434173" FechaNacimiento="1971-12-13" Email="mesenguadalupe5550@hotmail.com" Telefono1="71031055" Telefono2="26208224"/>
 	   <Usuario User="guadalupemesen2924" Pass="password1" ValorDocumentoIdentidad="121434173" EsAdministrador="0" />
@@ -84,7 +65,7 @@ SET @x = '<Operaciones>
 	   <Movimientos Tipo="1" CodigoCuenta="11435357" Monto="1729.00" Descripcion="MCDONALDS" />
 	   <UsuarioPuedeVer User="guadalupemesen2924" NumeroCuenta="11435357" />
 	</FechaOperacion>
-	<FechaOperacion Fecha="2020-08-03">
+	<FechaOperacion Fecha="2020-09-03">
 	   <Persona TipoDocuIdentidad="1" Nombre="Guadalupe Serrano Roman" ValorDocumentoIdentidad="117359964" FechaNacimiento="1979-12-15" Email="serranoguadalupe2842@outlook.com" Telefono1="84668763" Telefono2="29893862"/>
 	   <Usuario User="guadalupeserrano2969" Pass="!@#$%^Y*" ValorDocumentoIdentidad="117359964" EsAdministrador="0" />
 	   <Persona TipoDocuIdentidad="1" Nombre="Gabriel Arrieta Oviedo" ValorDocumentoIdentidad="110498718" FechaNacimiento="1986-03-22" Email="arrietagabriel4673@yahoo.com" Telefono1="76024920" Telefono2="22224247"/>
@@ -198,6 +179,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 			DELETE @TempMovimientos
 			DELETE @TempUsuarios
 			DELETE @TempPuedeVer
+			DELETE @TempEstadoCuenta
 			--reiniciar Id
 			--DBCC CHECKIDENT (AccesoUsuario, RESEED, 0)
 
@@ -406,6 +388,16 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 								InsertIn = '186.176.102.189'
 							WHERE [dbo].[SavingsAccount].Id = @CuentaId
 
+							IF((@SaldoActual + @monto) < @MinSaldo)
+								BEGIN
+									UPDATE [dbo].[AccountStatement]
+									SET MinBalance = @SaldoActual + @monto,
+										InsertAt = GETDATE(),
+										InsertBy = 'script',
+										InsertIn = '186.176.102.189'
+									WHERE [dbo].[AccountStatement].[SavingsAccountId] = @CuentaId
+								END
+
 							IF (@MinSaldo = 0 AND @monto>0)
 								BEGIN
 									UPDATE [dbo].[AccountStatement]
@@ -415,13 +407,6 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 										InsertIn = '186.176.102.189'
 									WHERE [dbo].[AccountStatement].[SavingsAccountId] = @CuentaId
 								END
-
-							UPDATE [dbo].[AccountStatement]
-							SET MinBalance = @SaldoActual + @monto,
-								InsertAt = GETDATE(),
-								InsertBy = 'script',
-								InsertIn = '186.176.102.189'
-							WHERE [dbo].[AccountStatement].[SavingsAccountId] = @CuentaId AND (@SaldoActual + @monto) < @MinSaldo
 
 							INSERT [dbo].[Movement CA] (SavingsAccountId,
 											TypeMovId,
@@ -525,7 +510,9 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 				   AC.[MinBalance]
 			FROM [dbo].[AccountStatement] AC,
 				 [dbo].[SavingsAccount] SA
-			WHERE (CAST(AC.[EndDate]  AS DATE) = CAST(@lo1 AS DATE))
+			WHERE (CAST(AC.[EndDate]  AS DATE) = CAST(@lo1 AS DATE)) AND AC.[SavingsAccountId] = SA.Id
+
+			--SELect * from @TempEstadoCuenta
 
 			DECLARE 
 					@minimo2 INT, 
