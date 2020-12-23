@@ -24,15 +24,17 @@ SET NOCOUNT ON
 				@DifMeses INT,
 				@outResultCode INT = 0
 
-		-----------------------Contar tramites--------------------------
-		SELECT @ATM = COUNT(MCA.[TypeMovId])
-		FROM [dbo].[Movement CA] MCA
-		WHERE MCA.[SavingsAccountId] = @inCuenta AND MCA.[TypeMovId] = 2 AND MCA.[DateOfMov] <= @inFecha
+		-----------------------Obtener tramites--------------------------
+		SELECT @ATM = AC.[AtmOps]
+		FROM [dbo].[AccountStatement] AC
+		WHERE (AC.SavingsAccountId = @inCuenta) 
+			AND (AC.EndDate >= @inFecha)
 
-		SELECT @Humano = COUNT(MCA.[TypeMovId])
-		FROM [dbo].[Movement CA] MCA
-		WHERE MCA.[SavingsAccountId] = @inCuenta AND MCA.[TypeMovId] = 3 AND MCA.[DateOfMov] <= @inFecha
-		-----------------------Contar tramites--------------------------
+		SELECT @Humano = AC.[HumOps]
+		FROM [dbo].[AccountStatement] AC
+		WHERE (AC.SavingsAccountId = @inCuenta) 
+			AND (AC.EndDate >= @inFecha)
+		-----------------------Obtener tramites--------------------------
 		--SELECT 'cuentas' AS Contar
 
 		SELECT @SaldoMinimo = TSA.[MinimunBalance]
@@ -60,13 +62,6 @@ SET NOCOUNT ON
 
 				--select @SaldoActual as 'saldo actual'
 
-				UPDATE [dbo].[SavingsAccount]
-				SET Balance = @SaldoActual - @MultaHumano,
-					InsertAt = GETDATE(),
-					InsertBy = 'script',
-					InsertIn = '186.176.102.189'
-				WHERE [dbo].[SavingsAccount].Id = @inCuenta
-
 				SELECT @Descripcion = TM.Name
 				FROM [dbo].[TypeMovement CA] TM
 				WHERE TM.Id = 8
@@ -89,6 +84,13 @@ SET NOCOUNT ON
 						@Descripcion,
 						1,
 						@inFecha)
+
+				UPDATE [dbo].[SavingsAccount]
+				SET Balance = @SaldoActual - @MultaHumano,
+					InsertAt = GETDATE(),
+					InsertBy = 'script',
+					InsertIn = '186.176.102.189'
+				WHERE [dbo].[SavingsAccount].Id = @inCuenta
 			END
 		-----------------------Multa superar retiros ventana--------------------------
 
@@ -109,13 +111,6 @@ SET NOCOUNT ON
 				SELECT @SaldoActual = SA.Balance
 				FROM [dbo].[SavingsAccount] SA
 				WHERE SA.Id = @inCuenta
-
-				UPDATE [dbo].[SavingsAccount]
-				SET Balance = @SaldoActual - @MultaATM,
-					InsertAt = GETDATE(),
-					InsertBy = 'script',
-					InsertIn = '186.176.102.189'
-				WHERE [dbo].[SavingsAccount].Id = @inCuenta
 
 				SELECT @Descripcion = TM.Name
 				FROM [dbo].[TypeMovement CA] TM
@@ -139,6 +134,13 @@ SET NOCOUNT ON
 						@Descripcion,
 						1,
 						@inFecha)
+
+				UPDATE [dbo].[SavingsAccount]
+				SET Balance = @SaldoActual - @MultaATM,
+					InsertAt = GETDATE(),
+					InsertBy = 'script',
+					InsertIn = '186.176.102.189'
+				WHERE [dbo].[SavingsAccount].Id = @inCuenta
 			END
 		-----------------------Multa superar retiros ATM--------------------------
 
@@ -152,13 +154,6 @@ SET NOCOUNT ON
 				SELECT @MultaSaldoMinimo = TSA.[PenaltyForBreach]
 				FROM [dbo].[TypeSavingsAccount] TSA
 				WHERE TSA.Id = @inTipoCuenta
-
-				UPDATE [dbo].[SavingsAccount]
-				SET Balance = @SaldoActual - @MultaSaldoMinimo,
-					InsertAt = GETDATE(),
-					InsertBy = 'script',
-					InsertIn = '186.176.102.189'
-				WHERE [dbo].[SavingsAccount].Id = @inCuenta
 
 				SELECT @Descripcion = TM.Name
 				FROM [dbo].[TypeMovement CA] TM
@@ -181,6 +176,13 @@ SET NOCOUNT ON
 						1,
 						@inFecha)
 
+				UPDATE [dbo].[SavingsAccount]
+				SET Balance = @SaldoActual - @MultaSaldoMinimo,
+					InsertAt = GETDATE(),
+					InsertBy = 'script',
+					InsertIn = '186.176.102.189'
+				WHERE [dbo].[SavingsAccount].Id = @inCuenta
+
 			END
 		-----------------------Multa incumplir saldo minimo--------------------------
 		--SELECT 'Multas' AS Multas
@@ -192,13 +194,6 @@ SET NOCOUNT ON
 		SELECT @monto = TSA.[MensualAccountForService]
 		FROM [dbo].[TypeSavingsAccount] TSA
 		WHERE TSA.[Id] = @inTipoCuenta
-
-		UPDATE [dbo].[SavingsAccount]
-		SET Balance = @SaldoActual - @monto,
-			InsertAt = GETDATE(),
-			InsertBy = 'script',
-			InsertIn = '186.176.102.189'
-		WHERE [dbo].[SavingsAccount].Id = @inCuenta
 
 		SELECT @Descripcion = TM.Name
 		FROM [dbo].[TypeMovement CA] TM
@@ -222,6 +217,14 @@ SET NOCOUNT ON
 				@Descripcion,
 				1,
 				@inFecha)
+
+		UPDATE [dbo].[SavingsAccount]
+		SET Balance = @SaldoActual - @monto,
+			InsertAt = GETDATE(),
+			InsertBy = 'script',
+			InsertIn = '186.176.102.189'
+		WHERE [dbo].[SavingsAccount].Id = @inCuenta
+
 		-----------------------Cargo mensual--------------------------
 		--SELECT 'cargo' as mensual
 		-----------------------Intereses--------------------------
@@ -236,13 +239,6 @@ SET NOCOUNT ON
 		SELECT @Intereses = TSA.[InterestRate]
 		FROM [dbo].[TypeSavingsAccount] TSA
 		WHERE TSA.[Id] = @inTipoCuenta
-
-		UPDATE [dbo].[SavingsAccount]
-		SET Balance = @SaldoActual + (@SaldoActual * (@Intereses/100)),
-			InsertAt = GETDATE(),
-			InsertBy = 'script',
-			InsertIn = '186.176.102.189'
-		WHERE [dbo].[SavingsAccount].Id = @inCuenta
 
 		INSERT [dbo].[Movement CA] (SavingsAccountId,
 									TypeMovId,
@@ -260,6 +256,14 @@ SET NOCOUNT ON
 				@Descripcion,
 				1,
 				@inFecha)
+
+		UPDATE [dbo].[SavingsAccount]
+		SET Balance = @SaldoActual + (@SaldoActual * ((@Intereses/100)/365)),
+			InsertAt = GETDATE(),
+			InsertBy = 'script',
+			InsertIn = '186.176.102.189'
+		WHERE [dbo].[SavingsAccount].Id = @inCuenta
+
 		-----------------------Intereses--------------------------
 		--SELECT 'Intereses' as intereses
 		-----------------------Cerrar estado de cuenta--------------------------

@@ -340,7 +340,8 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 					@SaldoActual MONEY,
 					@Descripcion VARCHAR(100),
 					@NumCuenta VARCHAR(50),
-					@MinSaldo MONEY
+					@MinSaldo MONEY,
+					@MovimientoActual INT
 
 					SELECT @minimo =MIN(Sec), 
 						   @maximo = MAX(Sec)
@@ -352,18 +353,43 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 							SELECT 
 								@Tipo = TM.TipoMovimiento,
 								@Descripcion = TM.Descripcion,
-								@NumCuenta = TM.NumCuenta
+								@NumCuenta = TM.NumCuenta,
+								@MovimientoActual = TM.TipoMovimiento
 							FROM @TempMovimientos TM
 							WHERE TM.Sec = @minimo 
+
+							IF((@MovimientoActual = 1 OR @MovimientoActual = 2 OR @MovimientoActual = 3))
+								BEGIN
+									SELECT @monto = -1*TM.Monto
+									FROM @TempMovimientos TM
+									WHERE TM.Sec = @minimo
+
+									IF (@MovimientoActual = 2)
+										BEGIN
+											UPDATE [dbo].[AccountStatement]
+											SET AtmOps = AtmOps + 1,
+												InsertAt = GETDATE(),
+												InsertBy = 'script',
+												InsertIn = '186.176.102.189'
+											WHERE [dbo].[AccountStatement].[SavingsAccountId] = @CuentaId
+										END
+									ElSE IF (@MovimientoActual = 3)
+										BEGIN
+											UPDATE [dbo].[AccountStatement]
+											SET HumOps = HumOps + 1,
+												InsertAt = GETDATE(),
+												InsertBy = 'script',
+												InsertIn = '186.176.102.189'
+											WHERE [dbo].[AccountStatement].[SavingsAccountId] = @CuentaId
+										END
+								END
+							ELSE
+								BEGIN
+									SELECT @monto = TM.Monto
+									FROM @TempMovimientos TM
+									WHERE TM.Sec = @minimo
+								END
 							
-							SELECT @monto = -1*TM.Monto
-							FROM @TempMovimientos TM
-							WHERE TM.Sec = @minimo and (TM.TipoMovimiento = 1 OR TM.TipoMovimiento = 2 OR TM.TipoMovimiento = 3)
-
-							SELECT @monto = TM.Monto
-							FROM @TempMovimientos TM
-							WHERE TM.Sec = @minimo AND (TM.TipoMovimiento = 4 OR TM.TipoMovimiento = 5 OR TM.TipoMovimiento = 6)
-
 							SELECT @CuentaId = SA.Id
 							FROM [dbo].[SavingsAccount] SA,
 								 @TempMovimientos TM
@@ -380,6 +406,23 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 							SELECT @MinSaldo = AC.MinBalance
 							FROM [dbo].[AccountStatement] AC
 							WHERE @lo1 < AC.EndDate AND AC.Id = @EstadoCuentaId
+
+							INSERT [dbo].[Movement CA] (SavingsAccountId,
+											TypeMovId,
+											AccountStatementId,
+											Amount,
+											NewBalance,
+											Description,
+											Visible,
+											DateOfMov)
+							VALUES(@CuentaId,
+								   @Tipo,
+								   @EstadoCuentaId,
+								   ABS(@monto),
+								   @SaldoActual + @monto,
+								   @Descripcion,
+								   1,
+								   @lo1)
 
 							UPDATE [dbo].[SavingsAccount]
 							SET Balance = @SaldoActual + @monto,
@@ -407,23 +450,6 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 										InsertIn = '186.176.102.189'
 									WHERE [dbo].[AccountStatement].[SavingsAccountId] = @CuentaId
 								END
-
-							INSERT [dbo].[Movement CA] (SavingsAccountId,
-											TypeMovId,
-											AccountStatementId,
-											Amount,
-											NewBalance,
-											Description,
-											Visible,
-											DateOfMov)
-							VALUES(@CuentaId,
-								   @Tipo,
-								   @EstadoCuentaId,
-								   ABS(@monto),
-								   @SaldoActual + @monto,
-								   @Descripcion,
-								   1,
-								   @lo1)
 
 							--UPDATE @TempMovimientos
 							--SET Monto = @monto
