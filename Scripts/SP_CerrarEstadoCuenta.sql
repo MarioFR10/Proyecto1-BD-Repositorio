@@ -339,6 +339,16 @@ SET NOCOUNT ON
 		--SELECT 'Abrir' AS Estado
 	END TRY
 	BEGIN CATCH
+		INSERT INTO dbo.BE_DBErrors  VALUES (
+            SUSER_SNAME(),
+            ERROR_NUMBER(),
+            ERROR_STATE(),
+            ERROR_SEVERITY(),
+            ERROR_LINE(),
+            ERROR_PROCEDURE(),
+            ERROR_MESSAGE(),
+            GETDATE()
+        );
 	END CATCH
 
 SET NOCOUNT OFF
