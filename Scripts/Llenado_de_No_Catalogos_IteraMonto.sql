@@ -146,19 +146,9 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 									 Minimo MONEY,
 									 FechaCreacion DATE)
 
-	-------------------tabla prueba insert select----------------------
-	DECLARE @TempPruebas TABLE (Sec INT IDENTITY(1,1),
-								TipoCuentaID INT,
-								PersonaId INT,
-								NumeroCuenta VARCHAR(50))
-	-------------------------------------------------------------------
-
-
 	INSERT INTO @TempFechas(fechaOperacion)
 	SELECT  T.Item.value('@Fecha', 'DATE')
 	FROM @x.nodes('Operaciones/FechaOperacion') as T(Item)
-
-	--select * from @TempFechas
 
 	DECLARE @OperationDate DATE,
 			@lo1 DATE, --iteradores
@@ -167,8 +157,6 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 	SELECT @lo1 = MIN(fechaOperacion),
 		   @hi1 = MAX(fechaOperacion)
 	FROM @TempFechas
-
-	--SET @OperationDate = '2020-07-01'
 
 	WHILE @lo1 <= @hi1
 		BEGIN
@@ -208,8 +196,6 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 					'186.176.102.189'
 			FROM @x.nodes('Operaciones/FechaOperacion[@Fecha=sql:variable("@lo1")]/Persona') as T(Item)
 
-			--select * from [dbo].[Person]
-
 			--Insertar en tablas variables
 
 			INSERT INTO @TempCuentas(TipoCuentaID,
@@ -219,20 +205,6 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 				   T.Item.value('@ValorDocumentoIdentidadDelCliente','VARCHAR(50)'),
 				   T.Item.value('@NumeroCuenta','VARCHAR(50)')
 			FROM @x.nodes('Operaciones/FechaOperacion[@Fecha=sql:variable("@lo1")]/Cuenta') as T(Item)
-
-			--select * from @TempCuentas
-
-			--WHERE 
-			--SELECT TC.TipoCuentaID,
-			--	   @personaID,
-			--	   TC.NumeroCuenta
-			--FROM @TempCuentas TC
-			
-
-			--INSERT INTO table2 (column1, column2, column3, ...)
-			--SELECT column1, column2, column3, ...
-			--FROM table1
-			--WHERE condition;
 
 			INSERT INTO @TempBeneficiario(ParentescoID,
 									 ValDocIDent,
@@ -244,8 +216,6 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 				   T.Item.value('@Porcentaje','INT')
 			FROM @x.nodes('Operaciones/FechaOperacion[@Fecha=sql:variable("@lo1")]/Beneficiario') as T(Item)
 
-			--select * from @TempBeneficiario
-
 			INSERT INTO @TempMovimientos(NumCuenta,
 									 TipoMovimiento,
 									 Monto,
@@ -255,8 +225,6 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 				   T.Item.value('@Monto','MONEY'),
 				   T.Item.value('@Descripcion','VARCHAR(100)')
 			FROM @x.nodes('Operaciones/FechaOperacion[@Fecha=sql:variable("@lo1")]/Movimientos') as T(Item)
-
-			--select * from @TempMovimientos
 
 			INSERT INTO @TempUsuarios(Usuario,
 								Contrasenia,
@@ -297,9 +265,6 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 			FROM @TempCuentas TC
 			INNER JOIN [dbo].[Person] TP ON TP.[ValueDocIden] = TC.ValDocIDent
 			
-			--SELECT 'Cuenta'
-			--SELECT * FROM [dbo].[SavingsAccount] SA WHERE SA.Id = 1
-			--select * from [dbo].[SavingsAccount]
 			--------SavingAccount
 
 			--------Benefactor
@@ -325,7 +290,6 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 			INNER JOIN [dbo].[Person] TP ON TP.[ValueDocIden] = TB.ValDocIdent
 			INNER JOIN @TempCuentas TC ON TC.NumeroCuenta = TB.NumeroCuenta
 
-			--select * from [dbo].[Benefactor]
 			--------Benefactor
 
 			--------Movimiento
@@ -452,43 +416,9 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 									WHERE [dbo].[AccountStatement].[SavingsAccountId] = @CuentaId
 								END
 
-							--UPDATE @TempMovimientos
-							--SET Monto = @monto
-							--WHERE Sec = @minimo
-
 							SET @minimo = @minimo + 1
 						END
 
-
-			--SELECT 'MONTO'
-			--SELECT @monto
-
-			--INSERT INTO [dbo].[Movement CA] (SavingsAccountId,
-			--								TypeMovId,
-			--								AccountStatementId,
-			--								Amount,
-			--								NewBalance,
-			--								Description,
-			--								Visible,
-			--								DateOfMov)
-			--SELECT SA.Id,
-			--	   TM.TipoMovimiento,
-			--	   AC.Id,
-			--	   TM.Monto,
-			--	   SA.Balance + TM.Monto,
-			--	   TM.Descripcion,
-			--	   1,
-			--	   @lo1
-			--FROM @TempMovimientos TM
-			--INNER JOIN @TempCuentas TC ON TC.NumeroCuenta = TM.NumCuenta
-			--INNER JOIN [dbo].[SavingsAccount] SA ON SA.AccountNumber = TM.NumCuenta
-			--INNER JOIN [dbo].[AccountStatement] AC ON AC.SavingsAccountId = SA.Id
-			--WHERE AC.EndDate >= @lo1
-
-			--select * from [dbo].[Movement CA]
-
-			--SELECT 'Movimientos'
-			--SELECT * FROM [dbo].[Movement CA] MC WHERE MC.SavingsAccountId = 1
 			----------Movimiento
 
 			----------Usuarios----------
