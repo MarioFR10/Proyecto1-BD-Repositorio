@@ -143,7 +143,8 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 									 CuentaId INT,
 									 EstadoCuentaId INT,
 									 TipoCuenta INT,
-									 Minimo MONEY)
+									 Minimo MONEY,
+									 FechaCreacion DATE)
 
 	-------------------tabla prueba insert select----------------------
 	DECLARE @TempPruebas TABLE (Sec INT IDENTITY(1,1),
@@ -529,11 +530,13 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 			INSERT INTO @TempEstadoCuenta (CuentaId,
 											EstadoCuentaId,
 											TipoCuenta,
-											Minimo)
+											Minimo,
+											FechaCreacion)
 			SELECT AC.[SavingsAccountId],
 				   AC.[Id],
 				   SA.[TypeSavingsAccountId],
-				   AC.[MinBalance]
+				   AC.[MinBalance],
+				   AC.[StartDate]
 			FROM [dbo].[AccountStatement] AC,
 				 [dbo].[SavingsAccount] SA
 			WHERE (CAST(AC.[EndDate]  AS DATE) = CAST(@lo1 AS DATE)) AND AC.[SavingsAccountId] = SA.Id
@@ -546,7 +549,8 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 					@Cuenta INT,
 					@EstadoCuenta INT,
 					@TipoCuenta INT,
-					@SaldoMin MONEY
+					@SaldoMin MONEY,
+					@FechaC DATE
 
 			SELECT @minimo2 = MIN(Sec), 
 				   @maximo2 = MAX(Sec)
@@ -557,11 +561,12 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 					SELECT @Cuenta = TEC.CuentaId,
 						   @EstadoCuenta = TEC.EstadoCuentaId,
 						   @TipoCuenta = TEC.TipoCuenta,
-						   @SaldoMin = TEC.Minimo
+						   @SaldoMin = TEC.Minimo,
+						   @FechaC = TEC.FechaCreacion
 					FROM @TempEstadoCuenta TEC
 					WHERE TEC.Sec = @minimo2
 
-					EXEC dbo.CerrarEstadoCuenta @Cuenta, @EstadoCuenta, @TipoCuenta, @SaldoMin, @lo1
+					EXEC dbo.CerrarEstadoCuenta @Cuenta, @EstadoCuenta, @TipoCuenta, @SaldoMin, @FechaC, @lo1
 
 					SET @minimo2 = @minimo2 + 1
 				END
