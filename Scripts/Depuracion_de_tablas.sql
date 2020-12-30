@@ -47,3 +47,10 @@ SELECT * FROM [dbo].[TypeDocIdentity]
 DELETE FROM [dbo].[TypeMovement CA];
 DBCC CHECKIDENT([TypeMovement CA], RESEED, 0)
 Select * FROM [dbo].[TypeMovement CA]
+
+DELETE FROM [dbo].[TypeMovCO];
+DBCC CHECKIDENT([TypeMovCO], RESEED, 0)
+Select * FROM [dbo].[TypeMovCO]
+
+DELETE FROM [dbo].[TypeEvent];
+SELECT * FROM [dbo].[TypeEvent]
