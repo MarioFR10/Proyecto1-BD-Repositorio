@@ -280,7 +280,7 @@ SET NOCOUNT ON
 		IF @@TRANCOUNT>0
 			ROLLBACK TRANSACTION CerrarYAbrir
 		
-		INSERT INTO dbo.BE_DBErrors  VALUES (
+		INSERT INTO [dbo].[BE_Errors] VALUES (
             SUSER_SNAME(),
             ERROR_NUMBER(),
             ERROR_STATE(),

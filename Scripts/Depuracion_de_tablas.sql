@@ -22,6 +22,10 @@ DELETE FROM [dbo].[User];
 DBCC CHECKIDENT([User], RESEED, 0)
 SELECT * FROM [dbo].[User]
 
+DELETE FROM [dbo].[ObjetiveAccount];
+DBCC CHECKIDENT([ObjetiveAccount], RESEED, 0)
+Select * FROM [dbo].[ObjetiveAccount]
+
 DELETE FROM [dbo].[SavingsAccount];
 DBCC CHECKIDENT(SavingsAccount, RESEED, 0)
 SELECT * FROM [dbo].[SavingsAccount]
