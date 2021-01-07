@@ -87,6 +87,7 @@ export default new Vuex.Store({
       commit('setLoaded',false);
       const benefactorProvider = new BenefactorProvider();
       benefactorProvider.getAccountBenefactors(accountId).then(benefactors=>{
+        console.log(benefactors);
         commit('setBenefactors',benefactors);
         commit('setError',null);
         commit('setLoaded',true);

@@ -40,6 +40,12 @@ const routes: Array<RouteConfig> = [
     name: 'ObjetiveAccounts',
     component: () => import('../views/ObjetiveAccounts.vue'),
     meta: {requiresAuth: true},
+  },
+  {
+    path: '/admin/:id',
+    name: 'Admin',
+    component: () => import('../views/Admin.vue'),
+    meta: {requiresAuth: false},
   }
 ]
 

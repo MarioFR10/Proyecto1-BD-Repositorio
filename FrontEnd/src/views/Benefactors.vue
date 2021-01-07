@@ -60,6 +60,7 @@ import AddBenefactor from '../components/AddBenefactor.vue'
         AddBenefactor,
     },
     created(){
+        console.log('id de algo', this.id);
         this.getAccountBenefactors(this.id);
     },
     beforeRouteUpdate (to, from, next) {

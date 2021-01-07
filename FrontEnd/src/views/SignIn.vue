@@ -17,8 +17,12 @@
                             <b-form-group class=mb-0>
                                 <b-button type="submit" block :disabled="$v.$invalid||!loaded">Sign in</b-button>
                             </b-form-group>
+                            <router-link :to="{name:'Admin',params:{id: 1}}">
+                                <b-card-text>Ingresar como administrador</b-card-text>
+                            </router-link>
                         </b-form>
                     </b-card-body>
+
                 </b-card>
             </div>
             <div class="mt-2 d-flex justify-content-center">
@@ -54,7 +58,13 @@ import { Component, Vue } from 'vue-property-decorator';
         if (!this.$v.$invalid) {
             this.signIn(this.$v.user.$model);
         }
+      },
+
+      ventanaAdmin(){
+          console.log("funciona")
       }
+
+
   },
   validations: {
     user: {

@@ -50,7 +50,7 @@ import Benefactor from '../models/Benefactor';
       this.getRelationships();
   },
   props: {
-      accountId: String,
+      accountId: Number,
   },
   computed: {
       ...mapGetters(['hasError']),

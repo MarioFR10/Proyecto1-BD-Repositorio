@@ -21,7 +21,7 @@
                             </b-row>
                             <b-card-text class=mt-2>Balance: {{objetiveAccount.balance}} </b-card-text>
                             <b-card-text class=mt-1>Interes Acumulado: {{objetiveAccount.acumInterest}} </b-card-text>
-                            <b-card-text class=mt-1>Dias de Deposito: {{objetiveAccount.daysOfDeposit}} </b-card-text>
+                            <b-card-text class=mt-1>Dia de Deposito: {{objetiveAccount.daysOfDeposit}} </b-card-text>
                             <b-button-group class="ml-5 mb-2">
                                 <b-button variant="info" @click="saveChanges(objetiveAccount)">Guardar cambios</b-button>
                                 <b-button @click="deleteObjetive(objetiveAccount)" variant="warning">Desactivar Cuenta Objetivo</b-button>
