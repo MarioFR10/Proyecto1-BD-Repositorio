@@ -960,6 +960,48 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 			------------------InteresDiarioObjetiveAccount------------------
 
 			----------------------------DepositoCuentaObjetivo----------------------------
+
+			DECLARE @minimo4 INT,
+				    @maximo4 INT,
+					@idCuentaPrincipal INT,
+					@idCuentaObjetivo INT,
+					@montoTran MONEY,
+					@dia VARCHAR(50)
+
+			DECLARE @tempObj TABLE (Sec INT IDENTITY(1,1),
+							        idCuentaPrincipal INT,
+									idCuentaObj INT,
+									montoTransaccion MONEY
+								   )
+
+			SELECT @minimo4 = MIN(CO.Id),
+				   @maximo4 = MAX(CO.Id)
+			FROM [dbo].[ObjetiveAccount] CO
+
+
+			WHILE @minimo4 <= @maximo4
+				BEGIN
+					SELECT @dia = OBJ.[DaysOfDeposit]
+					FROM [dbo].[ObjetiveAccount] OBJ
+					WHERE OBJ.Id = @minimo4  
+
+					IF (DAY(@lo1) = @dia)
+						BEGIN
+							SELECT @idCuentaPrincipal = OBJ.[SavingsAccountId],
+								   @idCuentaObjetivo = OBJ.[Id],
+								   @montoTran = OBJ.[Fee]
+							FROM [dbo].[ObjetiveAccount] OBJ
+							WHERE OBJ.Id = @minimo4 
+
+							EXEC dbo.depositoObjetivo @idCuentaPrincipal, @idCuentaObjetivo, @montoTran, @lo1
+
+						END
+
+					SET @minimo4 = @minimo4 + 1
+				END
+
+			DELETE @tempObj
+
 			----------------------------DepositoCuentaObjetivo----------------------------
 
 			-------------Cerrar estados de cuenta---------------
@@ -1014,9 +1056,36 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 
 
 --SELECT * FROM [dbo].[AccountStatement]
---select * from [dbo].[SavingsAccount]
+--select * from [dbo].[SavingsAccount] where [dbo].[SavingsAccount].personId = 4
 --select * from [dbo].[Movement CA]
 --SELECT * from [dbo].[User]
 --SELECT * from [dbo].[UserCanAccess]
 --SELECT * FROM [dbo].[Person]
 --SELECT * FROM [dbo].[ObjetiveAccount]
+--SELECT * FROM [dbo].[Mov CO]
+--select * from [user] where [user].id = 1
+
+
+
+
+--DECLARE @a DATE = '12-15-2020'
+--IF (DAY(@a) = '15')
+--BEGIN
+--	SELECT 'Entro'
+--END
+--ELSE
+--BEGIN
+--	SELECT 'NO ENTRO' 
+--END
+
+
+--DECLARE 
+--		@Prueba TABLE (SEC INT IDENTITY(1,1))
+
+--DECLARE
+--		@CONTROLADOR INT
+
+--		SELECT @CONTROLADOR = MAX(PR.SEC)
+--		FROM @Prueba PR
+
+--		SELECT @CONTROLADOR
