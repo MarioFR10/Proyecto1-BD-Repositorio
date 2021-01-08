@@ -83,10 +83,10 @@ export default new Vuex.Store({
         commit('setLoaded',true);
       });
     },
-    getAccountBenefactors({commit},accountId: number){
+    getAccountBenefactors({commit},bene: Benefactor){
       commit('setLoaded',false);
       const benefactorProvider = new BenefactorProvider();
-      benefactorProvider.getAccountBenefactors(accountId).then(benefactors=>{
+      benefactorProvider.getAccountBenefactors(bene.savingsAccountId, bene.user).then(benefactors=>{
         console.log(benefactors);
         commit('setBenefactors',benefactors);
         commit('setError',null);
@@ -98,9 +98,10 @@ export default new Vuex.Store({
     },
     updatePercentages({commit},benefactors: Benefactor[]){
       commit('setLoaded',false);
+      console.log('adentro de updatePercentajes', benefactors);
       const benefactorProvider = new BenefactorProvider();
       benefactorProvider.updatePercentages(benefactors).then(message=>{
-        benefactorProvider.getAccountBenefactors(benefactors[0].savingsAccountId).then(benefactors=>{
+        benefactorProvider.getAccountBenefactors(benefactors[0].savingsAccountId, benefactors[0].user).then(benefactors=>{
           commit('setBenefactors',benefactors);
           commit('setSuccess',message);
           commit('setError',null);
@@ -119,8 +120,9 @@ export default new Vuex.Store({
     deleteBenefactor({commit},benefactor: Benefactor){
       commit('setLoaded',false);
       const benefactorProvider = new BenefactorProvider();
-      benefactorProvider.deleteBenefactor(benefactor.id).then(message=>{
-        benefactorProvider.getAccountBenefactors(benefactor.savingsAccountId).then(benefactors=>{
+      console.log('antes de delete', benefactor);
+      benefactorProvider.deleteBenefactor(benefactor.id, benefactor.user).then(message=>{
+        benefactorProvider.getAccountBenefactors(benefactor.savingsAccountId, benefactor.user).then(benefactors=>{
           commit('setBenefactors',benefactors);
           commit('setSuccess',message);
           commit('setError',null);
@@ -198,10 +200,10 @@ export default new Vuex.Store({
     },
 
     //funcion get objetive accounts
-    getObjetiveAccount({commit},accountId: number){
+    getObjetiveAccount({commit},objetive: ObjetiveAccount){
       commit('setLoaded',false);
       const accountProvider = new AccountProvider();
-      accountProvider.getObjetiveAccount(accountId).then(objetiveAccounts=>{
+      accountProvider.getObjetiveAccount(objetive.SavingsAccountId, objetive.user).then(objetiveAccounts=>{
         commit('setObjetiveAccounts',objetiveAccounts);
         commit('setError',null);
         commit('setLoaded',true);
@@ -215,8 +217,8 @@ export default new Vuex.Store({
     deleteObjetiveAccount({commit},objetiveAccount: ObjetiveAccount){
       commit('setLoaded',false);
       const accountProvider = new AccountProvider();
-      accountProvider.deleteObjetiveAccount(objetiveAccount.id).then(message=>{
-        accountProvider.getObjetiveAccount(objetiveAccount.SavingsAccountId).then(objetiveAccounts=>{
+      accountProvider.deleteObjetiveAccount(objetiveAccount.id, objetiveAccount.user).then(message=>{
+        accountProvider.getObjetiveAccount(objetiveAccount.SavingsAccountId, objetiveAccount.user).then(objetiveAccounts=>{
           commit('setObjetiveAccounts',objetiveAccounts);
           commit('setSuccess',message);
           commit('setError',null);
@@ -276,7 +278,7 @@ export default new Vuex.Store({
       commit('setLoaded',false);
       const accountProvider = new AccountProvider();
       accountProvider.updateObjetiveAccount(objetiveAccount).then(message=>{
-        accountProvider.getObjetiveAccount(objetiveAccount.SavingsAccountId).then(objetiveAccounts=>{
+        accountProvider.getObjetiveAccount(objetiveAccount.SavingsAccountId, objetiveAccount.user).then(objetiveAccounts=>{
           commit('setObjetiveAccounts',objetiveAccounts);
           commit('setSuccess',message);
           commit('setError',null);

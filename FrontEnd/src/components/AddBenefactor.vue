@@ -63,6 +63,7 @@ import Benefactor from '../models/Benefactor';
         if (!this.$v.$invalid) {
             this.benefactor.savingsAccountId = this.accountId;
             this.benefactor.nameDocId = this.relationshipSelected;
+            this.benefactor.user = this.user;
             this.createBenefactor(this.benefactor);
             this.$emit('closeForm');
         }

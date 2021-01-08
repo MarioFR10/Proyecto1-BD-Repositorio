@@ -53,19 +53,23 @@ import AddObjetiveAccount from '../components/AddObjetiveAccount.vue';
     data(){
         return {
             id: this.$route.params.id,
-            showCreateForm: false
+            showCreateForm: false,
+            contenedor: new ObjetiveAccount(0, 0, new Date(), new Date(), 0, '', 0, 0, 0, false, 0)
         }
     },
     components:{
         AddObjetiveAccount,
     },
     created(){
-        this.getObjetiveAccount(this.id);
+        this.contenedor.SavingsAccountId = this.id;
+        this.contenedor.user = this.user;
+        this.getObjetiveAccount(this.contenedor);
 
     },
     beforeRouteUpdate (to, from, next) {
-        this.id = to.params.id;
-        this.getObjetiveAccount(this.id);
+        this.contenedor.SavingsAccountId = to.params.id;
+        this.contenedor.user = this.user;
+        this.getObjetiveAccount(this.contenedor);
         next();
     },
     computed:{

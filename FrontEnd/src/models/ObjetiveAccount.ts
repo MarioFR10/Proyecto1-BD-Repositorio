@@ -7,10 +7,11 @@ export default class ObjetiveAccount{
     objetive: string;   
     balance: number;
     acumInterest: number;
-    daysOfDeposit: string;
+    daysOfDeposit: number;
     active: boolean;
+    user: number;
 
-    constructor(id: number|undefined, SavingsAccountId: number, startDate: Date, endDate: Date, fee: number, objetive: string, balance: number, acumInterest: number, daysOfDeposit: string, active: boolean ){
+    constructor(id: number|undefined, SavingsAccountId: number, startDate: Date, endDate: Date, fee: number, objetive: string, balance: number, acumInterest: number, daysOfDeposit: number, active: boolean, user: number ){
         this.id = id;
         this.SavingsAccountId = SavingsAccountId;
         this.startDate = startDate;
@@ -21,5 +22,6 @@ export default class ObjetiveAccount{
         this.acumInterest = acumInterest;
         this.daysOfDeposit = daysOfDeposit;
         this.active = active;
+        this.user = user;
     }
 }

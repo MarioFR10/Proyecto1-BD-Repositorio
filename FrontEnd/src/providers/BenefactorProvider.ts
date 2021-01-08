@@ -4,7 +4,7 @@ import Relationship from '@/models/Relationship';
 export default class BenefactorProvider{
     apiUrl = 'https://localhost:44308/api/benefactor/';
 
-    async getAccountBenefactors(accountId: number): Promise<Benefactor[]>{
+    async getAccountBenefactors(accountId: number, user: number): Promise<Benefactor[]>{
         const operation = "GetBenefactorByAccount";
         const options = {
         method: 'POST',
@@ -14,6 +14,7 @@ export default class BenefactorProvider{
         },
         body: JSON.stringify({
           "SavingsAccountId": accountId,
+          "user": user
         })
       };
       const response = await fetch(this.apiUrl+operation, options);
@@ -28,7 +29,7 @@ export default class BenefactorProvider{
     }
 
     async updatePercentages(benefactors: Benefactor[]): Promise<string>{
-      const percentages = benefactors.map(benefactor=>({id:benefactor.id,percentage:benefactor.percentage}));
+      const percentages = benefactors.map(benefactor=>({id:benefactor.id,percentage:benefactor.percentage, user:benefactor.user}));
       const operation = "updateBenefactorsPercentages";
         const options = {
         method: 'PUT',
@@ -37,7 +38,7 @@ export default class BenefactorProvider{
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "benefactors": percentages,
+          "benefactors": percentages
         })
       };
       const response = await fetch(this.apiUrl+operation, options);
@@ -51,7 +52,7 @@ export default class BenefactorProvider{
       throw new Error(response.status + " (" + response.statusText + ")");
     }
     
-    async deleteBenefactor(benefactorId: number): Promise<string>{
+    async deleteBenefactor(benefactorId: number, user: number): Promise<string>{
       const operation = "deleteBenefactor";
         const options = {
         method: 'PUT',
@@ -60,7 +61,8 @@ export default class BenefactorProvider{
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "benefactorId": benefactorId
+          "benefactorId": benefactorId,
+          "user": user
         })
       };
       const response = await fetch(this.apiUrl+operation, options);

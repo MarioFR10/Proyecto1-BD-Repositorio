@@ -76,7 +76,7 @@ export default class AccountProvider{
   throw new Error(response.status + " (" + response.statusText + ")");
   }
 
-  async getObjetiveAccount(accountId: number): Promise<ObjetiveAccount[]>{
+  async getObjetiveAccount(accountId: number, user: number): Promise<ObjetiveAccount[]>{
     const operation = "savingsaccount/getObjetiveAccounts";
     const options = {
     method: 'POST',
@@ -86,6 +86,7 @@ export default class AccountProvider{
     },
     body: JSON.stringify({
       "SavingsAccountId": accountId,
+      "user": user
     })
   };
   const response = await fetch(this.apiUrl+operation, options);
@@ -99,7 +100,7 @@ export default class AccountProvider{
   throw new Error(response.status + " (" + response.statusText + ")");
   }
 
-  async deleteObjetiveAccount(objetiveaccountId: number): Promise<Movement[]>{
+  async deleteObjetiveAccount(objetiveaccountId: number, user: number): Promise<Movement[]>{
     const operation = "savingsaccount/deleteObjetive";
       const options = {
       method: 'PUT',
@@ -108,7 +109,8 @@ export default class AccountProvider{
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "objetiveaccountId": objetiveaccountId
+        "objetiveaccountId": objetiveaccountId,
+        "user": user
       })
     };
     const response = await fetch(this.apiUrl+operation, options);
@@ -162,7 +164,8 @@ export default class AccountProvider{
         "endDate": cuentaObjetivo.endDate,
         "fee": cuentaObjetivo.fee,
         "objetive": cuentaObjetivo.objetive,
-        "daysOfDeposit": cuentaObjetivo.daysOfDeposit
+        "daysOfDeposit": cuentaObjetivo.daysOfDeposit,
+        "user": cuentaObjetivo.user
       })
     };
     const response = await fetch(this.apiUrl+operation, options);
@@ -186,7 +189,8 @@ export default class AccountProvider{
       },
       body: JSON.stringify({
         "objetiveaccountId": objetiveAccount.id,
-        "objetive": objetiveAccount.objetive
+        "objetive": objetiveAccount.objetive,
+        "user": objetiveAccount.user
       })
     };
     const response = await fetch(this.apiUrl+operation, options);

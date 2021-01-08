@@ -50,7 +50,7 @@
                                     <b-card-text class=mt-1>Dias de deposito: </b-card-text>
                             </b-col>
                             <b-col md="5">
-                                <b-form-input class="mt-2" v-model="diasDeposito" placeholder="Ingrese los dias de deposito"></b-form-input>
+                                <b-form-input class="mt-2" type=number v-model="diasDeposito"></b-form-input>
                             </b-col>
                         </b-row>
                     </b-form-group>
@@ -82,7 +82,7 @@ import ObjetiveAccount from '../models/ObjetiveAccount';
           fechaInicio: new Date(),
           fechaFin: new Date(),
           cuota: 0,
-          cuentaObjetivo: new ObjetiveAccount(undefined, 0 , new Date(), new Date(), 0, '', 0, 0, '', false)
+          cuentaObjetivo: new ObjetiveAccount(undefined, 0 , new Date(), new Date(), 0, '', 0, 0, 0, false,0)
       }
   },
   //created(){
@@ -105,6 +105,7 @@ import ObjetiveAccount from '../models/ObjetiveAccount';
         this.cuentaObjetivo.fee = this.cuota;
         this.cuentaObjetivo.objetive = this.objetivo;
         this.cuentaObjetivo.daysOfDeposit = this.diasDeposito;
+        this.cuentaObjetivo.user = this.user;
         
         this.createObjetiveAccount(this.cuentaObjetivo);
 

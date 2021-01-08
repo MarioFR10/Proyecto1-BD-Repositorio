@@ -9,7 +9,7 @@
                             <b-card-title>{{account.personName}}</b-card-title>
                             <b-card-sub-title class=mb-2>Cuenta: {{account.accountNumber}}</b-card-sub-title>
                             <b-card-text class=mt-4>Balance: {{account.balance}}</b-card-text>
-                            <b-card-text class="mb-1">{{new Date(account.creationDate).toLocaleDateString()}}</b-card-text>
+                            <b-card-text class="mb-1">Fecha creacion: {{new Date(account.creationDate).toLocaleDateString()}}</b-card-text>
                             <b-card-text class="mb-1">Tipo de cuenta: {{account.typeSavingsAccountName}}</b-card-text>
                             <router-link :to="{name:'Benefactors',params:{id: account.id}}">
                                 <b-card-text class="mb-1">Beneficiarios</b-card-text>

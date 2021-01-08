@@ -24,7 +24,7 @@
                 </ul>
                 <b-button-group class=ml-5>
                     <b-button variant="success" @click="createBenefactor" :disabled="benefactors.length >=3">Crear beneficiario</b-button>
-                    <b-button variant="info" @click="saveChanges" :disabled="percentage <= 100">Guardar cambios</b-button>
+                    <b-button variant="info" @click="saveChanges" :disabled="percentage > 100">Guardar cambios</b-button>
                 </b-button-group>
             </div>
             <div class="mt-2 d-flex justify-content-center">
@@ -54,18 +54,22 @@ import AddBenefactor from '../components/AddBenefactor.vue'
             percentage: 0,
             percentageError: 'Los porcentajes no suman 100',
             showCreateForm: false,
+            contenedor: new Benefactor(0, '', 0, '', '', 0, 0)
         }
     },
     components:{
         AddBenefactor,
     },
     created(){
-        console.log('id de algo', this.id);
-        this.getAccountBenefactors(this.id);
+        this.contenedor.savingsAccountId = this.id;
+        this.contenedor.user = this.user;
+        this.getAccountBenefactors(this.contenedor);
     },
     beforeRouteUpdate (to, from, next) {
         this.id = to.params.id;
-        this.getAccountBenefactors(this.id);
+        this.contenedor.savingsAccountId = this.id;
+        this.contenedor.user = this.user;
+        this.getAccountBenefactors(this.contenedor);
         next();
     },
     computed:{
