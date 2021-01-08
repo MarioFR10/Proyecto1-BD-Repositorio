@@ -2,7 +2,7 @@
 
 ----------------------Insert-------------------------
 
-CREATE PROCEDURE insertBenefactor
+CREATE PROCEDURE insertarBenefactor
 (
 	@inUsuario INT
 )
@@ -35,6 +35,7 @@ BEGIN TRY
 					FROM Benefactor AS B
 					WHERE B.Id = SCOPE_IDENTITY()
 					FOR XML AUTO)
+
 		COMMIT TRANSACTION insertBenefactor;
 	END TRY
 
@@ -59,7 +60,7 @@ GO
 
 ----------------------Update-------------------------
 
-CREATE PROCEDURE updateBenefactor(
+ALTER PROCEDURE actualizarBeneficiario(
 	@inId INT,
 	@inUsuario INT,
 	@inPercentage INT
@@ -138,7 +139,7 @@ GO
 
 ----------------------Delete-------------------------
 
-CREATE PROCEDURE deleteBenefactor(
+ALTER PROCEDURE borrarBeneficiario(
 	@inId INT,
 	@inUsuario INT
 )
@@ -220,7 +221,7 @@ GO
 
 --------------------------------Cuenta objetivo--------------------------------------
 ----------------------Insert-------------------------
-CREATE PROCEDURE insertCO
+ALTER PROCEDURE insertarCO
 (
 	@inUsuario INT
 )
@@ -229,6 +230,7 @@ BEGIN
 	BEGIN TRY
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION insertCO
+			SELECT 'ENTRE' AS PRUEBA
 			INSERT INTO [dbo].[Event](TypeEventId,
 									UserId,
 									IP,
@@ -271,18 +273,17 @@ BEGIN
             GETDATE()
         );
 	END CATCH
-
 END
 GO
 ----------------------Insert-------------------------
 
 ----------------------Update-------------------------
 
-CREATE PROCEDURE updateCO
+ALTER PROCEDURE actualizarCO
 (
-@inId INT,
-@inUsuario INT,
-@inDescripcion VARCHAR(50)
+	@inId INT,
+	@inUsuario INT,
+	@inDescripcion VARCHAR(50)
 )
 AS
 BEGIN
@@ -358,7 +359,7 @@ GO
 ----------------------Update-------------------------
 
 ----------------------Delete-------------------------
-CREATE PROCEDURE deleteCO
+ALTER PROCEDURE borrarCO
 (
 @inId INT,
 @inUsuario INT

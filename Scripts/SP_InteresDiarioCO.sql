@@ -13,7 +13,7 @@ SET NOCOUNT ON
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION interesDiario
 			UPDATE [dbo].[ObjetiveAccount]
-			SET [Balance] = (@inBalance + (@inBalance*@inAcumInterest))
+			SET [Balance] = (@inBalance + (@inBalance*(@inAcumInterest/365)))
 			WHERE [dbo].[ObjetiveAccount].[Id] = @inCOID
 
 		COMMIT TRANSACTION interesDiario;

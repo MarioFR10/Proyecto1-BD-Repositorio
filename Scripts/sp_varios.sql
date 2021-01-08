@@ -136,10 +136,8 @@ BEGIN
 			FROM [dbo].[Benefactor] BN
 			INNER JOIN [dbo].[Relationship] RL ON RL.Id = BN.RelationshipId
 			INNER JOIN [dbo].[Person] PE ON PE.Id = BN.PersonId
-			WHERE BN.SavingsAccountId = @AccountId AND BN.Condition = 0
+			WHERE BN.SavingsAccountId = @AccountId AND BN.Condition = 1
 
 	SET NOCOUNT OFF
 END 
 GO
-
-exec SP_GetBenefactorsbyAccount 37

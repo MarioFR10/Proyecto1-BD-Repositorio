@@ -573,7 +573,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 							EndDate DATE,
 							Fee MONEY,
 							Objetive VARCHAR(50),
-							DaysOfDeposit VARCHAR(50),
+							DaysOfDeposit INT,
 							OANumber INT)
 
 	DECLARE @TempEstadoCuenta TABLE (Sec INT IDENTITY(1,1), 
@@ -692,7 +692,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 				   T.Item.value('@FechaFinal','DATE'),
 				   T.Item.value('@MontoAhorro','MONEY'),
 				   T.Item.value('@Descripcion','VARCHAR(50)'),
-				   T.Item.value('@DiaAhorro','VARCHAR(50)'),
+				   T.Item.value('@DiaAhorro','INT'),
 				   T.Item.value('@NumeroCuentaAhorro','INT')
 			FROM @x.nodes('Operaciones/FechaOperacion[@Fecha=sql:variable("@OperationDate")]/CuentaAhorro') as T(Item)
 			--------Insertar en tablas--------
@@ -951,7 +951,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 						   @saldo = CO.Balance,
 						   @intereses = CO.AcumInterest
 					FROM [dbo].[ObjetiveAccount] CO
-					WHERE CO.Id = @minimo3
+					WHERE CO.Id = @minimo3 -- hay que poner la condicion de que solo calcule los int a las activas
 
 					EXEC dbo.interesDiarioCO @COId, @saldo, @intereses
 
@@ -1069,7 +1069,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 
 
 --DECLARE @a DATE = '12-15-2020'
---IF (DAY(@a) = '15')
+--IF (DAY(@a) = 15)
 --BEGIN
 --	SELECT 'Entro'
 --END

@@ -9,14 +9,6 @@ desactivacion
 
 */
 
-
-select * from [dbo].[ObjetiveAccount]
-
-delete from [dbo].[ObjetiveAccount]
-DBCC CHECKIDENT(ObjetiveAccount, RESEED, 0)
-
-exec dbo_SP_Create_ObjetiveAccount 4, '2020-11-23', '2020-11-23', 3, 'prueba', '14, 15, 16'
-
 --Read
 ALTER PROCEDURE dbo_SP_Read_ObjectiveAccount
 (
@@ -62,15 +54,22 @@ ALTER PROCEDURE dbo_SP_Create_ObjetiveAccount
 	@inEndDate DATE,	--ingresa usuario
 	@inFee MONEY,		--ingresa usuario
 	@inObjetive VARCHAR(50),   --ingresa usuario
-	@inDaysOfDeposit VARCHAR(50)  --ingresa usuario  
+	@inDaysOfDeposit INT,  --ingresa usuario 
+	@inUser INT
 )
 AS
 BEGIN
-	SET NOCOUNT ON				--set nocount 
+	SET NOCOUNT ON 
 	BEGIN TRY
 		DECLARE @outResultCode INT = 0
 		IF exists( SELECT SA.Id FROM [dbo].[SavingsAccount] SA WHERE SA.Id = @AccountId )
-		BEGIN	
+			BEGIN
+				DECLARE 
+						@numeroCuenta INT
+
+					SELECT @numeroCuenta = MAX([dbo].[ObjetiveAccount].OANumber) + 1
+					FROM [dbo].[ObjetiveAccount] 
+
 				INSERT INTO [dbo].[ObjetiveAccount] ([SavingsAccountId],
 													 [StartDate],
 													 [EndDate],
@@ -79,6 +78,7 @@ BEGIN
 													 [Balance],
 													 [AcumInterest],
 													 [DaysOfDeposit],
+													 [OANumber],
 													 [Active])
 
 											VALUES	(@AccountId, 
@@ -89,18 +89,21 @@ BEGIN
 													 0,
 													 0.0,
 													 @inDaysOfDeposit,
+													 @numeroCuenta,
 													 1)
 				SELECT @outResultCode
-		END
+				EXECUTE insertarCO @inUser
+			END
+
 		ELSE
 			BEGIN 
 				SET @outResultCode = 1 -- Codigo de error NO EXISTE EL ID DE LA CUENTA ASOCIADA
-				SELECT @outResultCode
+				SELECT @outResultCode AS ERROR
 			END
 	END TRY
 	BEGIN CATCH
 		SET @outResultCode = 1 -- Codigo de error NO EXISTE EL ID DE LA CUENTA ASOCIADA
-		SELECT @outResultCode
+		SELECT @outResultCode AS CAT 
 	END CATCH
 	SET NOCOUNT OFF				--set nocount 
 END	
@@ -196,4 +199,3 @@ END
 GO
 
 
-select * from [ObjetiveAccount]

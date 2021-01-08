@@ -10,10 +10,11 @@ GO
 
 ALTER PROCEDURE SP_Create_Benefactor
 (
-    @AccountId int, 
-	@inValueDocIden varchar(50), 
-	@inRelationshipId int, 
-	@inPercentaje int
+    @AccountId VARCHAR, 
+	@inValueDocIden VARCHAR(50), 
+	@inRelationshipId INT, 
+	@inPercentaje INT,
+	@inUsuario INT
 )
 AS
 BEGIN
@@ -36,8 +37,11 @@ BEGIN
 										 @AccountId, 
 										 @BenefactorName,
 										 @inPercentaje,
-										 0)
+										 1)
 						SELECT @outResultCode
+
+						EXECUTE insertarBenefactor @inUsuario
+
 					SET NOCOUNT OFF
 			END;
 			ELSE
@@ -94,8 +98,8 @@ GO
 
 ALTER PROCEDURE SP_Update_Benefactor
 (
-	@beneId int,
-	@inPercentaje int
+	@beneId INT,
+	@inPercentaje INT
 )
 AS
 BEGIN
@@ -116,7 +120,6 @@ END
 GO
 	
 
-
 -- =============================================
 -- Author:      Mario Fernandez
 -- Create Date: 2020
@@ -134,7 +137,7 @@ BEGIN
 	IF exists( SELECT BN.Id FROM [dbo].[Benefactor] BN WHERE BN.Id = @beneId )
 	BEGIN
 	
-		UPDATE [dbo].[Benefactor] SET [Condition] = 1
+		UPDATE [dbo].[Benefactor] SET [Condition] = 0
 		WHERE [dbo].[Benefactor].Id = @beneId
 
 		SELECT @outResultCode
@@ -146,3 +149,5 @@ BEGIN
 		END
 END	
 GO
+
+
