@@ -129,10 +129,8 @@ SET NOCOUNT ON
 
 							SET @minimo1 = @minimo1+1
 						END
-
-				COMMIT TRANSACTION AdministradorB;
-
-			END
+				END
+		COMMIT TRANSACTION AdministradorB;
 	END TRY
 
 	BEGIN CATCH
