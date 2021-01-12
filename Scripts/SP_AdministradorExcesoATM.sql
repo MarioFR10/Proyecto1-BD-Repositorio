@@ -131,6 +131,7 @@ SET NOCOUNT ON
 						END
 				END
 		COMMIT TRANSACTION AdministradorB;
+		SELECT * FROM @TempExcesoRetiros
 	END TRY
 
 	BEGIN CATCH
