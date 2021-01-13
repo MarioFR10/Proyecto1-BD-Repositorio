@@ -88,6 +88,12 @@ SET NOCOUNT ON
 					SET @minimo1 = @minimo1 + 1
 				END
 		COMMIT TRANSACTION defuncion;
+		SELECT NombreBenefactor,
+			   Balance, 
+			   CuentaMayorBeneficio, 
+			   CantCuentasAsociadas 
+		FROM @TempTotales
+		ORDER BY Balance DESC
 	END TRY
 
 	BEGIN CATCH
