@@ -5,7 +5,7 @@ BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
 		DECLARE @TempExcesoRetiros TABLE (Sec INT IDENTITY(1,1),
-										 CuentaId INT,
+										 CodigoCuenta VARCHAR(50),
 										 PromedioRetiros FLOAT,
 										 MesMayorRetiro INT,
 										 AnioMayorRetiro INT)
@@ -16,7 +16,8 @@ SET NOCOUNT ON
 										  RetirosATM INT,
 										  EndDate DATE)
 
-		DECLARE @minimo1 INT,
+		DECLARE @codigoCuenta VARCHAR(50),
+				@minimo1 INT,
 				@maximo1 INT,
 				@minimo2 INT,
 				@maximo2 INT,
@@ -118,11 +119,15 @@ SET NOCOUNT ON
 
 									SET @minimo2 = @minimo2 + 1
 								END
-							INSERT @TempExcesoRetiros (CuentaId,
+							SELECT @codigoCuenta = SA.[AccountNumber]
+							FROM [dbo].[SavingsAccount] SA
+							WHERE SA.[Id] = @minimo1
+
+							INSERT @TempExcesoRetiros (CodigoCuenta,
 														PromedioRetiros,
 														MesMayorRetiro,
 														AnioMayorRetiro)
-							VALUES(@minimo1,
+							VALUES(@codigoCuenta,
 									@totalOps/(1+DATEDIFF(MONTH,@inFechaInicio,@fechaParada)),
 									@mesMasOps,
 									@anioMasOps)
