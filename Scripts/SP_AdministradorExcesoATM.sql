@@ -136,7 +136,12 @@ SET NOCOUNT ON
 						END
 				END
 		COMMIT TRANSACTION AdministradorB;
-		SELECT * FROM @TempExcesoRetiros
+
+		SELECT CodigoCuenta,
+			   PromedioRetiros,
+			   MesMayorRetiro,
+			   AnioMayorRetiro
+		FROM @TempExcesoRetiros
 	END TRY
 
 	BEGIN CATCH

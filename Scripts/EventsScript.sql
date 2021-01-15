@@ -2,7 +2,7 @@
 
 ----------------------Insert-------------------------
 
-CREATE PROCEDURE insertarBenefactor
+ALTER PROCEDURE insertarBenefactor
 (
 	@inUsuario INT
 )
@@ -11,6 +11,29 @@ BEGIN
 BEGIN TRY
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION insertBenefactor
+
+		DECLARE 
+				@xmlAfter xml,
+				@nuevoId INT
+
+		SELECT @nuevoId = MAX(BN.Id)
+		FROM [dbo].[Benefactor] BN
+
+		SET @xmlAfter = (SELECT B.[Id],
+					B.[RelationshipId],
+					B.[PersonId],
+					B.[SavingsAccountId],
+					B.[Name],
+					B.[Percentage],
+					B.[Condition],
+					B.[InsertAt],
+					B.[InsertBy],
+					B.[InsertIn]
+					FROM Benefactor AS B
+					WHERE B.Id = @nuevoId
+					FOR XML AUTO)
+
+		
 			INSERT INTO [dbo].[Event](TypeEventId,
 									UserId,
 									IP,
@@ -22,19 +45,7 @@ BEGIN TRY
 				   CONVERT(char(15), CONNECTIONPROPERTY('client_net_address')),
 				   GETDATE(),
 				   '',
-				   (SELECT B.[Id],
-					B.[RelationshipId],
-					B.[PersonId],
-					B.[SavingsAccountId],
-					B.[Name],
-					B.[Percentage],
-					B.[Condition],
-					B.[InsertAt],
-					B.[InsertBy],
-					B.[InsertIn]
-					FROM Benefactor AS B
-					WHERE B.Id = SCOPE_IDENTITY()
-					FOR XML AUTO)
+				   @xmlAfter
 
 		COMMIT TRANSACTION insertBenefactor;
 	END TRY
@@ -230,7 +241,31 @@ BEGIN
 	BEGIN TRY
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION insertCO
-			SELECT 'ENTRE' AS PRUEBA
+			
+
+			DECLARE 
+				@xmlAfter xml,
+				@nuevoId INT
+
+			SELECT @nuevoId = MAX(OA.Id)
+			FROM [dbo].[ObjetiveAccount] OA
+
+			SET @xmlAfter = (SELECT CO.[Id],
+					CO.[SavingsAccountId],
+					CO.[StartDate],
+					CO.[EndDate],
+					CO.[Fee],
+					CO.[Objective],
+					CO.[Balance],
+					CO.[AcumInterest],
+					CO.[DaysOfDeposit],
+					CO.[Active]
+					FROM ObjetiveAccount AS CO
+					WHERE CO.Id = @nuevoId
+					FOR XML AUTO)
+
+			
+	
 			INSERT INTO [dbo].[Event](TypeEventId,
 									UserId,
 									IP,
@@ -242,19 +277,8 @@ BEGIN
 				   CONVERT(char(15), CONNECTIONPROPERTY('client_net_address')),
 				   GETDATE(),
 				   '',
-				   (SELECT CO.[Id],
-					CO.[SavingsAccountId],
-					CO.[StartDate],
-					CO.[EndDate],
-					CO.[Fee],
-					CO.[Objective],
-					CO.[Balance],
-					CO.[AcumInterest],
-					CO.[DaysOfDeposit],
-					CO.[Active]
-					FROM ObjetiveAccount AS CO
-					WHERE CO.Id = SCOPE_IDENTITY()
-					FOR XML AUTO)
+				   @xmlAfter
+				   
 		COMMIT TRANSACTION insertCO;
 	END TRY
 

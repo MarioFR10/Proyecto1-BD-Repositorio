@@ -58,6 +58,7 @@ SET @x = '<Catalogos>
 
 
 
+
 -----------------------------------------Script de llenado de TypeDocIdentity
 
 INSERT INTO [dbo].[TypeDocIdentity](Id, Name)
@@ -149,7 +150,6 @@ VALUES (11,
 		'Debito')
 
 SET IDENTITY_INSERT [dbo].[TypeMovement CA] OFF
-
 SELECT * FROM [dbo].[TypeMovement CA]
 
 ------------------------------------------Script de llenado de TypeMovCO
@@ -170,3 +170,4 @@ SELECT  T.Item.value('@Id', 'int'),
 FROM @x.nodes('Catalogos/TiposEvento/TipoEvento') as T(Item)
 
 select * from TypeEvent
+

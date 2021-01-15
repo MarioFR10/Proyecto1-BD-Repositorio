@@ -1,13 +1,3 @@
-/*
-Edicion cuenta obj
-
-Creacion
-
-modificacion descripcion
-
-desactivacion
-
-*/
 
 --Read
 ALTER PROCEDURE dbo_SP_Read_ObjectiveAccount
@@ -39,7 +29,17 @@ BEGIN
 				END
 		END TRY
 		BEGIN CATCH
-			SET @outResultCode = 1 -- Codigo de error NO EXISTE LA CUENTA OBJETIVO
+			INSERT INTO [dbo].[BE_Errors] VALUES (
+				SUSER_SNAME(),
+				ERROR_NUMBER(),
+				ERROR_STATE(),
+				ERROR_SEVERITY(),
+				ERROR_LINE(),
+				ERROR_PROCEDURE(),
+				ERROR_MESSAGE(),
+				GETDATE()
+			);	
+
 		END CATCH
 	SET NOCOUNT OFF 
 END	
@@ -102,8 +102,16 @@ BEGIN
 			END
 	END TRY
 	BEGIN CATCH
-		SET @outResultCode = 1 -- Codigo de error NO EXISTE EL ID DE LA CUENTA ASOCIADA
-		SELECT @outResultCode AS CAT 
+			INSERT INTO [dbo].[BE_Errors] VALUES (
+				SUSER_SNAME(),
+				ERROR_NUMBER(),
+				ERROR_STATE(),
+				ERROR_SEVERITY(),
+				ERROR_LINE(),
+				ERROR_PROCEDURE(),
+				ERROR_MESSAGE(),
+				GETDATE()
+			);	
 	END CATCH
 	SET NOCOUNT OFF				--set nocount 
 END	
@@ -134,6 +142,16 @@ BEGIN
 				END
 		END TRY
 		BEGIN CATCH
+			INSERT INTO [dbo].[BE_Errors] VALUES (
+				SUSER_SNAME(),
+				ERROR_NUMBER(),
+				ERROR_STATE(),
+				ERROR_SEVERITY(),
+				ERROR_LINE(),
+				ERROR_PROCEDURE(),
+				ERROR_MESSAGE(),
+				GETDATE()
+			);	
 		END CATCH
 	SET NOCOUNT OFF 
 END	
@@ -163,39 +181,18 @@ BEGIN
 				END
 		END TRY
 		BEGIN CATCH
-					SET @outResultCode = 1 -- Codigo de error NO EXISTE LA CUENTA OBJETIVO
-					SELECT @outResultCode
+			INSERT INTO [dbo].[BE_Errors] VALUES (
+				SUSER_SNAME(),
+				ERROR_NUMBER(),
+				ERROR_STATE(),
+				ERROR_SEVERITY(),
+				ERROR_LINE(),
+				ERROR_PROCEDURE(),
+				ERROR_MESSAGE(),
+				GETDATE()
+			);
 		END CATCH
 	SET NOCOUNT OFF 
 END	
 GO
-
---Activar
-
-ALTER PROCEDURE dbo_SP_Activate_ObjectiveAccount
-(
-	@ObjectiveAccountId INT
-)
-AS
-BEGIN
-	SET NOCOUNT ON
-		BEGIN TRY
-			DECLARE @outResultCode INT = 0
-			IF exists( SELECT OA.Id FROM [dbo].[ObjetiveAccount] OA WHERE OA.Id = @ObjectiveAccountId )
-			BEGIN
-				UPDATE [dbo].[ObjetiveAccount] SET [Active] = 1
-				WHERE [dbo].[ObjetiveAccount].Id = @ObjectiveAccountId
-			END;
-			ELSE
-				BEGIN 
-					SET @outResultCode = 1 -- Codigo de error NO EXISTE LA CUENTA
-					SELECT @outResultCode
-				END
-		END TRY
-		BEGIN CATCH
-		END CATCH
-	SET NOCOUNT OFF 
-END	
-GO
-
 

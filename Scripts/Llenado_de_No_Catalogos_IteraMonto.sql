@@ -951,9 +951,9 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 						   @saldo = CO.Balance,
 						   @intereses = CO.AcumInterest
 					FROM [dbo].[ObjetiveAccount] CO
-					WHERE CO.Id = @minimo3 -- hay que poner la condicion de que solo calcule los int a las activas
+					WHERE CO.Id = @minimo3  AND CO.Active = 1
 
-					EXEC dbo.interesDiarioCO @COId, @saldo, @intereses
+					EXEC dbo.interesDiarioCO @COId, @saldo, @intereses, @lo1
 
 					SET @minimo3 = @minimo3 + 1
 				END
@@ -967,12 +967,6 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 					@idCuentaObjetivo INT,
 					@montoTran MONEY,
 					@dia VARCHAR(50)
-
-			DECLARE @tempObj TABLE (Sec INT IDENTITY(1,1),
-							        idCuentaPrincipal INT,
-									idCuentaObj INT,
-									montoTransaccion MONEY
-								   )
 
 			SELECT @minimo4 = MIN(CO.Id),
 				   @maximo4 = MAX(CO.Id)
@@ -991,7 +985,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 								   @idCuentaObjetivo = OBJ.[Id],
 								   @montoTran = OBJ.[Fee]
 							FROM [dbo].[ObjetiveAccount] OBJ
-							WHERE OBJ.Id = @minimo4 
+							WHERE OBJ.Id = @minimo4 AND OBJ.Active = 1
 
 							EXEC dbo.depositoObjetivo @idCuentaPrincipal, @idCuentaObjetivo, @montoTran, @lo1
 
@@ -1000,9 +994,36 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 					SET @minimo4 = @minimo4 + 1
 				END
 
-			DELETE @tempObj
+			------------------------------DepositoCuentaObjetivo----------------------------
 
-			----------------------------DepositoCuentaObjetivo----------------------------
+			------------------------------RedencionCO--------------------------------
+
+			DECLARE @minimo5 INT,
+				    @maximo5 INT,
+					@fecha DATE,
+					@cuentaPrinId INT,
+					@cuentaObjId INT
+
+			SELECT @minimo5 = MIN(CO.Id),
+				   @maximo5 = MAX(CO.Id)
+			FROM [dbo].[ObjetiveAccount] CO
+
+
+			WHILE @minimo5 <= @maximo5
+				BEGIN
+					SELECT @fecha = OBJ.[EndDate],
+						   @cuentaPrinId = OBJ. [SavingsAccountId],
+						   @cuentaObjId = OBJ.[Id]
+					FROM [dbo].[ObjetiveAccount] OBJ
+					WHERE OBJ.Id = @minimo5  
+
+					IF ((CAST( @fecha AS DATE) = CAST( @lo1 AS DATE)))
+						BEGIN
+							EXEC dbo.redencionCO @cuentaPrinId, @cuentaObjId, @lo1
+						END
+					SET @minimo5 = @minimo5 + 1
+				END
+			----------------------------RedencionCO--------------------------------
 
 			-------------Cerrar estados de cuenta---------------
 			INSERT INTO @TempEstadoCuenta (CuentaId,
@@ -1017,9 +1038,7 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 				   AC.[StartDate]
 			FROM [dbo].[AccountStatement] AC,
 				 [dbo].[SavingsAccount] SA
-			WHERE (CAST(AC.[EndDate]  AS DATE) = CAST(@lo1 AS DATE)) AND AC.[SavingsAccountId] = SA.Id
-
-			--SELect * from @TempEstadoCuenta
+			WHERE (CAST(AC.[EndDate] AS DATE) = CAST(@lo1 AS DATE)) AND AC.[SavingsAccountId] = SA.Id
 
 			DECLARE 
 					@minimo2 INT, 
@@ -1051,41 +1070,21 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 			----------------------------------------------------
 
 			SET @lo1=DATEADD(d,1,@lo1)
-
 		END
 
 
 --SELECT * FROM [dbo].[AccountStatement]
 --select * from [dbo].[SavingsAccount] where [dbo].[SavingsAccount].personId = 4
 --select * from [dbo].[Movement CA]
+--select * from Benefactor
 --SELECT * from [dbo].[User]
 --SELECT * from [dbo].[UserCanAccess]
 --SELECT * FROM [dbo].[Person]
 --SELECT * FROM [dbo].[ObjetiveAccount]
 --SELECT * FROM [dbo].[Mov CO]
+--SELECT * FROM [dbo].[Mov CO Interest]
 --select * from [user] where [user].id = 1
 
 
-
-
---DECLARE @a DATE = '12-15-2020'
---IF (DAY(@a) = 15)
---BEGIN
---	SELECT 'Entro'
---END
---ELSE
---BEGIN
---	SELECT 'NO ENTRO' 
---END
-
-
---DECLARE 
---		@Prueba TABLE (SEC INT IDENTITY(1,1))
-
---DECLARE
---		@CONTROLADOR INT
-
---		SELECT @CONTROLADOR = MAX(PR.SEC)
---		FROM @Prueba PR
-
---		SELECT @CONTROLADOR
+--SELECT 1
+--WHERE (CAST('12-12-2020' AS DATE) = CAST('12-12-2020' AS DATE))

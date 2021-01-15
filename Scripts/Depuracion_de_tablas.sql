@@ -1,6 +1,10 @@
 
 --Depuracion de tablas
 
+DELETE FROM [dbo].[BE_Errors]
+DBCC CHECKIDENT([BE_Errors], RESEED, 0)
+SELECT * FROM [dbo].[BE_Errors]
+
 DELETE FROM [dbo].[Event];
 DBCC CHECKIDENT([Event], RESEED, 0)
 SELECT * FROM [dbo].[Event]
@@ -21,11 +25,17 @@ DELETE FROM [dbo].[UserCanAccess];
 DBCC CHECKIDENT([UserCanAccess], RESEED, 0)
 SELECT * FROM [dbo].[UserCanAccess]
 
-
-
 DELETE FROM [dbo].[User];
 DBCC CHECKIDENT([User], RESEED, 0)
 SELECT * FROM [dbo].[User]
+
+DELETE FROM [dbo].[AdminQueryA]
+DBCC CHECKIDENT([AdminQueryA], RESEED, 0)
+SELECT * FROM [dbo].[AdminQueryA]
+
+DELETE FROM [dbo].[Mov CO Interest]
+DBCC CHECKIDENT([Mov CO Interest], RESEED, 0)
+Select * FROM [dbo].[Mov CO Interest]
 
 DELETE FROM [dbo].[Mov CO]
 DBCC CHECKIDENT([Mov CO], RESEED, 0)
