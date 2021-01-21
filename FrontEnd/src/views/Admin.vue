@@ -6,7 +6,7 @@
                     <div class=pb-2>
                         <h1 class="mb-1 pt-4 ml-4">Consulta tipo a)</h1>
                         <b-button-group class="ml-5 mb-2 pt-2">
-                                <b-button variant="success" >Consultar</b-button>
+                                <b-button variant="success" @click="adminA()">Consultar</b-button>
                         </b-button-group>
                     </div>
                     <div class=pb-2>
@@ -17,7 +17,7 @@
                             </b-col>
                             <b-col>
                             <b-button-group class="ml-2">
-                                <b-button variant="success" >Consultar</b-button>
+                                <b-button variant="success" @click="adminB()">Consultar</b-button>
                             </b-button-group>
                             </b-col>
                         </b-row>
@@ -26,7 +26,7 @@
                     <div class=pb-2>
                         <h1 class="mb-1 pt-4 ml-4">Consulta tipo c)</h1>
                         <b-button-group class="ml-5 mb-2 pt-2">
-                                <b-button variant="success" >Consultar</b-button>
+                                <b-button variant="success" @click="adminC()">Consultar</b-button>
                         </b-button-group>
                     </div>
                     <div class=pb-2>
@@ -45,12 +45,14 @@
 <script lang="ts">
 import { mapActions, mapGetters, mapState } from 'vuex';
 import { Component, Vue } from 'vue-property-decorator';
+import Consulta from '../models/Consulta';
 
 @Component({
     data(){
         return {
             id: this.$route.params.id,
-            dias: 0
+            dias: '',
+            consulta: new Consulta(0,0,0,'',0,0,0,0,'',0,'',0,'',0,0,0)
         }
     },
     /*created(){
@@ -60,13 +62,32 @@ import { Component, Vue } from 'vue-property-decorator';
         next();
     },
     computed:{
-        ...mapState(['movements','loaded','error','user']),
+        ...mapState(['consultas','loaded','error','user']),
         ...mapGetters(['hasError']),
     },
     methods: {
-        ...mapActions(['getMovements', 'getMovementsWord']),
+        ...mapActions(['consultaA', 'consultaC', 'consultaB']),
+
+        adminA(){
+            console.log("Consulta A");
+            this.consultaA(this.consulta);
+
+        },
+
+        adminB(){
+            console.log("Consulta B");
+            this.consultaB(this.dias);
+        },
+
+        adminC(){
+            console.log("Consulta C");
+            this.consultaC(this.consulta);
+        }
+
         
     },
+
+    
 })
 export default class Admin extends Vue {}
 </script>

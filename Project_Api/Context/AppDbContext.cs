@@ -525,6 +525,124 @@ namespace Project_Api.Context
         }
 
 
+        public Dictionary<string, object> consultaAdminA()
+        {
+            List<Dictionary<string, object>> response = new List<Dictionary<string, object>>();
+            Dictionary<string, object> finalresponse = new Dictionary<string, object>();
+
+            using (SqlConnection con = new SqlConnection("Server = tcp:proyecto1-server-bd.database.windows.net,1433; Database = proyecto1-database; User ID = Administrador; Password = Proyecto1; Trusted_Connection = False; Encrypt = True;"))
+            {
+                SqlCommand cmd = new SqlCommand("[dbo].[sp_queryA]", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Dictionary<string, object> consulta = new Dictionary<string, object>();
+                    consulta.Add("id", dr.GetInt32(0));
+                    consulta.Add("oANumber", dr.GetInt32(1));
+                    consulta.Add("objetiveAccountId", dr.GetInt32(2));
+                    consulta.Add("description", dr.GetString(3));
+                    consulta.Add("succesfullDeposits", dr.GetInt32(4));
+                    consulta.Add("deposits", dr.GetInt32(5));
+                    consulta.Add("succesfullBalance", dr.GetDecimal(6));
+                    consulta.Add("balance", dr.GetDecimal(7));
+                    response.Add(consulta);
+                }
+                dr.Close();
+                if (response.Count() == 0)
+                {
+                    Dictionary<string, object> error = new Dictionary<string, object>();
+                    error.Add("error", "No hay consultas disponibles");
+                    response.Add(error);
+                    return finalresponse;
+                }
+                con.Close();
+                finalresponse.Add("consultas", response);
+                return finalresponse;
+
+            }
+        }
+
+
+        public Dictionary<string, object> consultaAdminB(DateTime fecha)
+        {
+            List<Dictionary<string, object>> response = new List<Dictionary<string, object>>();
+            Dictionary<string, object> finalresponse = new Dictionary<string, object>();
+
+            using (SqlConnection con = new SqlConnection("Server = tcp:proyecto1-server-bd.database.windows.net,1433; Database = proyecto1-database; User ID = Administrador; Password = Proyecto1; Trusted_Connection = False; Encrypt = True;"))
+            {
+                SqlCommand cmd = new SqlCommand("[dbo].[AdministradorExcesoATM]", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("@inFechaInicio", fecha);
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Dictionary<string, object> consulta = new Dictionary<string, object>();
+                    consulta.Add("codigoCuenta", dr.GetString(0));
+                    consulta.Add("promedioRetiros", dr.GetDouble(1));
+                    consulta.Add("mesMayor", dr.GetInt32(2));
+                    consulta.Add("anioMayor", dr.GetInt32(3));
+                    response.Add(consulta);
+                }
+                dr.Close();
+                if (response.Count() == 0)
+                {
+                    Dictionary<string, object> error = new Dictionary<string, object>();
+                    error.Add("error", "No hay consultas disponibles");
+                    response.Add(error);
+                    return finalresponse;
+                }
+                con.Close();
+                finalresponse.Add("consultas", response);
+                return finalresponse;
+
+            }
+        }
+
+        public Dictionary<string, object> consultaAdminC()
+        {
+            List<Dictionary<string, object>> response = new List<Dictionary<string, object>>();
+            Dictionary<string, object> finalresponse = new Dictionary<string, object>();
+
+            using (SqlConnection con = new SqlConnection("Server = tcp:proyecto1-server-bd.database.windows.net,1433; Database = proyecto1-database; User ID = Administrador; Password = Proyecto1; Trusted_Connection = False; Encrypt = True;"))
+            {
+                SqlCommand cmd = new SqlCommand("[dbo].[AdministradorDefuncion]", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Dictionary<string, object> consulta = new Dictionary<string, object>();
+                    consulta.Add("nombre", dr.GetString(0));
+                    consulta.Add("balan", dr.GetDecimal(1));
+                    consulta.Add("mayorBen", dr.GetString(2));
+                    consulta.Add("cantCuentas", dr.GetInt32(3));
+                    response.Add(consulta);
+                }
+                dr.Close();
+                if (response.Count() == 0)
+                {
+                    Dictionary<string, object> error = new Dictionary<string, object>();
+                    error.Add("error", "No hay consultas disponibles");
+                    response.Add(error);
+                    return finalresponse;
+                }
+                con.Close();
+                finalresponse.Add("consultas", response);
+                return finalresponse;
+
+            }
+        }
+
+
 
         public DbSet<User> User { get; set; }
         public DbSet<SavingsAccount> SavingsAccount { get; set; }
