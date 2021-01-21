@@ -8,6 +8,7 @@ import BenefactorProvider from '@/providers/BenefactorProvider';
 import Benefactor from '@/models/Benefactor';
 import Movement from '@/models/Movement';
 import ObjetiveAccount from '@/models/ObjetiveAccount';
+import Consulta from '@/models/Consulta';
 
 Vue.use(Vuex)
 
@@ -22,7 +23,8 @@ export default new Vuex.Store({
     accountStatements: [],
     relationships: [],
     movements: [],
-    objetiveAccounts: []
+    objetiveAccounts: [],
+    consultas: []
   },
   mutations: {
     setUser(state,payload){
@@ -54,6 +56,9 @@ export default new Vuex.Store({
     },
     setObjetiveAccounts(state,payload){
       state.objetiveAccounts = payload;
+    },
+    setConsultas(state,payload){
+      state.consultas = payload;
     }
   },
   actions: {
@@ -142,7 +147,7 @@ export default new Vuex.Store({
       commit('setLoaded',false);
       const benefactorProvider = new BenefactorProvider();
       benefactorProvider.createBenefactor(benefactor).then(message=>{
-        benefactorProvider.getAccountBenefactors(benefactor.savingsAccountId).then(benefactors=>{
+        benefactorProvider.getAccountBenefactors(benefactor.savingsAccountId, benefactor.user).then(benefactors=>{
           commit('setBenefactors',benefactors);
           commit('setSuccess',message);
           commit('setError',null);
@@ -255,7 +260,7 @@ export default new Vuex.Store({
       commit('setLoaded',false);
       const accountProvider = new AccountProvider();
       accountProvider.createObjetiveAccount(cuentaObjetivo).then(message=>{
-        accountProvider.getObjetiveAccount(cuentaObjetivo.SavingsAccountId).then(objetiveAccounts=>{
+        accountProvider.getObjetiveAccount(cuentaObjetivo.SavingsAccountId, cuentaObjetivo.user).then(objetiveAccounts=>{
           commit('setObjetiveAccounts',objetiveAccounts);
           commit('setSuccess',message);
           commit('setError',null);
@@ -295,6 +300,50 @@ export default new Vuex.Store({
       });
     },
 
+
+    consultaA({commit},objetive: Consulta){
+      commit('setLoaded',false);
+      const accountProvider = new AccountProvider();
+      accountProvider.consultaAdminA().then(consultas=>{
+        console.log('consultas', consultas);
+        commit('setConsultas',consultas);
+        commit('setError',null);
+        commit('setLoaded',true);
+      }).catch(error=>{
+        commit('setError',error);
+        commit('setLoaded',true);
+      });
+    },
+
+    consultaB({commit},fecha: Date){
+      commit('setLoaded',false);
+      const accountProvider = new AccountProvider();
+      accountProvider.consultaAdminB(fecha).then(consultas=>{
+        console.log('consultas', consultas);
+        commit('setConsultas',consultas);
+        commit('setError',null);
+        commit('setLoaded',true);
+      }).catch(error=>{
+        commit('setError',error);
+        commit('setLoaded',true);
+      });
+    },
+
+    consultaC({commit},objetive: Consulta){
+      commit('setLoaded',false);
+      const accountProvider = new AccountProvider();
+      accountProvider.consultaAdminC().then(consultas=>{
+        console.log('consultas', consultas);
+        commit('setConsultas',consultas);
+        commit('setError',null);
+        commit('setLoaded',true);
+      }).catch(error=>{
+        commit('setError',error);
+        commit('setLoaded',true);
+      });
+    },
+
+    
     
   },
   modules: {

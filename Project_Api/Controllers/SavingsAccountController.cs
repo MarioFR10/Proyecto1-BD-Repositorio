@@ -146,5 +146,55 @@ namespace Project_Api.Controllers
             }
         }
 
+        [HttpPost("consultaA")]
+        public ActionResult ConsultaA([FromBody] Dictionary<string, object> pJson)
+        {
+            try
+            {
+                Dictionary<string, object> responseList = new Dictionary<string, object>();
+                responseList = context.consultaAdminA();
+                context.SaveChanges();
+                return Ok(responseList);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.ToString());
+            }
+        }
+
+        [HttpPost("consultaB")]
+        public ActionResult ConsultaB([FromBody] Dictionary<string, object> pJson)
+        {
+            try
+            {
+                Dictionary<string, object> responseList = new Dictionary<string, object>();
+
+                DateTime fechaInicio = Convert.ToDateTime(pJson["fecha"].ToString());
+                responseList = context.consultaAdminB(fechaInicio);
+                context.SaveChanges();
+                return Ok(responseList);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.ToString());
+            }
+        }
+
+        [HttpPost("consultaC")]
+        public ActionResult ConsultaC([FromBody] Dictionary<string, object> pJson)
+        {
+            try
+            {
+                Dictionary<string, object> responseList = new Dictionary<string, object>();
+                responseList = context.consultaAdminC();
+                context.SaveChanges();
+                return Ok(responseList);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.ToString());
+            }
+        }
+
     }
 }
