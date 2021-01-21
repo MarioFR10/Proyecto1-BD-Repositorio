@@ -55,7 +55,7 @@ SET NOCOUNT ON
 					FROM [dbo].[TypeSavingsAccount] TSA,
 						 [dbo].[SavingsAccount] SA
 					WHERE (SA.Id = @minimo1)
-						AND (SA.[TypeSavingsAccountId] = TSA.Id)
+						AND (SA.[TypeSavingsAccount] = TSA.Id)
 
 					IF(5 >= @contadorExceso)
 						BEGIN
