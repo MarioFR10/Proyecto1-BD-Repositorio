@@ -33,27 +33,27 @@ SET NOCOUNT ON
 				@beneficioActual MONEY,
 				@nombre VARCHAR(100)
 
-		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
-		BEGIN TRANSACTION defuncion
-			INSERT INTO @TempDatosBeneficiarios (BeneficiarioId,
+		INSERT INTO @TempDatosBeneficiarios (BeneficiarioId,
 												PersonId,
 												NombrePersona,
 												NumeroCuenta,
 												Balance)
-			SELECT B.Id,
-				   P.Id,
-				   P.Name,
-				   SA.[AccountNumber],
-				   (SA.[Balance]*B.[Percentage])/100
-			FROM [dbo].[Benefactor] B
-			INNER JOIN [dbo].[Person] P ON P.Id = B.[PersonId]
-			INNER JOIN [dbo].[SavingsAccount] SA ON SA.Id = B.[SavingsAccountId]
-			WHERE B.[Condition] = 1
+		SELECT B.Id,
+			   P.Id,
+			   P.Name,
+			   SA.[AccountNumber],
+			   SA.[Balance]*(B.[Percentage]/100)
+		FROM [dbo].[Benefactor] B
+		INNER JOIN [dbo].[Person] P ON P.Id = B.[PersonId]
+		INNER JOIN [dbo].[SavingsAccount] SA ON SA.Id = B.[SavingsAccountId]
+		WHERE B.[Condition] = 1
 
-			SELECT @minimo1 = MIN(TDB.Sec),
-				   @maximo1 = MAX(TDB.Sec)
-			FROM @TempDatosBeneficiarios TDB
-			
+		SELECT @minimo1 = MIN(TDB.Sec),
+			   @maximo1 = MAX(TDB.Sec)
+		FROM @TempDatosBeneficiarios TDB
+
+		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+		BEGIN TRANSACTION defuncion
 			WHILE @minimo1 < @maximo1
 				BEGIN
 					SELECT @persona = TDB.PersonId,
