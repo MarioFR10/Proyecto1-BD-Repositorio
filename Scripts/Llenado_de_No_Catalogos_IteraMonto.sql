@@ -25,6 +25,16 @@ SET @x = '<Operaciones>
 <Movimientos Descripcion="Compra" Monto="923935" CodigoCuenta="86073678" Tipo="1"/>
 
 <Movimientos Descripcion="Retiro ATM" Monto="488869" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
 
 <Movimientos Descripcion="Retiro Ventana" Monto="193713" CodigoCuenta="86073678" Tipo="3"/>
 
@@ -64,6 +74,16 @@ SET @x = '<Operaciones>
 <Movimientos Descripcion="Deposito Ventana" Monto="6818616" CodigoCuenta="58493144" Tipo="4"/>
 
 <Movimientos Descripcion="Compra" Monto="849240" CodigoCuenta="58493144" Tipo="1"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
 
 <Movimientos Descripcion="Retiro ATM" Monto="108119" CodigoCuenta="58493144" Tipo="2"/>
 
@@ -113,6 +133,16 @@ SET @x = '<Operaciones>
 <Movimientos Descripcion="Deposito Ventana" Monto="777151" CodigoCuenta="82792055" Tipo="5"/>
 
 <Movimientos Descripcion="Devolucion de Compra" Monto="287345" CodigoCuenta="82792055" Tipo="6"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
 
 <Usuario Email="butterfree@yahoo.com" ValorDocumentoIdentidad="48135837" EsAdministrador="0" Pass="48135837" User="Butterfree"/>
 
@@ -146,6 +176,15 @@ SET @x = '<Operaciones>
 <Movimientos Descripcion="Compra" Monto="539397" CodigoCuenta="30713560" Tipo="1"/>
 
 <Movimientos Descripcion="Retiro ATM" Monto="589730" CodigoCuenta="30713560" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
 
 <Movimientos Descripcion="Retiro Ventana" Monto="200877" CodigoCuenta="30713560" Tipo="3"/>
 
@@ -187,6 +226,16 @@ SET @x = '<Operaciones>
 <Movimientos Descripcion="Retiro ATM" Monto="332431" CodigoCuenta="13699566" Tipo="2"/>
 
 <Movimientos Descripcion="Retiro Ventana" Monto="399182" CodigoCuenta="13699566" Tipo="3"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
 
 <Movimientos Descripcion="Deposito en ATM" Monto="415895" CodigoCuenta="13699566" Tipo="4"/>
 
@@ -222,6 +271,17 @@ SET @x = '<Operaciones>
 <Movimientos Descripcion="Deposito Ventana" Monto="8755232" CodigoCuenta="89045693" Tipo="4"/>
 
 <Movimientos Descripcion="Compra" Monto="821708" CodigoCuenta="89045693" Tipo="1"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
 
 <Movimientos Descripcion="Retiro ATM" Monto="403262" CodigoCuenta="89045693" Tipo="2"/>
 
@@ -271,6 +331,16 @@ SET @x = '<Operaciones>
 <Movimientos Descripcion="Deposito Ventana" Monto="704923" CodigoCuenta="56793445" Tipo="5"/>
 
 <Movimientos Descripcion="Devolucion de Compra" Monto="894080" CodigoCuenta="56793445" Tipo="6"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
 
 <Usuario Email="sandslash@hotmail.com" ValorDocumentoIdentidad="12292728" EsAdministrador="1" Pass="12292728" User="Sandslash"/>
 
@@ -310,6 +380,26 @@ SET @x = '<Operaciones>
 <Movimientos Descripcion="Deposito Ventana" Monto="683212" CodigoCuenta="63759760" Tipo="5"/>
 
 <Movimientos Descripcion="Devolucion de Compra" Monto="763904" CodigoCuenta="63759760" Tipo="6"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
 
 <Usuario Email="nidoran(hembra)@outlook.com" ValorDocumentoIdentidad="6943894" EsAdministrador="0" Pass="6943894" User="Nidoran(hembra)"/>
 
@@ -349,7 +439,17 @@ SET @x = '<Operaciones>
 <Movimientos Descripcion="Deposito Ventana" Monto="426805" CodigoCuenta="15411425" Tipo="5"/>
 
 <Movimientos Descripcion="Devolucion de Compra" Monto="562139" CodigoCuenta="15411425" Tipo="6"/>
-
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
 <Usuario Email="clefable@hotmail.com" ValorDocumentoIdentidad="65668077" EsAdministrador="0" Pass="65668077" User="Clefable"/>
 
 </FechaOperacion>
@@ -390,8 +490,116 @@ SET @x = '<Operaciones>
 <Movimientos Descripcion="Deposito Ventana" Monto="394122" CodigoCuenta="85339034" Tipo="5"/>
 
 <Movimientos Descripcion="Devolucion de Compra" Monto="666590" CodigoCuenta="85339034" Tipo="6"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
 
 <Usuario Email="wigglytuff@yahoo.com" ValorDocumentoIdentidad="53296941" EsAdministrador="0" Pass="53296941" User="Wigglytuff"/>
+
+</FechaOperacion>
+<FechaOperacion Fecha="09-14-2020">
+
+<Movimientos Descripcion="Retiro ATM" Monto="277280" CodigoCuenta="92972525" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+
+</FechaOperacion>
+<FechaOperacion Fecha="09-21-2020">
+
+<Movimientos Descripcion="Retiro ATM" Monto="277280" CodigoCuenta="92972525" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+
+</FechaOperacion>
+
+<FechaOperacion Fecha="10-16-2020">
+
+<Movimientos Descripcion="Retiro ATM" Monto="277280" CodigoCuenta="92972525" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="277280" CodigoCuenta="92972525" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+
+</FechaOperacion>
+<FechaOperacion Fecha="11-26-2020">
+
+<Movimientos Descripcion="Retiro ATM" Monto="277280" CodigoCuenta="92972525" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="277280" CodigoCuenta="92972525" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
 
 </FechaOperacion>
 	<FechaOperacion Fecha="12-29-2020">
@@ -421,6 +629,23 @@ SET @x = '<Operaciones>
 <Movimientos Descripcion="Retiro Ventana" Monto="384885" CodigoCuenta="56793445" Tipo="3"/>
 
 <Movimientos Descripcion="Retiro ATM" Monto="277280" CodigoCuenta="92972525" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="277280" CodigoCuenta="92972525" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
 
 <Movimientos Descripcion="Deposito en ATM" Monto="20503" CodigoCuenta="24093199" Tipo="4"/>
 
@@ -476,6 +701,18 @@ SET @x = '<Operaciones>
 <Movimientos Descripcion="Devolucion de Compra" Monto="127790" CodigoCuenta="22689040" Tipo="6"/>
 
 <Movimientos Descripcion="Compra" Monto="53670" CodigoCuenta="15411425" Tipo="1"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
 
 </FechaOperacion>
 
@@ -521,7 +758,72 @@ SET @x = '<Operaciones>
 <Movimientos Descripcion="Retiro ATM" Monto="269575" CodigoCuenta="83253220" Tipo="2"/>
 
 </FechaOperacion>
+<FechaOperacion Fecha="01-26-2021">
 
+<Movimientos Descripcion="Retiro ATM" Monto="277280" CodigoCuenta="92972525" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="277280" CodigoCuenta="92972525" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+
+</FechaOperacion>
+<FechaOperacion Fecha="02-16-2021">
+
+<Movimientos Descripcion="Retiro ATM" Monto="277280" CodigoCuenta="92972525" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="277280" CodigoCuenta="92972525" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+
+</FechaOperacion>
+<FechaOperacion Fecha="03-15-2021">
+
+<Movimientos Descripcion="Retiro ATM" Monto="277280" CodigoCuenta="92972525" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="277280" CodigoCuenta="92972525" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+<Movimientos Descripcion="Retiro ATM" Monto="4888" CodigoCuenta="86073678" Tipo="2"/>
+
+</FechaOperacion>
 </Operaciones>'
 
 
@@ -1073,9 +1375,9 @@ DECLARE @TempFechas TABLE ( Sec int IDENTITY(1,1),
 		END
 
 
---SELECT * FROM [dbo].[AccountStatement]
+--SELECT * FROM [dbo].[AccountStatement] where SavingsAccountId = 1
 --select * from [dbo].[SavingsAccount] where [dbo].[SavingsAccount].personId = 4
---select * from [dbo].[Movement CA]
+--select * from [dbo].[Movement CA] where [dbo].[Movement CA].TypeMovId = 9
 --select * from Benefactor
 --SELECT * from [dbo].[User]
 --SELECT * from [dbo].[UserCanAccess]
