@@ -1,53 +1,6 @@
-
---Read
-ALTER PROCEDURE dbo_SP_Read_ObjectiveAccount
-(
-	@SavingsAccountId INT
-)
-AS
-BEGIN
-	SET NOCOUNT ON
-		BEGIN TRY
-			DECLARE @outResultCode INT = 0
-			IF exists( SELECT OA.Id FROM [dbo].[ObjetiveAccount] OA WHERE OA.SavingsAccountId = @SavingsAccountId )
-			BEGIN
-				SELECT OA.Id, 
-					   OA.SavingsAccountId,
-					   OA.StartDate,
-					   OA.EndDate,
-					   OA.Fee,
-					   OA.Objective,
-					   OA.Balance,
-					   OA.AcumInterest,
-					   OA.DaysOfDeposit
-				FROM [dbo].[ObjetiveAccount] OA
-				WHERE OA.SavingsAccountId = @SavingsAccountId AND OA.Active = 1
-			END;
-			ELSE
-				BEGIN 
-					SET @outResultCode = 1 -- Codigo de error NO EXISTE LA CUENTA OBJETIVO
-				END
-		END TRY
-		BEGIN CATCH
-			INSERT INTO [dbo].[BE_Errors] VALUES (
-				SUSER_SNAME(),
-				ERROR_NUMBER(),
-				ERROR_STATE(),
-				ERROR_SEVERITY(),
-				ERROR_LINE(),
-				ERROR_PROCEDURE(),
-				ERROR_MESSAGE(),
-				GETDATE()
-			);	
-
-		END CATCH
-	SET NOCOUNT OFF 
-END	
-GO
-
 --Create
 
-ALTER PROCEDURE dbo_SP_Create_ObjetiveAccount
+ALTER PROCEDURE [dbo].[dbo_SP_Create_ObjetiveAccount]
 (
     @AccountId INT,   --Mapeado en capa logica
 	@inStartDate DATE,	--ingresa usuario
@@ -115,11 +68,57 @@ BEGIN
 	END CATCH
 	SET NOCOUNT OFF				--set nocount 
 END	
+
+--Read
+ALTER PROCEDURE dbo_SP_Read_ObjectiveAccount
+(
+	@SavingsAccountId INT
+)
+AS
+BEGIN
+	SET NOCOUNT ON
+		BEGIN TRY
+			DECLARE @outResultCode INT = 0
+			IF exists( SELECT OA.Id FROM [dbo].[ObjetiveAccount] OA WHERE OA.SavingsAccountId = @SavingsAccountId )
+			BEGIN
+				SELECT OA.Id, 
+					   OA.SavingsAccountId,
+					   OA.StartDate,
+					   OA.EndDate,
+					   OA.Fee,
+					   OA.Objective,
+					   OA.Balance,
+					   OA.AcumInterest,
+					   OA.DaysOfDeposit
+				FROM [dbo].[ObjetiveAccount] OA
+				WHERE OA.SavingsAccountId = @SavingsAccountId AND OA.Active = 1
+			END;
+			ELSE
+				BEGIN 
+					SET @outResultCode = 1 -- Codigo de error NO EXISTE LA CUENTA OBJETIVO
+				END
+		END TRY
+		BEGIN CATCH
+			INSERT INTO [dbo].[BE_Errors] VALUES (
+				SUSER_SNAME(),
+				ERROR_NUMBER(),
+				ERROR_STATE(),
+				ERROR_SEVERITY(),
+				ERROR_LINE(),
+				ERROR_PROCEDURE(),
+				ERROR_MESSAGE(),
+				GETDATE()
+			);	
+
+		END CATCH
+	SET NOCOUNT OFF 
+END	
 GO
+
 
 --Update
 
-ALTER PROCEDURE dbo_SP_Update_ObjectiveAccount
+ALTER PROCEDURE [dbo].[dbo_SP_Update_ObjectiveAccount]
 (
 	@ObjectiveAccountId INT,
 	@inDescription VARCHAR(50)
@@ -155,11 +154,10 @@ BEGIN
 		END CATCH
 	SET NOCOUNT OFF 
 END	
-GO
 
 --Desactivar
 
-ALTER PROCEDURE dbo_SP_Delete_ObjectiveAccount
+ALTER PROCEDURE [dbo].[dbo_SP_Delete_ObjectiveAccount]
 (
 	@ObjectiveAccountId INT
 )
@@ -194,5 +192,4 @@ BEGIN
 		END CATCH
 	SET NOCOUNT OFF 
 END	
-GO
 

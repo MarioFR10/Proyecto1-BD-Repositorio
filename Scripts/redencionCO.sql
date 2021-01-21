@@ -3,7 +3,7 @@
 -- Create Date: 2021
 -- Description: Redencion de CO
 -- =============================================
-ALTER PROCEDURE dbo.redencionCO
+ALTER PROCEDURE [dbo].[redencionCO]
 (
 	@inIdPrincipal INT,
 	@inIdObjetivo INT,
@@ -66,4 +66,4 @@ BEGIN
 		
     SET NOCOUNT OFF
 END
-GO
+

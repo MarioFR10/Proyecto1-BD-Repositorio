@@ -168,4 +168,3 @@ SELECT     AA.Id,
 	FROM [dbo].[AdminQueryA] AA
 	INNER JOIN [dbo].[ObjetiveAccount] OA ON AA.ObjetiveAccountId = OA.Id
 
-exec dbo.sp_queryA

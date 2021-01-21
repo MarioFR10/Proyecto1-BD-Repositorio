@@ -51,7 +51,8 @@ namespace Project_Api.Controllers
             {
                 Dictionary<string, object> responseList = new Dictionary<string, object>();
                 int accountId = Convert.ToInt32(pJson["SavingsAccountId"].ToString());
-                responseList = context.GetBenefactorByAccount(accountId);
+                int user = Convert.ToInt32(pJson["user"].ToString());
+                responseList = context.GetBenefactorByAccount(accountId, user);
                 context.SaveChanges();
                 return Ok(responseList);
             }
@@ -68,7 +69,8 @@ namespace Project_Api.Controllers
             {
                 Dictionary<string, object> responseList = new Dictionary<string, object>();
                 int accountId = Convert.ToInt32(pJson["SavingsAccountId"].ToString());
-                responseList = context.GetObjetiveAccounts(accountId);
+                int user = Convert.ToInt32(pJson["user"].ToString());
+                responseList = context.GetObjetiveAccounts(accountId, user);
                 context.SaveChanges();
                 return Ok(responseList);
             }
@@ -95,8 +97,9 @@ namespace Project_Api.Controllers
                 decimal monto = Convert.ToDecimal(pJson["fee"].ToString());
                 string objetivo = pJson["objetive"].ToString();
                 string dias = pJson["daysOfDeposit"].ToString();
+                int user = Convert.ToInt32(pJson["user"].ToString());
 
-                responseList = context.CreateObjetive(idCuenta, fechaInicio, fechaFinal, monto, objetivo, dias);
+                responseList = context.CreateObjetive(idCuenta, fechaInicio, fechaFinal, monto, objetivo, dias, user);
                 context.SaveChanges();
                 return Ok(responseList);
             }
@@ -114,8 +117,9 @@ namespace Project_Api.Controllers
             {
                 Dictionary<string, object> responseList = new Dictionary<string, object>();
                 int objetiveId = Convert.ToInt32(pJson["objetiveaccountId"].ToString());
+                int user = Convert.ToInt32(pJson["user"].ToString());
 
-                responseList = context.DeleteObjetive(objetiveId);
+                responseList = context.DeleteObjetive(objetiveId, user);
                 context.SaveChanges();
                 return Ok(responseList);
             }
@@ -133,10 +137,11 @@ namespace Project_Api.Controllers
             {
                 int objetiveAccountId = Convert.ToInt32(pJson["objetiveaccountId"].ToString());
                 string descripcion = pJson["objetive"].ToString();
+                int user = Convert.ToInt32(pJson["user"].ToString());
 
                 Dictionary<string, object> responseList = new Dictionary<string, object>();
 
-                responseList = context.UpdateObjetive(objetiveAccountId, descripcion);
+                responseList = context.UpdateObjetive(objetiveAccountId, descripcion, user);
                 context.SaveChanges();
                 return Ok(responseList);
             }

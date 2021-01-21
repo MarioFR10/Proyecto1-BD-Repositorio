@@ -31,6 +31,44 @@
                     </div>
                     <div class=pb-2>
                         <h1 class="d-flex justify-content-center mb-0 pt-4">Resultados Consultas</h1>
+                        <ul v-for="consul in consultas" :key="consul.id">
+                            <div>
+                                <b-card class="account-card d-flex justify-content-center" v-if="tipoConsulta == 1">
+                                    <b-card-text>Consulta tipo A</b-card-text>
+                                    <b-card-text>Id cuenta objetivo: {{consul.objetiveAccountId}}</b-card-text>
+                                    <b-card-text class=mt-1>Codigo cuenta objetivo: {{consul.oANumber}} </b-card-text>
+                                    <b-card-text class=mt-1>Descripcion: {{consul.description}} </b-card-text>
+                                    <b-card-text class=mt-1>Cantidad depositos realizados: {{consul.succesfullDeposits}} </b-card-text>
+                                    <b-card-text class=mt-1>Cantidad depositos teoricos: {{consul.deposits}} </b-card-text>
+                                    <b-card-text class=mt-1>Balance real: {{consul.succesfullBalance}} </b-card-text>
+                                    <b-card-text class=mt-1>Balance teorico: {{consul.balance}} </b-card-text>
+                                </b-card> 
+                            </div>
+                        </ul>
+
+                        <ul v-for="consul in consultas" :key="consul.id">
+                            <div>
+                                <b-card class="account-card d-flex justify-content-center" v-if="tipoConsulta == 2">
+                                    <b-card-text>Consulta tipo B</b-card-text>
+                                    <b-card-text>Codigo cuenta: {{consul.codigoCuenta}}</b-card-text>
+                                    <b-card-text class=mt-1>Promedio retiros: {{consul.promedioRetiros}} </b-card-text>
+                                    <b-card-text class=mt-1>Mes mayor cantidad retiros: {{consul.mesMayor}} </b-card-text>
+                                    <b-card-text class=mt-1>Año mayor cantidad retiros: {{consul.anioMayor}} </b-card-text>
+                                </b-card> 
+                            </div>
+                        </ul>
+
+                        <ul v-for="consul in consultas" :key="consul.id">
+                            <div>
+                                <b-card class="account-card d-flex justify-content-center" v-if="tipoConsulta == 3">
+                                    <b-card-text>Consulta tipo C</b-card-text>
+                                    <b-card-text>Nombre beneficiario: {{consul.nombre}}</b-card-text>
+                                    <b-card-text class=mt-1>Balance: {{consul.balan}} </b-card-text>
+                                    <b-card-text class=mt-1>Cuenta mayor beneficio: {{consul.mayorBen}} </b-card-text>
+                                    <b-card-text class=mt-1>Cantidad cuentas asociadas: {{consul.cantCuentas}} </b-card-text>
+                                </b-card> 
+                            </div>
+                        </ul>
                     </div>
             </div>
             <div class="mt-2 d-flex justify-content-center">
@@ -52,7 +90,8 @@ import Consulta from '../models/Consulta';
         return {
             id: this.$route.params.id,
             dias: '',
-            consulta: new Consulta(0,0,0,'',0,0,0,0,'',0,'',0,'',0,0,0)
+            consulta: new Consulta(0,0,0,'',0,0,0,0,'',0,'',0,'',0,0,0),
+            tipoConsulta: 0
         }
     },
     /*created(){
@@ -70,17 +109,20 @@ import Consulta from '../models/Consulta';
 
         adminA(){
             console.log("Consulta A");
+            this.tipoConsulta = 1;
             this.consultaA(this.consulta);
 
         },
 
         adminB(){
             console.log("Consulta B");
+            this.tipoConsulta = 2;
             this.consultaB(this.dias);
         },
 
         adminC(){
             console.log("Consulta C");
+            this.tipoConsulta = 3;
             this.consultaC(this.consulta);
         }
 
@@ -110,7 +152,7 @@ export default class Admin extends Vue {}
 .account-card{
   margin:auto;
   width: 70%;
-  max-height: 310px;
+  max-height: 350px;
 }
 .account-card:hover {
   box-shadow: 0 8px 16px 0 rgba(92, 94, 97, 0.904);

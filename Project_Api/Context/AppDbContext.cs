@@ -81,7 +81,7 @@ namespace Project_Api.Context
 
             }
         }
-        public Dictionary<string, object> CreateBenefactor(int numCuenta, string valorIdentificacion, int relationshipId, int percentage)
+        public Dictionary<string, object> CreateBenefactor(int numCuenta, string valorIdentificacion, int relationshipId, int percentage, int user)
         {
             Dictionary<string, object> response = new Dictionary<string, object>();
 
@@ -95,6 +95,8 @@ namespace Project_Api.Context
                 cmd.Parameters.AddWithValue("@inValueDocIden", valorIdentificacion);
                 cmd.Parameters.AddWithValue("@inRelationshipId", relationshipId);
                 cmd.Parameters.AddWithValue("@inPercentaje", percentage);
+                cmd.Parameters.AddWithValue("@inUsuario", user);
+                
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
@@ -113,7 +115,7 @@ namespace Project_Api.Context
 
             }
         }
-        public Dictionary<string, object> GetBenefactorByAccount(int accountId)
+        public Dictionary<string, object> GetBenefactorByAccount(int accountId, int user)
         {
             List<Dictionary<string, object>> response = new List<Dictionary<string, object>>();
             Dictionary<string, object> finalresponse = new Dictionary<string, object>();
@@ -136,6 +138,7 @@ namespace Project_Api.Context
                     benefactors.Add("savingsAccountId", dr.GetInt32(3));
                     benefactors.Add("name", dr.GetString(4));
                     benefactors.Add("percentage", dr.GetInt32(5));
+                    benefactors.Add("user", user);
                     response.Add(benefactors);
                 }
                 dr.Close();
@@ -160,14 +163,16 @@ namespace Project_Api.Context
             {
                 using (SqlConnection con = new SqlConnection("Server = tcp:proyecto1-server-bd.database.windows.net,1433; Database = proyecto1-database; User ID = Administrador; Password = Proyecto1; Trusted_Connection = False; Encrypt = True;"))
                 {
-                    SqlCommand cmd = new SqlCommand("SP_Update_Benefactor", con)
+                    SqlCommand cmd = new SqlCommand("actualizarBeneficiario", con)
                     {
                         CommandType = CommandType.StoredProcedure
                     };
                     int BeneId = Convert.ToInt32(a["id"].ToString());
+                    int user = Convert.ToInt32(a["user"].ToString());
                     int porcentaje = Convert.ToInt32(a["percentage"].ToString());
-                    cmd.Parameters.AddWithValue("@beneId", BeneId);
-                    cmd.Parameters.AddWithValue("@inPercentaje", porcentaje);
+                    cmd.Parameters.AddWithValue("@inId", BeneId);
+                    cmd.Parameters.AddWithValue("@inUsuario", user);
+                    cmd.Parameters.AddWithValue("@inPercentage", porcentaje);
                     con.Open();
                     SqlDataReader dr = cmd.ExecuteReader();
                     while (dr.Read())
@@ -192,17 +197,18 @@ namespace Project_Api.Context
             return response;
         }
 
-        public Dictionary<string, object> DeleteBenefactor(int BeneId)
+        public Dictionary<string, object> DeleteBenefactor(int BeneId, int user)
         {
             Dictionary<string, object> response = new Dictionary<string, object>();
 
             using (SqlConnection con = new SqlConnection("Server = tcp:proyecto1-server-bd.database.windows.net,1433; Database = proyecto1-database; User ID = Administrador; Password = Proyecto1; Trusted_Connection = False; Encrypt = True;"))
             {
-                SqlCommand cmd = new SqlCommand("SP_Delete_Benefactor", con)
+                SqlCommand cmd = new SqlCommand("borrarBeneficiario", con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                cmd.Parameters.AddWithValue("@beneId", BeneId);
+                cmd.Parameters.AddWithValue("@inId", BeneId);
+                cmd.Parameters.AddWithValue("@inUsuario", user);
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
@@ -299,13 +305,13 @@ namespace Project_Api.Context
             }
         }
 
-        public Dictionary<string, object> CreateObjetive(int idCuenta, DateTime fechaInicio, DateTime fechaFinal, decimal monto, string objetivo, string dias)
+        public Dictionary<string, object> CreateObjetive(int idCuenta, DateTime fechaInicio, DateTime fechaFinal, decimal monto, string objetivo, string dias, int user)
         {
             Dictionary<string, object> response = new Dictionary<string, object>();
 
             using (SqlConnection con = new SqlConnection("Server = tcp:proyecto1-server-bd.database.windows.net,1433; Database = proyecto1-database; User ID = Administrador; Password = Proyecto1; Trusted_Connection = False; Encrypt = True;"))
             {
-                SqlCommand cmd = new SqlCommand("dbo_SP_Create_ObjetiveAccount", con)
+                SqlCommand cmd = new SqlCommand("[dbo].[dbo_SP_Create_ObjetiveAccount]", con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -315,6 +321,7 @@ namespace Project_Api.Context
                 cmd.Parameters.AddWithValue("@inFee", monto);
                 cmd.Parameters.AddWithValue("@inObjetive", objetivo);
                 cmd.Parameters.AddWithValue("@inDaysOfDeposit", dias);
+                cmd.Parameters.AddWithValue("@inUser", user);
 
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -335,17 +342,19 @@ namespace Project_Api.Context
             }
         }
 
-        public Dictionary<string, object> UpdateObjetive(int objCuentaId, string descripcion)
+        public Dictionary<string, object> UpdateObjetive(int objCuentaId, string descripcion, int user)
         {
             Dictionary<string, object> response = new Dictionary<string, object>();
             using (SqlConnection con = new SqlConnection("Server = tcp:proyecto1-server-bd.database.windows.net,1433; Database = proyecto1-database; User ID = Administrador; Password = Proyecto1; Trusted_Connection = False; Encrypt = True;"))
             {
-                SqlCommand cmd = new SqlCommand("dbo_SP_Update_ObjectiveAccount", con)
+                SqlCommand cmd = new SqlCommand("actualizarCO", con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                cmd.Parameters.AddWithValue("@ObjectiveAccountId", objCuentaId);
-                cmd.Parameters.AddWithValue("@inDescription", descripcion);
+                cmd.Parameters.AddWithValue("@inId", objCuentaId);
+                cmd.Parameters.AddWithValue("@inUsuario", user);
+                cmd.Parameters.AddWithValue("@inDescripcion", descripcion);
+               
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
@@ -368,17 +377,18 @@ namespace Project_Api.Context
         }
 
 
-        public Dictionary<string, object> DeleteObjetive(int objetiveId)
+        public Dictionary<string, object> DeleteObjetive(int objetiveId, int user)
         {
             Dictionary<string, object> response = new Dictionary<string, object>();
 
             using (SqlConnection con = new SqlConnection("Server = tcp:proyecto1-server-bd.database.windows.net,1433; Database = proyecto1-database; User ID = Administrador; Password = Proyecto1; Trusted_Connection = False; Encrypt = True;"))
             {
-                SqlCommand cmd = new SqlCommand("dbo_SP_Delete_ObjectiveAccount", con)
+                SqlCommand cmd = new SqlCommand("borrarCO", con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                cmd.Parameters.AddWithValue("@ObjectiveAccountId", objetiveId);
+                cmd.Parameters.AddWithValue("@inId", objetiveId);
+                cmd.Parameters.AddWithValue("@inUsuario", user);
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
@@ -481,7 +491,7 @@ namespace Project_Api.Context
             }
         }
 
-        public Dictionary<string, object> GetObjetiveAccounts(int accountId)
+        public Dictionary<string, object> GetObjetiveAccounts(int accountId, int user)
         {
             List<Dictionary<string, object>> response = new List<Dictionary<string, object>>();
             Dictionary<string, object> finalresponse = new Dictionary<string, object>();
@@ -506,7 +516,8 @@ namespace Project_Api.Context
                     objetiveaccount.Add("objetive", dr.GetString(5));
                     objetiveaccount.Add("balance", dr.GetDecimal(6));
                     objetiveaccount.Add("acumInterest", dr.GetDouble(7));
-                    objetiveaccount.Add("daysOfDeposit", dr.GetString(8));
+                    objetiveaccount.Add("daysOfDeposit", dr.GetInt32(8));
+                    objetiveaccount.Add("user", user);
                     response.Add(objetiveaccount);
                 }
                 dr.Close();

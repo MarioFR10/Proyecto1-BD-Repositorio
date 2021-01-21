@@ -37,7 +37,8 @@ namespace Project_Api.Controllers
             {
                 Dictionary<string, object> responseList = new Dictionary<string, object>();
                 int accountId = Convert.ToInt32(pJson["SavingsAccountId"].ToString());
-                responseList = context.GetBenefactorByAccount(accountId);
+                int user = Convert.ToInt32(pJson["user"].ToString());
+                responseList = context.GetBenefactorByAccount(accountId, user);
                 context.SaveChanges();
                 return Ok(responseList);
             }
@@ -73,8 +74,9 @@ namespace Project_Api.Controllers
             {
                 Dictionary<string, object> responseList = new Dictionary<string, object>();
                 int BeneId = Convert.ToInt32(pJson["benefactorId"].ToString());
+                int user = Convert.ToInt32(pJson["user"].ToString());
 
-                responseList = context.DeleteBenefactor(BeneId);
+                responseList = context.DeleteBenefactor(BeneId, user);
                 context.SaveChanges();
                 return Ok(responseList);
             }
@@ -99,8 +101,9 @@ namespace Project_Api.Controllers
                 string valorIdentificacion = values["valueDocIden"].ToString();
                 int relationshipId = Convert.ToInt32(values["nameDocId"].ToString());
                 int percentage = Convert.ToInt32(values["percentage"].ToString());
+                int user = Convert.ToInt32(values["user"].ToString());
 
-                responseList = context.CreateBenefactor(idCuenta, valorIdentificacion, relationshipId, percentage);
+                responseList = context.CreateBenefactor(idCuenta, valorIdentificacion, relationshipId, percentage, user);
                 context.SaveChanges();
                 return Ok(responseList);
             }
