@@ -43,6 +43,7 @@ SET NOCOUNT ON
 			WHILE @minimo1 <= @maximo1
 				BEGIN
 					DELETE @TempEstadosCuenta
+					SET @totalOps = 0
 
 					SELECT @contadorExceso = COUNT(MCA.[TypeMovId])
 					FROM [dbo].[Movement CA] MCA
@@ -56,7 +57,7 @@ SET NOCOUNT ON
 					WHERE (SA.Id = @minimo1)
 						AND (SA.[TypeSavingsAccountId] = TSA.Id)
 
-					IF(@maxOps >= @contadorExceso)
+					IF(5 >= @contadorExceso)
 						BEGIN
 							SET @minimo1 = @minimo1+1
 						END
@@ -70,7 +71,7 @@ SET NOCOUNT ON
 								   SA.[TypeSavingsAccountId],
 								   AC.[AtmOps],
 								   AC.[EndDate]
-							FROM [SavingsAccountId] SA
+							FROM [SavingsAccount] SA
 							INNER JOIN [dbo].[AccountStatement] AC ON AC.[SavingsAccountId] = SA.Id
 							WHERE SA.Id = @minimo1
 
